@@ -1,0 +1,300 @@
+// navigation bar
+
+@use '../abstracts/colors' as *;
+@use '../abstracts/vars' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/functions' as *;
+
+.main-header {
+    nav {
+        background-color: map-get($map: $primary, $key: first);
+        background-image: linear-gradient(to bottom, map-get($map: $primary, $key: first), map-get($map: $primary, $key: third));
+        .container {
+            height: clamp(100px, 7vw, 200px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            ul {
+                height: 100%;
+                display: flex;
+                justify-content: right;
+                gap: clamp(5px, 2.5vw, 100px);
+                a {
+                    display: flex;
+                    height: 100%;
+                    align-items: center;
+                    color: map-get($map: $font-color, $key: a-nav-color);
+                    position: relative;
+                    &:not(.active):hover {
+                        &::before {
+                            content: "";
+                            height: 4px;
+                            width: 100%;
+                            background-color: map-get($map: $primary, $key: second);
+                            box-shadow: 0 0 3px .05px map-get($map: $primary, $key: dark-color);
+                            position: absolute;
+                            bottom: 0;
+                        }
+                    }
+                }
+                a.active {
+                    &::before {
+                        content: "";
+                        height: 4px;
+                        width: 100%;
+                        background-color: map-get($map: $primary, $key: second);
+                        box-shadow: 0 0 3px .05px map-get($map: $primary, $key: dark-color);
+                        position: absolute;
+                        bottom: 0;
+                    }
+                }
+                .search-icon {
+                    font-size: map-get($map: $f-sizes, $key: p-header-size);
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    transition: .2s;
+                    &:hover {
+                        transform: scale(1.2) translateY(-40%);
+                        transition: .2s;
+                    }
+                }
+                li:last-child {
+                    position: relative;
+                }
+            }
+            #menu-icon {display: none;}
+            
+            @include breakpoints(medium) {
+                .change span {
+                    &:nth-child(2) {opacity: 0;}
+                    &:first-child {
+                        transform: translate(0, 17px) rotate(-45deg);
+                    }
+                    &:last-child {
+                        transform: translate(0, -17px) rotate(45deg);
+                    }
+                    transition: .3s;
+                }
+                #menu-icon {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    width: 40px;
+                    height: 40%;
+                    border: none;
+                    border-radius: 0;
+                    background-color: transparent;
+                    transition: .3s;
+                    cursor: pointer;
+                    span {
+                        width: 100%;
+                        height: 6px;
+                        border-radius: 15px;
+                        background-color: map-get($map: $primary, $key: second);
+                        transition: .3s;
+                    }
+                }
+                .nav-links {
+                    display: none;
+                    flex-direction: column;
+                    width: 80%;
+                    height: fit-content;
+                    gap: 0;
+                    border-left: 1px solid map-get($map: $primary, $key: dark-light-color);
+                    background-color: map-get($map: $primary, $key: light-color);
+                    box-shadow: 0px 5px 5px -3px map-get($map: $primary, $key: dark-light-color);
+                    position: absolute;
+                    top: clamp(100px, 7vw, 200px);
+                    right: 0;
+                    transition: .3s;
+                    z-index: 44;
+                    li a, .search-icon {
+                        color: map-get($map: $primary, $key: dark-color);
+                        text-shadow: none;
+                        padding: 20px 40px;
+                        border-bottom: 1px solid map-get($map: $primary, $key: dark-light-color);
+                        transition: .2s;
+                        &::before {
+                            display: none;
+                        }
+                        &:hover {
+                            background-color: map-get($map: $primary, $key: light-color);
+                            padding-left: 60px;
+                            transition: .3s;
+                        }
+                        &.active {
+                            padding-left: 60px;
+                            border-left: 8px solid map-get($map: $primary, $key: third);
+                        }
+                    }
+                    li:last-child {
+                        border-bottom: 1px solid map-get($map: $primary, $key: dark-light-color);
+                        background-color: map-get($map: $primary, $key: light-color);
+                    }
+                    .search-icon {
+                        transform: translateY(0);
+                        border: none;
+                        &:hover {transform: translateY(0);}
+                    }
+                    @include breakpoints(extra-small) {
+                        width: 100%;
+                        left: 0;
+                    }
+                }
+            }
+            @include breakpoints(large) {
+                max-width: 90%;
+                .nav-links {
+                    a {font-size: map-get($map: $f-sizes-large, $key: p-nav-size);}
+                    li:last-child {
+                        .search-icon {font-size: map-get($map: $f-sizes-large, $key: p-header-size);}
+                    }
+                }
+            }
+            @include breakpoints(extra-large) {
+                max-width: 90%;
+                .logo {width: 300px;}
+                .nav-links {
+                    a {font-size: map-get($map: $f-sizes-extra-large, $key: h3-size);}
+                    li:last-child {
+                        .search-icon {font-size: map-get($map: $f-sizes-extra-large, $key: h2-size);}
+                        form input {
+                            padding: 25px 30px;
+                            width: 500px;
+                            font-size: map-get($map: $f-sizes-extra-large, $key: p-size);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .get-started {
+        padding-top: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid map-get($map: $primary, $key: dark-color);
+        .how-to-icon {display: none;}
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(10px, 4vw, 100px);
+            * {
+                transition: .3s;
+            }
+            img {
+                width: 70px;
+                transition: .2s;
+            }
+            .how-to-img {width: 140px;}
+            .option {
+                text-align: center;
+                cursor: pointer;
+                h3 {
+                    font-size: map-get($map: $f-sizes-extra-small, $key: p-size);
+                    line-height: get-line-height-p(1.1rem);
+                    color: map-get($map: $primary, $key: dark-color);
+                }
+                &:hover {
+                    img{transform: scale(1.1);}
+                    h3 {color: map-get($map: $primary, $key: first);}
+                }
+            }
+        }
+        @include breakpoints(extra-large) {
+            padding-top: 40px;
+            padding-bottom: 30px;
+            .container {
+                img {width: 100px;}
+                .how-to-img {width: 240px;}
+                .option {
+                    h3 {
+                        font-size: map-get($map: $f-sizes-extra-large, $key: p-size);
+                        line-height: get-line-height-p(map-get($map: $f-sizes, $key: h3-size));
+                    }
+                }
+            }
+        }
+        @include breakpoints(medium) {
+            .container {
+                img {width: 60px;}
+                .how-to-img {width: 120px;}
+                .option {
+                    h3 {
+                        font-size: .8rem;
+                        line-height: get-line-height-p(.8rem);
+                    }
+                }
+            }
+        }
+        @include breakpoints(small) {
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            border-bottom: none;
+            position: relative;
+            .container {
+                .how-to-img {display: none;}
+                display: none;
+                flex-direction: column;
+                align-items: start;
+                gap: 0;
+                padding-inline: 0;
+                width: 100%;
+                max-width: 100%;
+                height: fit-content;
+                box-shadow: 0px 5px 5px -3px map-get($map: $primary, $key: dark-light-color);
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 18;
+                .option {
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                    padding: 15px 20px;
+                    width: 100%;
+                    gap: 20px;
+                    background-color: map-get($map: $primary, $key: second);
+                    border: 1px solid map-get($map: $primary, $key: dark-light-color);
+                    border-top: none;
+                    img {width: 40px;}
+                    h3 {
+                        font-size: map-get($map: $f-sizes-small, $key: p-size);
+                        font-weight: normal;
+                    }
+                }
+                .option:nth-child(2) {
+                    padding-top: 40px;
+                }
+            }
+            .how-to-icon {
+                width: fit-content;
+                height: 25px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 5px 20px;
+                background-image: linear-gradient(to top, map-get($map: $primary, $key: first), map-get($map: $primary, $key: third));
+                border-bottom-left-radius: 100px;
+                border-bottom-right-radius: 100px;
+                transition: .2s;
+                cursor: pointer;
+                z-index: 40;
+                * {
+                    color: map-get($map: $primary, $key: second);
+                    font-size: calc(map-get($map: $f-sizes-extra-small, $key: p-size) - .2rem);
+                    transition: .2s;
+                }
+                p {line-height: 0px;}
+                svg {margin-left: 10px;}
+                .up {
+                    transform: rotate(-180deg);
+                    transition: .2s;
+                }
+            }
+        }
+    }
+}

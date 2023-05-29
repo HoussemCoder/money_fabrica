@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="main-section">
+  <div class="article-header">
+    <div class="container">
+      <div class="title">
+        <h1>{{article.title}}</h1>
+        <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+      </div>
+      <div class="in-between-ads">
+        <div class="container">
+          <h2>ads</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="ads-money-game">
+    <div class="container">
+      <img src="../../static/images/ads/money_game_bg.png" alt="The Money Game book" title="The Money Game book">
+      <div class="text-btn">
+        <h2>The Money Game</h2>
+        <p>Is a book that combines principles of a <strong>growth mindset</strong> with financial strategies to help readers achieve <strong>financial freedom</strong>.</p>
+        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="Read The Book">Read The Book</a>
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <article>
+      <div class="all-text">
+        {{first_para|safe}}
+        <div class="in-between-ads">
+          <div class="container">
+            <h2>ads</h2>
+          </div>
+        </div>
+        <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="">
+        {{mid_para_1|safe}}
+        <div class="in-between-ads">
+          <div class="container">
+            <h2>ads</h2>
+          </div>
+        </div>
+        {{mid_para_2|safe}}
+        <div class="in-between-ads">
+          <div class="container">
+            <h2>ads</h2>
+          </div>
+        </div>
+        {{last_para|safe}}
+      </div>
+    </article>
+    <div class="after-article">
+      <div class="in-between-ads">
+        <div class="container">
+          <h2>ads</h2>
+        </div>
+      </div>
+      <!-- <p>We would love to hear your thoughts! Feel free to leave a comment and share your valuable insights after reading the article.</p> -->
+      <div class="share-article">
+        <a class="button fb" href="#">
+          <i class="fa-brands fa-facebook-f"></i>
+          <span>Share</span>
+        </a>
+        <a class="button pin" href="#">
+          <i class="fa-brands fa-pinterest-p"></i>
+          <span>Pin</span>
+        </a>
+        <a class="button in" href="#">
+          <i class="fa-brands fa-linkedin-in"></i>
+          <span>Share</span>
+        </a>
+        <a class="button tw" href="#">
+          <i class="fa-brands fa-twitter"></i>
+          <span>Tweet</span>
+        </a>
+      </div>
+      <div class="article-source">
+        <p>
+          <span>
+            <a href="/home.html">Home</a>
+          </span> >>
+          <span>
+            <a href="#">{{article.category}}</a>
+          </span> >>
+          <span>{{article.title}}</span>
+        </p>
+      </div>
+      <div class="related-articles">
+        <p>Related articles you may like:</p>
+        <div class="articles-section">
+          {% for article in related %}
+            <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
+              <img src="../../static/images/thumbnails/{{article.thumbnail}}">
+              <div class="text">
+                <h3>{{article.title}}</h3>
+                <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <aside class="ads-others">
+      <div class="company-ad">
+        <img src="../../static/images/header.png" alt="">
+      </div>
+      <div class="company-ad">
+        <img src="../../static/images/newsletter.png" alt="">
+      </div>
+      <div class="planner-ad">
+        <img src="../../static/images/ads/planner.png" alt="The Ultimate Guided Planner Only For Big Goals">
+        <div class="text-btn">
+          <h3>The Ultimate Guided Planner</h3>
+          <p><strong>only for big goals.</strong><br>Empower your ambitions with our comprehensive goal-oriented planner.</p>
+          <a class="button call-to-action-btn a-btn" href="#" target="_blank">Take a Look</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,493 @@
+/// Home page styling
+
+// header
+@use '../abstracts/colors' as *;
+@use '../abstracts/vars' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/functions' as *;
+
+.header {
+    background-image: linear-gradient(to bottom, map-get($map: $primary, $key: first), #1b7240);
+    background-image: url(../../images/header.png);
+    // background-repeat: no-repeat;
+    // background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    nav {
+        background-color: transparent;
+        background-image: none;
+        .container {
+            background-color: transparent;
+            ul li a {color: map-get($map: $primary, $key: second);}
+        }
+    }
+    .heading-section .all {
+        width: clamp(min(100px, 100%), 90vw, max(100%, 10vw));
+        height: 55%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -35%);
+    }
+    @include breakpoints(large) {
+        .heading-section .all {
+            height: 70%;
+            transform: translate(-50%, -45%);
+            .h1-header {
+                @include font-styling(map-get($map: $f-sizes-large, $key: h1-header-size))
+            }
+            .p-header {
+                @include font-styling(map-get($map: $f-sizes-large, $key: p-header-size))
+            }
+        }
+    }
+    @include breakpoints(extra-large) {
+        .heading-section .all {
+            height: 60%;
+            .h1-header {
+                @include font-styling(map-get($map: $f-sizes-extra-large, $key: h1-header-size))
+            }
+            .p-header {
+                @include font-styling(map-get($map: $f-sizes-extra-large, $key: p-header-size))
+            }
+        }
+    }
+    @include breakpoints(small) {
+        .heading-section .all {
+            .break {display: none;}
+            width: 85%;
+            .h1-header {
+                @include font-styling(map-get($map: $f-sizes-small, $key: h1-header-size));
+                line-height: get-line-height(3.5rem);
+            }
+            .p-header {
+                @include font-styling(map-get($map: $f-sizes-small, $key: p-header-size))
+            }
+            & .button {
+                transform: scale(0.9);
+                transition: .2s;
+            }
+            & .button:hover {
+                transform: scale(0.9);
+                transition: .2s;
+            }
+            & .button:active {
+                transform: scale(0.88);
+                transition: .1s;
+            }
+        }
+    }
+    @include breakpoints(extra-small) {
+        .heading-section .all {
+            height: 65%;
+            transform: translate(-50%, -40%);
+            .h1-header {
+                @include font-styling(map-get($map: $f-sizes-extra-small, $key: h1-header-size));
+                line-height: get-line-height(3.5rem);
+            }
+            .p-header {
+                @include font-styling(map-get($map: $f-sizes-extra-small, $key: p-header-size))
+            }
+            & button {
+                transform: scale(0.8);
+            }
+            & button:hover {
+                transform: scale(0.8);
+            }
+            & button:active {
+                transform: scale(0.78);
+            }
+        }
+    }
+    @media ((min-width: 500px) and (max-width: 990px)) and ((min-height: 300px) and (max-height: 500px)) {
+        min-height: 160vh;
+        min-height: 160dvh;
+    }
+    @media ((min-width: 1900px) and (max-width: 2500px)) and ((min-height: 3000px) and (max-height: 4500px)) {
+        min-height: 50vh;
+        min-height: 50dvh;
+    }
+}
+
+.all-sections {
+    .mindset,
+    .money-game {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+            "h1 h1"
+            "p img";
+        gap: clamp(10px, 5vw, 150px);
+        > img {
+            grid-area: img;
+            width: 100%;
+        }
+        h1 {
+            width: fit-content;
+            height: fit-content;
+            grid-area: h1;
+            margin-bottom: clamp(10px, 3vw, 160px);
+            position: relative;
+        }
+        h1::before {
+            content: "";
+            width: 30%;
+            height: 2px;
+            background-color: map-get($map: $primary, $key: first);
+            border-radius: 20px;
+            position: absolute;
+            bottom: -30%;
+            left: 0;
+        }
+        p {
+            grid-area: p;
+            align-self: center;
+        }
+        @include breakpoints(large) {
+            img {
+                width: 80%;
+                height: 100%;
+                justify-self: flex-end;
+            }
+            p {width: 90%;}
+
+        }
+        @include breakpoints(extra-large) {
+            gap: 50px;
+            h1 {
+                font-size: map-get($map: $f-sizes-extra-large, $key: h1-size);
+                line-height: get-line-height-h1(5rem);
+            }
+            img {
+                width: 80%;
+                height: 100%;
+            }
+            p {
+                margin-top: 40px;
+                align-self: self-start;
+                width: 90%;
+                font-size: map-get($map: $f-sizes-extra-large, $key: p-size);
+                line-height: get-line-height-p(map-get($map: $f-sizes-extra-large, $key: p-size));
+            }
+        }
+        @include breakpoints(medium) {
+            grid-template-areas: 
+                "h1 h1"
+                "p img";
+            img {
+                height: 90%;
+                align-self: center;
+            }
+            h1 {
+                text-align: center;
+            }
+            h1::before {
+                width: 30%;
+                bottom: -15%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        @include breakpoints(small) {
+            grid-template-columns: 1fr;
+            grid-template-areas: "h1" "img" "p";
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            h1::before {display: none;}
+            a {margin: auto;}
+        }
+        @include breakpoints(extra-small) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h1 {
+                font-size: map-get($map: $f-sizes-extra-small, $key: h1-size);
+                line-height: get-line-height-h1(3rem);
+            }
+        }
+    }
+    .money-game {
+        grid-template-areas:
+        "h1 img"
+        "p img"
+        "btn img";
+        position: relative;
+        a {
+            grid-area: btn;
+            align-self: self-start;
+        }
+        @include breakpoints(large) {h1 {margin-bottom: 0;}}
+        @include breakpoints(extra-medium) {h1::before {bottom: -15%;}}
+        @include breakpoints(medium) {
+            h1 {
+                text-align: start;
+                &::before {
+                    left: 0;
+                    transform: translateX(0%);
+                }
+            }
+        }
+        @include breakpoints(small) {
+            display: flex;
+            flex-direction: column;
+            h1 {text-align: center;}
+            h1::before {display: none;}
+            a {align-self: center;}
+        }
+    }
+    .articles-section {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(10px, 10vh, 150px);
+        text-align: center;
+        .section-text {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(10px, 5vw, 150px);
+            h1 {
+                width: 100%;
+                height: fit-content;
+                position: relative;
+            }
+            h1::before {
+                content: "";
+                width: 20%;
+                height: 2px;
+                background-color: map-get($map: $primary, $key: first);
+                border-radius: 20px;
+                position: absolute;
+                bottom: -25%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        .articles-set {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(3, 1fr);
+            gap: 50px;
+            .article {
+                height: min-content;
+                display: flex;
+                border-radius: 15px;
+                overflow: hidden;
+                cursor: pointer;
+                img {
+                    width: 50%;
+                    height: 50%;
+                    flex: 1.4;
+                    border-radius: 15px;
+                }
+                .text {
+                    height: fit-content;
+                    flex: 1;
+                    width: 40%;
+                    padding-left: 20px;
+                    padding-bottom: 20px;
+                    text-align: left;
+                    color: map-get($map: $primary, $key: black-color);
+                    position: relative;
+                    transition: .3s;
+                    &:not(.article:first-child .text)::before {
+                        content: "";
+                        width: 30%;
+                        height: 5px;
+                        background-color: map-get($map: $primary, $key: first);
+                        position: absolute;
+                        bottom: 0;
+                        left: 20px;
+                    }
+                }
+                &:hover {
+                    .text {color: map-get($map: $primary, $key: first);}
+                    transition: .3s;
+                } 
+            }
+            .article:first-child {
+                height: fit-content;
+                grid-column: 1;
+                grid-row: 1 / span 3;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                img {
+                    width: 100%;
+                    height: 50%;
+                }
+                .text {
+                    width: 100%;
+                    padding-inline: 0;
+                    display: flex;
+                    flex-direction: column;
+                    gap: inherit;
+                    text-align: start;
+                    p span {
+                        color: map-get($map: $primary, $key: first);
+                        text-decoration: underline;
+                        transition: .5s;
+                    }
+                }
+                &:hover .text span {
+                    color: map-get($map: $font-color, $key: a-color);
+                    transition: .2s;
+                }
+            }
+        }
+    @include breakpoints(large) {
+        .articles-set {
+            .article:first-child {
+                p {line-height: get-line-height-p(1.3rem);}
+            }
+        }
+    }
+    @include breakpoints(extra-large) {
+        .section-text {
+            h1 {font-size: map-get($map: $f-sizes-extra-large, $key: h1-size);}
+            p {
+                font-size: map-get($map: $f-sizes-extra-large, $key: p-size);
+                line-height: get-line-height-p(map-get($map: $f-sizes-extra-large, $key: p-size));
+            }
+        }
+        .articles-set {
+            .article:not(.article:first-child) {
+                height: fit-content;
+                h3 {
+                    font-size: map-get($map: $f-sizes-extra-large, $key: h3-size);
+                    line-height: get-line-height(map-get($map: $f-sizes-extra-large, $key: h3-size));
+                }
+            }
+            .article:first-child {
+                gap: 60px;
+                img {
+                    width: 100%;
+                }
+                h3 {
+                    font-size: map-get($map: $f-sizes-extra-large, $key: h3-size);
+                    line-height: get-line-height(map-get($map: $f-sizes-extra-large, $key: h3-size));
+                }
+                p {
+                    font-size: map-get($map: $f-sizes-extra-large, $key: p-size);
+                    line-height: get-line-height-p(map-get($map: $f-sizes-extra-large, $key: p-size));
+                }
+            }
+        }
+    }
+        @include breakpoints(medium) {
+            .articles-set {
+                grid-template-columns: 1fr;
+                .article img {flex: 1.1;}
+                .article:first-child {
+                    align-items: center;
+                    grid-column: 1;
+                    img {width: 90%;}
+                    .text {text-align: center;}
+                }
+            }
+        }
+        @include breakpoints(extra-small) {
+            h1 {
+                font-size: map-get($map: $f-sizes-extra-small, $key: h1-size);
+                line-height: get-line-height-h1(3rem);
+            }
+            h1::before {display: none;}
+            gap: 50px;
+            .articles-set{
+                .article:first-child img {width: 100%;}
+                .article {
+                    flex-direction: column;
+                    align-items: center;
+                    img {
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+                    .text {
+                        width: 100%;
+                        text-align: center;
+                        &::before {
+                            left: 50%;
+                            transform: translateX(100%);
+                        }
+                    }
+                }
+            }
+        }
+        .button {
+            align-self: center;
+        }
+    }
+    .make-money {
+        .articles-set {
+            .article:first-child {
+                grid-column: 2;
+                grid-row: 1 / span 3;
+            }
+        }
+        @include breakpoints(medium) {
+            .articles-set {
+                grid-template-columns: 1fr;
+                .article:first-child {grid-column: 1;}
+            }
+        }
+    }
+    @include breakpoints(large) {
+        .container {
+            .text h1 {
+                font-size: map-get($map: $f-sizes-large, $key: h1-size);
+                line-height: get-line-height-h1(5rem);
+                &::before {height: 5px;}
+            }
+            .text p {
+                font-size: map-get($map: $f-sizes-large, $key: p-size);
+                line-height: get-line-height-p(2rem);
+            }
+        }
+    }
+    @include breakpoints(extra-large) {
+        .container {
+            .articles-set{
+                .article{
+                    height: 500px;
+                }
+            }
+            .text h1 {
+                font-size: map-get($map: $f-sizes-extra-large, $key: h1-size);
+                line-height: get-line-height-h1(7rem);
+            }
+            .text p {
+                font-size: map-get($map: $f-sizes-extra-large, $key: p-size);
+                line-height: get-line-height-p(3rem);
+            }
+        }
+    }
+    @include breakpoints(medium) {
+        .articles-set {
+            grid-template-columns: repeat(2, minmax(min(250px, 100%), 1fr));
+        }
+        .text h1::before {
+            bottom: -10%;
+        }
+    }
+    @include breakpoints(small) {
+        .text h1::before {
+            display: none;
+        }
+    }
+    @include breakpoints(extra-small) {
+        .articles-set {
+            grid-template-columns: repeat(1, minmax(min(250px, 100%), 1fr));
+        }
+        .text h1 {
+            font-size: map-get($map: $f-sizes-extra-small, $key: h1-size);
+            line-height: get-line-height(3rem);
+        }
+    }
+}
+

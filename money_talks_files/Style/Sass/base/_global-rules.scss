@@ -1,0 +1,50 @@
+// grid system
+
+@use '../abstracts/colors' as *;
+@use '../abstracts/vars' as *;
+@use '../abstracts/mixins' as *;
+
+// grid columns
+// $grid-col: 12;
+
+// @for $col-num from 1 through $grid-col {
+//     .col-#{$col-num} {
+//         width: percentage(calc($col-num / $grid-col));
+//     }
+// }
+
+.container {
+    max-width: 92%;
+    margin-inline: auto;
+    @include breakpoints(extra-small) {
+        // max-width: 95%;
+        // padding-inline: 20px;
+    }
+    @include breakpoints(large) {
+        max-width: 70%;
+        padding-inline: 25px;
+    }
+    @include breakpoints(extra-large) {
+        max-width: 45%;
+        padding-inline: 30px;
+    }
+}
+
+.section-rules {
+    margin: 40px 0;
+    padding: 40px 0;
+    @include breakpoints(extra-large) {
+        margin: 70px 0;
+        padding: 70px 0;
+    }
+    @include breakpoints(extra-small) {
+        margin: 20px 0;
+        padding: 20px 0;
+    }
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

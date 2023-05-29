@@ -1,0 +1,41 @@
+// COLORS
+
+// colors to be used in the whole project
+$primary: (
+    first: #2ecc71,
+    second: white,
+    third: #1b7240,
+    action-btn: #f9d71c,
+    action-btn-border: #ffbd59,
+    links-color: #e39751,
+    black-color: black,
+    dark-color: #333333,
+    dark-color-2: #999999,
+    dark-light-color: #c0c0c0,
+    light-color: #fafafa,
+);
+
+// typography colors
+$font-color: (
+    h1-header-color: map-get($map: $primary, $key: second),
+    h1-color: map-get($map: $primary, $key: first),
+    h2-color: map-get($map: $primary, $key: black-color),
+    h3-color: map-get($map: $primary, $key: light-dark-color),
+    p-color: map-get($map: $primary, $key: dark-color),
+    a-color: map-get($map: $primary, $key: links-color),
+    a-nav-color: map-get($map: $primary, $key: second),
+    btn-color: map-get($map: $primary, $key: black-color),
+);
+
+
+// layout colors
+$nav-bar-color: map-get($map: $primary, $key: first);
+
+$header-bg-color: map-get($map: $primary, $key: first);
+
+$section-bg-color: (
+    light-grey: map-get($map: $primary, $key: light-color),
+    white-color: map-get($map: $primary, $key: second)
+);
+
+$footer-bg-color: map-get($map: $primary, $key: first);

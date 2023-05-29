@@ -1,0 +1,105 @@
+/// Mixins
+
+@use '../abstracts/vars' as *;
+@use '../abstracts/colors' as *;
+@use '../abstracts/functions' as *;
+
+// breakpoints mixin
+@mixin breakpoints($screen) {
+    @if $screen == extra-small {
+        @media (max-width: map-get($map: $breakpoints, $key: extra-small)) {
+            @content;
+        }
+    } @else if $screen == small {
+        @media (max-width: map-get($map: $breakpoints, $key: small)) {
+            @content
+        };
+    } @else if $screen == medium {
+        @media (max-width: map-get($map: $breakpoints, $key: medium)) {
+            @content
+        };
+    } @else if $screen == extra-medium {
+        @media (max-width: map-get($map: $breakpoints, $key: extra-medium)) {
+            @content
+        };
+    } @else if $screen == large {
+        @media (min-width: map-get($map: $breakpoints, $key: large)) {
+            @content
+        };
+    } @else if $screen == extra-large {
+        @media (min-width: map-get($map: $breakpoints, $key: extra-large)) {
+            @content
+        };
+    }
+};
+
+// font styling
+@mixin font-styling($text: '', $section: '') {
+    @if $text == 'h1' {
+        font-size: clamp(map-get($map: $f-sizes-extra-small, $key: h1-size), 8vw, map-get($map: $f-sizes-extra-large, $key: h1-size));
+        line-height: clamp(get-line-height-h1(map-get($map: $f-sizes-extra-small, $key: h1-size)), 8vw, get-line-height-p(map-get($map: $f-sizes-extra-large, $key: h1-size)));
+        color: map-get($map: $font-color, $key: h1-color);
+    } @else if $text == 'h2' {
+        font-size: clamp(map-get($map: $f-sizes-extra-small, $key: h2-size), 4vw, map-get($map: $f-sizes-extra-large, $key: h2-size));
+        line-height: clamp(get-line-height-h1(map-get($map: $f-sizes-small, $key: h2-size)), 7vw, get-line-height-p(map-get($map: $f-sizes-extra-large, $key: h2-size)));
+        color: map-get($map: $font-color, $key: h2-color);
+    } @else if $text == 'h3' {
+        font-size: clamp(map-get($map: $f-sizes-extra-small, $key: h3-size), 2.4vw, map-get($map: $f-sizes-extra-large, $key: h3-size));
+        line-height: clamp(get-line-height-h1(map-get($map: $f-sizes-small, $key: h3-size)), 4vw, get-line-height-p(map-get($map: $f-sizes-extra-large, $key: h3-size)));
+        color: map-get($map: $font-color, $key: h3-color);
+    } @else if $text == 'p' {
+        font-size: clamp(map-get($map: $f-sizes-small, $key: p-size), 2vw, map-get($map: $f-sizes-extra-large, $key: p-size));
+        line-height: clamp(get-line-height-p(map-get($map: $f-sizes-extra-small, $key: p-size)), 6vw, get-line-height-p(map-get($map: $f-sizes-extra-large, $key: p-size)));
+        color: map-get($map: $font-color, $key: p-color);
+    } @else if $text == 'a' {
+        font-size: clamp(map-get($map: $f-sizes-small, $key: a-size), 2vw, map-get($map: $f-sizes-extra-large, $key: a-size));
+        line-height: clamp(get-line-height-p(map-get($map: $f-sizes-extra-small, $key: a-size)), 6vw, get-line-height-p(map-get($map: $f-sizes-extra-large, $key: a-size)));
+        color: map-get($map: $font-color, $key: a-color);
+    } @else if $text == 'btn' {
+        font-size: clamp(map-get($map: $f-sizes-extra-small, $key: p-size), 1.6vw, (map-get($map: $f-sizes-extra-large, $key: p-size)));
+        font-weight: normal;
+        color: map-get($map: $font-color, $key: btn-color);
+    } @else if type-of($value: $text) == number {
+        font-size: $text;
+        line-height: get-line-height-p($text);
+        @content;
+    }
+    @if $section == 'header' {
+        color: map-get($map: $font-color, $key: h1-header-color);
+        text-shadow: 0 0 10px map-get($map: $primary, $key: dark-color);
+        @content;
+    }
+}
+
+// buttons
+@mixin buttons($type: '') {
+    @if $type == 'action' {
+        width: fit-content;
+        padding: 10px 40px;
+        background-color: map-get($map: $primary, $key: action-btn);
+        border-color: map-get($map: $primary, $key: action-btn-border);
+    } @else {
+        padding: 10px 20px;
+        background-color: map-get($map: $primary, $key: light-color);
+        border-color: map-get($map: $primary, $key: dark-light-color);
+    }
+}
+
+@mixin social-icon($icon) {
+    @if $icon == 'fb' {
+        color: #1877f2;
+        background-color: #1877f2;
+    } @else if $icon == 'insta' {
+        color: #c13584;
+        background-color: #c13584;
+    } @else if $icon == 'tw' {
+        color: #1da1f2;
+        background-color: #1da1f2;
+    } @else if $icon == 'pin' {
+        color: #E60023;
+        background-color: #E60023;
+    } @else if $icon == 'in' {
+        color: #0A66C2;
+        background-color: #0A66C2;
+    }
+}

@@ -1,0 +1,59 @@
+// global typography rules
+
+@use '../abstracts/mixins' as *;
+@use '../abstracts/vars' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/colors' as *;
+
+html {
+    font-family: Helvetica, roboto, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+h1 {
+    @include font-styling('h1')
+}
+
+.h1-header {
+    @include font-styling('h1', 'header');
+    font-size: map-get($map: $f-sizes, $key: h1-header-size);
+}
+
+h2 {
+    @include font-styling('h2')
+}
+
+h3 {
+    @include font-styling('h3')
+}
+
+p {
+    @include font-styling('p');
+    font-weight: normal;
+}
+
+.p-header {
+    @include font-styling('p', 'header');
+    font-size: map-get($map: $f-sizes, $key: p-header-size);
+    line-height: get-line-height(map-get($map: $f-sizes, $key: p-header-size));
+    letter-spacing: 0.08em;
+    font-weight: normal;
+}
+
+a:not(.a-btn) {
+    @include font-styling('a');
+    font-weight: normal;
+}
+
+.a-header {
+    @include font-styling('', 'header');
+    font-size: clamp(0.1rem, 1.5vw, map-get($map: $f-sizes, $key: h1-header-size));
+    font-weight: normal;
+}
+
+time {
+    font-size: initial;
+}
+

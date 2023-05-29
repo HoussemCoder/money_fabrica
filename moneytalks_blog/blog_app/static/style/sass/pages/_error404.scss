@@ -1,0 +1,14 @@
+/// the 404 error page styling
+
+@use '../abstracts/colors' as *;
+
+.message {
+    .container {
+        text-align: center;
+        margin-top: clamp(20px, 5vw, 40px);
+        margin-bottom: clamp(20px, 5vw, 40px);
+        h1 {
+            color: map-get($map: $primary, $key: dark-color);
+        }
+    }
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="#">
+  <meta name="author" content="H_coder">
+  <!-- tab info and icon -->
+  <title>Home | Money Talks</title>
+  <link rel="icon" type="image/png" href="images/logos/logo_light_icon.png">
+  <!-- main css file -->
+  <link rel="stylesheet" href="Style/Sass/main.css">
+  <!-- font awesome library -->
+  <link rel="stylesheet" href="Style/Sass/all.min.css">
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Roboto:wght@100;300;500;900&family=Work+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+  <!-- javascript files -->
+  <script src="JS/behaviors.js" defer></script>
+  <script src="JS/all.min.js" defer></script>
+  <script src="JS/bootstrap.bundle.min.js" defer></script>
+</head>
+<body onscroll="show_when('go-up')">
+  <header class="main-header header" id="header">
+    <nav>
+      <div class="container">
+        <img class="logo" src="images/logos/logo_dark.png" alt="Logo" title="Money Talks">
+        <!-- <button id="menu-icon"><i class="fa-solid fa-bars"></i></button> -->
+        <button id="menu-icon" onclick="show_list('.nav-links'); change_icon_shape(this)">
+          <span></span>
+          <span></span>
+          <span></span>
+        </i></button>
+        <ul class="nav-links" id="menu" role="navigation">
+          <li><a class="active a-header" href="home.html" target="_self">Home</a></li>
+          <li><a class="a-header" href="articles.html" target="_self">Articles</a></li>
+          <li><a class="a-header" href="advertise.html" target="_self">Advertise</a></li>
+          <li><a class="a-header" href="contact.html" target="_self">Contact</a></li>
+          <li><a class="a-header" href="shop.html" target="_self">Shop</a></li>
+          <li><a class="a-header" href="success_stories.html" target="_self">Success Stories</a></li>
+          <li title="Search">
+            <i class="fa-solid fa-magnifying-glass-dollar a-header search-icon" onclick="show_search_bar('.search-menu-form')"></i>
+            <!-- <div class="arrow"></div> -->
+            <form class="search-menu-form form-trans-bg" action="#" method="post">
+              <input type="search" name="search-bar" placeholder="Search articles" autofocus>
+              <button class="search-btn button call-to-action-btn">Go</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="heading-section">
+      <div class="all">
+        <h1 class="h1-header">Money Talks</h1>
+        <p class="p-header">Expand Your Incomes And Reach Your<br class="break"> Financial Freedom</p>
+        <button class="button call-to-action-btn" id="go-to-mindset" onclick="btn_action('mindset')" title="See how...">Want to know how?</button>
+      </div>
+    </div>
+  </header>
+  <section class="all-sections">
+    <div class="container">
+      <section class="mindset section-rules" id="mindset">
+        <h1>It's all about your MINDSET</h1>
+        <p>Changing your mindset to focus on creating value and seeking opportunities rather than 
+          just earning money can be key to becoming wealthy. By developing an abundance mindset, 
+          embracing risk and learning from failures, and focusing on long-term goals, you can open 
+          yourself up to new possibilities and increase your chances of achieving financial success.
+        </p>
+        <img src="images/home_mindset.png" alt="growth your mindset" title="growth your mindset">
+      </section>
+      <section class="articles-section section-rules">
+        <div class="section-text">
+          <h1>Build a Strong Mindset</h1>
+          <p>We will help you build your own strong mindset to be able to dive into this big world of MONEY</p>
+        </div>
+        <div class="articles-set">
+          <a href="#" target="_blank" class="article">
+            <img src="images/newsletter.png" alt="growth your mindset">
+            <div class="text">
+              <h3>article title 1 Lorem ipsum dolor sit amet.</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam soluta inventore quam cumque 
+                itaque magnam harum sapiente maiores dignissimos tempore autem, sed odit aspernatur nisi. Lorem 
+                ipsum dolor sit amet...
+                <span>Read More</span>
+              </p>
+            </div>
+          </a>
+          <a href="#" target="_blank" class="article">
+            <img src="images/header.png" alt="growth your mindset">
+            <div class="text">
+              <h3>article title 1 Lorem ipsum dolor sit amet.</h3>
+            </div>
+          </a>
+          <a href="#" target="_blank" class="article">
+            <img src="images/newsletter.png" alt="growth your mindset">
+            <div class="text">
+              <h3>article title 2 Lorem ipsum dolor sit amet.</h3>
+            </div>
+          </a>
+          <a href="#" target="_blank" class="article">
+            <img src="images/header.png" alt="growth your mindset">
+            <div class="text">
+              <h3>article title 3 Lorem ipsum dolor sit amet.</h3>
+            </div>
+          </a>
+        </div>
+        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
+      </section>
+      <section class="money-game section-rules">
+        <h1>The Money Game</h1>
+        <img src="images/ads/money_game.png" alt="The Money Game book" title="The Money Game book">
+        <p>is a guide to help you develop the right mindset to build wealth and financial freedom. 
+          It offers practical strategies to transform your relationship with money and provides real-world 
+          examples of successful individuals who have applied these principles to achieve abundance in their 
+          lives. With this book, you'll learn how to shift your mindset from scarcity to abundance and take 
+          control of your financial future.</p>
+        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="Read The Book">Read The Book</a>
+      </section>
+      <section class="articles-section make-money section-rules">
+        <div class="section-text">
+          <h1>It's Time To Get Rich</h1>
+          <p>Unlock your potential wealth and learn the secrets to financial abundance with these informative articles on how to get rich</p>
+        </div>
+        <div class="articles-set">
+          <a href="#" target="_blank" class="article">
+            <img src="images/header.png" alt="learn how to get rich">
+            <div class="text">
+              <h3>article title 1 Lorem ipsum dolor sit amet.</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam soluta inventore quam cumque itaque 
+                magnam harum sapiente maiores dignissimos tempore autem, sed odit aspernatur nisi. Lorem ipsum dolor
+                , sit amet consectetur... <span>Read More</span></p>
+            </div>
+          </a>
+          <a href="#" target="_blank" class="article">
+            <img src="images/newsletter.png" alt="learn how to get rich">
+            <div class="text">
+              <h3>article title 1 Lorem ipsum dolor sit amet.</h3>
+            </div>
+          </a>
+          <a href="#" target="_blank" class="article">
+            <img src="images/header.png" alt="learn how to get rich">
+            <div class="text">
+              <h3>article title 1 Lorem ipsum dolor sit amet.</h3>
+            </div>
+          </a>
+          <a href="#" target="_blank" class="article">
+            <img src="images/newsletter.png" alt="learn how to get rich">
+            <div class="text">
+              <h3>article title 1 Lorem ipsum dolor sit amet.</h3>
+            </div>
+          </a>
+        </div>
+        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
+      </section>
+    </div>
+    <button class="button go-to-up-btn" id="go-up" onclick="btn_action('header')" title="Go up"><i class="fa-solid fa-angles-up"></i></button>
+  </section>
+  <footer>
+    <div class="newsletter">
+      <div class="container">
+        <p>Be The First Who Know...</p>
+        <form class="newsletter-form" action="#" method="post">
+          <label for="#email"><span>Subscribe</span> for our newsletter:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+          <button class="call-to-action-btn button" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="container">
+        <div class="logo-socials">
+          <img class="logo" src="images/logos/logo_dark.png" alt="Money Talks Logo" title="Money Talks Logo">
+          <p>Follow us on social media</p>
+          <div class="social-icons">
+            <a id="fb" href="#" target="_blank" title="Facebook"><i class="fa-brands fa-square-facebook"></i></a>
+            <a id="insta" href="#" target="_blank" title="Instagram"><i class="fa-brands fa-square-instagram"></i></a>
+            <a id="tw" href="#" target="_blank" title="Twitter"><i class="fa-brands fa-square-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <ul class="about" role="navigation">
+            About
+            <li><a href="#">Who are we?</a></li>
+            <li><a href="#">Our goals</a></li>
+            <li><a href="#">Developer</a></li>
+          </ul>
+          <ul class="connect" role="navigation">
+            Connect
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">E-mail</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Twitter</a></li>
+          </ul>
+          <ul class="legal" role="navigation">
+            Legal
+            <li><a href="#">Terms of use</a></li>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Cookie policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p>&copy; 2023 <span>Money Talks.</span> All Rights Reserved</p>
+    </div>
+  </footer>
+</body>
+</html>

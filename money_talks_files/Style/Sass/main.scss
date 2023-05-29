@@ -1,0 +1,34 @@
+// The main sass file that will be compiled into the main CSS file
+
+// import files from 'abstract' folder
+@use './abstracts/colors' as *;
+@use './abstracts/functions' as *;
+@use './abstracts/mixins' as *;
+@use './abstracts/vars' as *;
+
+// import files from 'base' folder
+@use './base/global-rules';
+@use './base/reset';
+@use './base/typography';
+
+// import files from 'components' folder
+@use './components/buttons';
+@use './components/cards';
+@use './components/forms';
+@use './components/icons';
+
+// import files from 'layout' folder
+@use './layout/ads';
+@use './layout/article';
+@use './layout/footer';
+@use './layout/main-header';
+@use './layout/side-bar';
+
+// import files from 'pages' folder
+@use './pages/home';
+@use './pages/articles';
+@use './pages/advertise';
+@use './pages/contact';
+@use './pages/shop';
+@use './pages/success-stories';
+@use './pages/category';

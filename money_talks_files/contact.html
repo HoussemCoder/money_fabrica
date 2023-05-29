@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="#">
+  <meta name="author" content="H_coder">
+  <!-- tab info and icon -->
+  <title>Contact | Money Talks</title>
+  <link rel="icon" type="image/png" href="/images/logos/logo_light_icon.png">
+  <!-- main css file -->
+  <link rel="stylesheet" href="/Style/Sass/main.css">
+  <!-- font awesome library -->
+  <link rel="stylesheet" href="/Style/Sass/all.min.css">
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Roboto:wght@100;300;500;900&family=Work+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+  <!-- javascript files -->
+  <script src="/JS/behaviors.js" defer></script>
+  <script src="/JS/all.min.js" defer></script>
+  <script src="/JS/bootstrap.bundle.min.js" defer></script>
+</head>
+<body onscroll="show_when('go-up')">
+  <header class="main-header" id="header">
+    <nav>
+      <div class="container">
+        <img class="logo" src="/images/logos/logo_dark.png" alt="Logo" title="Money Talks">
+        <button id="menu-icon" onclick="show_list('.nav-links'); change_icon_shape(this);">
+          <span></span>
+          <span></span>
+          <span></span>
+        </i></button>
+        <ul class="nav-links" role="navigation">
+          <li><a class="a-header" href="home.html" target="_self">Home</a></li>
+          <li><a class="a-header" href="articles.html" target="_self">Articles</a></li>
+          <li><a class="a-header" href="advertise.html" target="_self">Advertise</a></li>
+          <li><a class="active a-header" href="contact.html" target="_self">Contact</a></li>
+          <li><a class="a-header" href="shop.html" target="_self">Shop</a></li>
+          <li><a class="a-header" href="success_stories.html" target="_self">Success Stories</a></li>
+          <li title="Search">
+            <i class="fa-solid fa-magnifying-glass-dollar a-header search-icon" onclick="show_search_bar('.search-menu-form')"></i>
+            <form class="search-menu-form" action="#" method="post">
+              <input type="search" name="search-bar" placeholder="Search articles" autofocus>
+              <button class="search-btn button call-to-action-btn" type="submit" name="go-submit">Go</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="get-started">
+      <div class="how-to-icon" onclick="show_list('.get-started-list'); up_down('#arrow')"><p>How to...</p><i class="fa-solid fa-angle-down" id="arrow"></i></div>
+      <div class="container get-started-list">
+        <img class="how-to-img" src="../../images/logos/how_to.png" alt="how to...">
+        <a href="build_mindset_category.html" target="_blank" class="option">
+          <img src="/images/logos/build_mindset.png" alt="">
+          <h3>Build a strong mindset</h3>
+        </a>
+        <a href="increase_incomes_category.html" target="_blank" class="option">
+          <img src="/images/logos/expand_incomes.png" alt="">
+          <h3>Increase your incomes</h3>
+        </a>
+        <a href="develop_skills_category.html" target="_blank" class="option">
+          <img src="/images/logos/develop_skills.png" alt="">
+          <h3>Develop new skills</h3>
+        </a>
+        <a href="remote_jobs_category.html" target="_blank" class="option">
+          <img src="/images/logos/remote_jobs.png" alt="">
+          <h3>Get remote jobs</h3>
+        </a>
+        <a href="start_business_category.html" target="_blank" class="option">
+          <img src="/images/logos/start_business.png" alt="">
+          <h3>Start a business</h3>
+        </a>
+      </div>
+    </div>
+  </header>

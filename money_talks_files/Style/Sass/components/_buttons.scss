@@ -1,0 +1,53 @@
+// global buttons styling
+
+@use '../abstracts/mixins' as *;
+@use '../abstracts/vars' as *;
+@use '../abstracts/colors' as *;
+
+button,
+.button {
+    @include font-styling('btn');
+    border: map-get($map: $buttons, $key: btn-border);
+    border-radius: map-get($map: $buttons, $key: btn-border-radius);
+    transition: .3s;
+    cursor: pointer;
+    &:hover:not(.filter-btn, .three-points) {
+        transform: scale(1.1);
+        transition: .3s;
+        transition-delay: .2s;
+    }
+}
+
+.call-to-action-btn {
+    @include buttons('action');
+    @include breakpoints(extra-large) {
+        padding: calc(10px + 10px) calc(40px + 20px);
+        transition: .2s;
+    }
+}
+
+.filter-btn {
+    @include buttons;
+}
+
+.pages-btn {
+    @include buttons;
+}
+
+.go-to-up-btn {
+    @include buttons;
+    display: none;
+    padding: 15px;
+    border: none;
+    border-radius: map-get($map: $buttons, $key: btn-border-radius);
+    box-shadow: 0 3px 4px 4px map-get($map: $primary, $key: dark-light-color);
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.9;
+    &:hover {transition-delay: 0s;}
+    @include breakpoints(small) {
+        padding: 10px;
+    }
+}
+
