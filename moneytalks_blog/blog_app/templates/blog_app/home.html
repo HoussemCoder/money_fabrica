@@ -22,11 +22,13 @@
   <script src="{% static 'js/behaviors.js' %}" defer></script>
   <script src="{% static 'js/all.min.js' %}" defer></script>
 </head>
-<body onscroll="show_when('go-up')">
+<body onscroll="show_when('go-up'), nice_show('.initial')">
   <header class="main-header header" id="header">
     <nav>
       <div class="container">
-        <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Logo" title="Money Talks">
+        <a href="{% url 'home_page' %}" target="_blank">
+          <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Logo" title="Money Talks">
+        </a>
         <button id="menu-icon" onclick="show_list('.nav-links'); change_icon_shape(this)">
           <span></span>
           <span></span>
@@ -41,8 +43,8 @@
           <li><a class="a-header" href="success_stories.html" target="_blank">Success Stories</a></li>
           <li title="Search">
             <i class="fa-solid fa-magnifying-glass-dollar a-header search-icon" onclick="show_search_bar('.search-menu-form')"></i>
-            <form class="search-menu-form form-trans-bg" action="#" method="post">
-              <input type="search" name="search-bar" placeholder="Search articles" autofocus>
+            <form class="search-menu-form form-trans-bg" action="{% url 'search_articles_page' %}" method="get" target="_blank">
+              {{search_form.search}}
               <button class="search-btn button call-to-action-btn">Go</button>
             </form>
           </li>
@@ -68,7 +70,7 @@
         </p>
         <img src="../../static/images/home_mindset.png" alt="growth your mindset" title="growth your mindset">
       </section>
-      <section class="articles-section section-rules">
+      <section class="articles-section section-rules initial">
         <div class="section-text">
           <h1>Build a Strong Mindset</h1>
           <p>We will help you build your own strong mindset to be able to dive into this big world of MONEY</p>
@@ -94,7 +96,7 @@
         </div>
         <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
       </section>
-      <section class="money-game section-rules">
+      <section class="money-game section-rules initial">
         <h1>The Money Game</h1>
         <img src="../../static/images/ads/money_game.png" alt="The Money Game book" title="The Money Game book">
         <p>is a guide to help you develop the right mindset to build wealth and financial freedom. 
@@ -104,7 +106,7 @@
           control of your financial future.</p>
         <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="Read The Book">Read The Book</a>
       </section>
-      <section class="articles-section make-money section-rules">
+      <section class="articles-section make-money section-rules initial">
         <div class="section-text">
           <h1>It's Time To Get Rich</h1>
           <p>Unlock your potential wealth and learn the secrets to financial abundance with these informative articles on how to get rich</p>
@@ -132,6 +134,29 @@
     </div>
     <button class="button go-to-up-btn" id="go-up" onclick="btn_action('header')" title="Go up"><i class="fa-solid fa-angles-up"></i></button>
   </section>
+  <section class="home-articles initial">
+    <div class="container">
+      <div class="section-plus-btn">
+        <section class="latest-articles">
+          {% for article in latest_articles %}
+            <a href="#" target="_blank" class="article">
+              <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
+              <div class="text">
+                <h3>{{article.title}}</h3>
+                <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+              </div>
+            </a>
+          {% endfor %}
+        </section>
+        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
+      </div>
+      <div class="in-between-ads">
+        <div class="container">
+          <h2>ads</h2>
+        </div>
+      </div>
+    </div>
+  </section>
   <footer>
     <div class="newsletter">
       <div class="container">
@@ -146,7 +171,9 @@
     <div class="footer">
       <div class="container">
         <div class="logo-socials">
-          <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Money Talks Logo" title="Money Talks Logo">
+          <a href="{% url 'home_page' %}" target="_blank">
+            <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Money Talks Logo" title="Money Talks Logo">
+          </a>
           <p>Follow us on social media</p>
           <div class="social-icons">
             <a id="fb" href="#" target="_blank" title="Facebook"><i class="fa-brands fa-square-facebook"></i></a>
@@ -158,7 +185,7 @@
           <ul class="about" role="navigation">
             About
             <li><a href="#">Who are we?</a></li>
-            <li><a href="#">Our goals</a></li>
+            <!-- <li><a href="#">Our goals</a></li> -->
             <li><a href="#">Developer</a></li>
           </ul>
           <ul class="connect" role="navigation">

@@ -17,7 +17,8 @@
       <div class="container">
         {% for article in started_articles %}
           <a href="{% url 'article_page' keyword=article.slug %}" target="_blank">
-            <i class="fa-solid fa-hand-holding-dollar"></i>
+            <!-- <i class="fa-solid fa-hand-holding-dollar"></i> -->
+            <i class="fa-solid fa-right-long"></i>
             <span>{{article.title}}</span>
           </a>
         {% endfor %}
@@ -40,7 +41,7 @@
     <img src="../../static/images/ads/money_game_bg.png" alt="The Money Game book" title="The Money Game book">
     <div class="text-btn">
       <h2>The Money Game</h2>
-      <p>Is a book that combines principles of a <strong>growth mindset</strong> with financial strategies to help readers achieve <strong>financial freedom</strong>.</p>
+      <p>Is a book that combines principles of the <strong>growth mindset</strong> with financial strategies to help readers achieve <strong>financial freedom</strong>.</p>
       <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="Read The Book">Read The Book</a>
     </div>
   </div>

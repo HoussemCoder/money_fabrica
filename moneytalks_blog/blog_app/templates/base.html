@@ -26,24 +26,28 @@
   <header class="main-header" id="header">
     <nav>
       <div class="container">
-        <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Logo" title="Money Talks">
+        <a href="{% url 'home_page' %}" target="_blank">
+          <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Logo" title="Money Talks">
+        </a>
         <button id="menu-icon" onclick="show_list('.nav-links'); change_icon_shape(this);">
           <span></span>
           <span></span>
           <span></span>
         </i></button>
         <ul class="nav-links" role="navigation">
-          <li><a class="a-header" href="{% url 'home_page' %}" target="_self">Home</a></li>
-          <li><a class="active a-header" href="{% url 'search_articles_page' %}" target="_self">Articles</a></li>
-          <li><a class="a-header" href="advertise.html" target="_self">Advertise</a></li>
-          <li><a class="a-header" href="contact.html" target="_self">Contact</a></li>
-          <li><a class="a-header" href="shop.html" target="_self">Shop</a></li>
-          <li><a class="a-header" href="success_stories.html" target="_self">Success Stories</a></li>
+          <li><a class="a-header" href="{% url 'home_page' %}" target="_blank">Home</a></li>
+          <li><a class="active a-header" href="{% url 'search_articles_page' %}" target="_blank">Articles</a></li>
+          <li><a class="a-header" href="advertise.html" target="_blank">Advertise</a></li>
+          <li><a class="a-header" href="contact.html" target="_blank">Contact</a></li>
+          <li><a class="a-header" href="shop.html" target="_blank">Shop</a></li>
+          <li><a class="a-header" href="success_stories.html" target="_blank">Success Stories</a></li>
           <li title="Search">
             <i class="fa-solid fa-magnifying-glass-dollar a-header search-icon" onclick="show_search_bar('.search-menu-form')"></i>
-            <form class="search-menu-form" action="#" method="post">
-              <input type="search" name="search-bar" placeholder="Search articles" autofocus>
-              <button class="search-btn button call-to-action-btn" type="submit" name="go-submit">Go</button>
+            <form class="search-menu-form" action="{% url 'search_articles_page' %}" method="get">
+              {{search_form.search}}
+              <!-- {{form.category}}
+              {{form.filter}} -->
+              <button class="search-btn button call-to-action-btn" type="submit" name="submit">Go</button>
             </form>
           </li>
         </ul>
@@ -53,23 +57,23 @@
       <div class="how-to-icon" onclick="show_list('.get-started-list'); up_down('#arrow')"><p>How to...</p><i class="fa-solid fa-angle-down" id="arrow"></i></div>
       <div class="container get-started-list">
         <img class="how-to-img" src="../../static/images/logos/how_to.png" alt="how to...">
-        <a href="{% url 'category' category_slug='build-a-strong-mindset' %}" target="_blank" class="option">
+        <a href="{% url 'category_page' category_slug='build-a-strong-mindset' %}" target="_blank" class="option">
           <img src="../../static/images/logos/build_mindset.png" alt="">
           <h3>Build a strong mindset</h3>
         </a>
-        <a href="{% url 'category' category_slug='increase-your-incomes' %}" target="_blank" class="option">
+        <a href="{% url 'category_page' category_slug='increase-your-incomes' %}" target="_blank" class="option">
           <img src="../../static/images/logos/expand_incomes.png" alt="">
           <h3>Increase your incomes</h3>
         </a>
-        <a href="{% url 'category' category_slug='develop-new-skills' %}" target="_blank" class="option">
+        <a href="{% url 'category_page' category_slug='develop-new-skills' %}" target="_blank" class="option">
           <img src="../../static/images/logos/develop_skills.png" alt="">
           <h3>Develop new skills</h3>
         </a>
-        <a href="{% url 'category' category_slug='get-remote-jobs' %}" target="_blank" class="option">
+        <a href="{% url 'category_page' category_slug='get-remote-jobs' %}" target="_blank" class="option">
           <img src="../../static/images/logos/remote_jobs.png" alt="">
           <h3>Get remote jobs</h3>
         </a>
-        <a href="{% url 'category' category_slug='start-a-business' %}" target="_blank" class="option">
+        <a href="{% url 'category_page' category_slug='start-a-business' %}" target="_blank" class="option">
           <img src="../../static/images/logos/start_business.png" alt="">
           <h3>Start a business</h3>
         </a>
@@ -87,9 +91,11 @@
     <div class="newsletter">
       <div class="container">
         <p>Be The First Who Know...</p>
-        <form class="newsletter-form" action="#" method="post">
+        <form class="newsletter-form" action="" method="post">
           <label for="#email"><span>Subscribe</span> for our newsletter:</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+          <!-- <input type="email" id="email" name="email" placeholder="Enter your email address" required> -->
+          {% csrf_token %}
+          {{email_form.email_form}}
           <button class="call-to-action-btn button" type="submit">Subscribe</button>
         </form>
       </div>
@@ -98,7 +104,9 @@
     <div class="footer">
       <div class="container">
         <div class="logo-socials">
-          <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Money Talks Logo" title="Money Talks Logo">
+          <a href="{% url 'home_page' %}" target="_blank">
+            <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Money Talks Logo" title="Money Talks Logo">
+          </a>
           <p>Follow us on social media</p>
           <div class="social-icons">
             <a id="fb" href="#" target="_blank" title="Facebook"><i class="fa-brands fa-square-facebook"></i></a>
@@ -110,7 +118,7 @@
           <ul class="about" role="navigation">
             About
             <li><a href="#">Who are we?</a></li>
-            <li><a href="#">Our goals</a></li>
+            <!-- <li><a href="#">Our goals</a></li> -->
             <li><a href="#">Developer</a></li>
           </ul>
           <ul class="connect" role="navigation">

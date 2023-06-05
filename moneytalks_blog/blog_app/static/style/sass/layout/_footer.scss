@@ -79,9 +79,13 @@ footer {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                .logo {
-                    margin-bottom: 40px;
-                    width: 60%;
+                a {
+                    display: flex;
+                    justify-content: center;
+                    .logo {
+                        margin-bottom: 40px;
+                        width: 60%;
+                    }
                 }
                 p {
                     @include font-styling("p");
@@ -124,7 +128,7 @@ footer {
                 gap: 100px;
                 padding: 50px 0;
                 .logo-socials {
-                    .logo {img {width: 40%;}}
+                    a .logo { img{width: 40%;}}
                 }
                 .footer-links {
                     justify-content: space-around;
@@ -160,7 +164,7 @@ footer {
                 .logo-socials {
                     flex: 1;
                     justify-content: center;
-                    .logo {
+                    a .logo {
                         margin-inline: auto;
                         img {width: 70%;}
                     }

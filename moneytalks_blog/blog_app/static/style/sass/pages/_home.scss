@@ -12,8 +12,9 @@
     // background-repeat: no-repeat;
     // background-position: center;
     background-size: cover;
-    min-height: 100vh;
-    min-height: 100dvh;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 2000px;
     position: relative;
     nav {
         background-color: transparent;
@@ -117,6 +118,20 @@
 }
 
 .all-sections {
+    .container > .initial {
+        padding-top: 100px;
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    .container > .show-section {
+        padding-top: 0;
+        opacity: 1;
+        transform: scale(1);
+        transition-duration: .6s;
+        transition-property: padding-top, opacity, transform;
+        transition-timing-function: ease-out;
+
+    }
     .mindset,
     .money-game {
         display: grid;
@@ -221,7 +236,10 @@
         "p img"
         "btn img";
         position: relative;
-        img {width: 80%;}
+        img {
+            width: 80%;
+            justify-self: center;
+        }
         a {
             grid-area: btn;
             align-self: self-start;
@@ -253,6 +271,8 @@
         .section-text {
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
             gap: clamp(10px, 5vw, 150px);
             h1 {
                 width: 100%;
@@ -270,6 +290,7 @@
                 left: 50%;
                 transform: translateX(-50%);
             }
+            p {max-width: 900px;}
         }
         .articles-set {
             display: grid;

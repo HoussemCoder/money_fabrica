@@ -7,28 +7,24 @@
 
 {% block content %}
 <section class="sections-container">
+  {% if count == None %}
   <div class="browse-text">
     <h1>Browse Articles</h1>
     <p>Explore our collection of informative articles that offer practical advice on building wealth and developing a winning mindset</p>
   </div>
+  {% else %}
+  <div class="browse-text" style="align-items: flex-start;">
+    <h2><span>{{count}}</span> Search results for: <span class="search-words">'{{keyword}}'</span> in <span>'{{category}}'</span></h2>
+  </div>
+  {% endif %}
   <section class="search-articles">
     <div class="container">
-      <form class="search-menu-form" action="#" method="post">
-        <input type="search" name="search-bar" placeholder="Search articles" autofocus>
+      <form class="search-menu-form" action="{% url 'search_articles_page' %}" method="get">
+        {{search_form.search}}
         <div class="btns">
-          <select class="search-btn button filter-btn" name="categories" id="categories">
-            <option value="all-categories" selected>All categories</option>
-            <option value="make-money">Build mindset</option>
-            <option value="build-mindset">Increase incomes</option>
-            <option value="make-money">Develop skills</option>
-            <option value="make-money">Remote jobs</option>
-            <option value="make-money">Start business</option>
-          </select>
-          <select class="search-btn button filter-btn" name="filter" id="filter">
-            <option value="newest" selected>Newest</option>
-            <option value="popular">Popular</option>
-          </select>
-          <button class="search-btn button call-to-action-btn" id="go" type="submit" name="go-submit">Go</button>
+          {{search_form.category}}
+          {{search_form.filter}}
+          <button class="search-btn button call-to-action-btn" id="go" type="submit" name="submit">Go</button>
         </div>
       </form>
     </div>
@@ -38,120 +34,36 @@
       <img src="../../static/images/ads/money_game_bg.png" alt="The Money Game book" title="The Money Game book">
       <div class="text-btn">
         <h2>The Money Game</h2>
-        <p>Is a book that combines principles of a <strong>growth mindset</strong> with financial strategies to help readers achieve <strong>financial freedom</strong>.</p>
+        <p>Is a book that combines principles of the <strong>growth mindset</strong> with financial strategies to help readers achieve <strong>financial freedom</strong>.</p>
         <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="Read The Book">Read The Book</a>
       </div>
     </div>
   </section>
-  <section class="home-articles">
-    <div class="container">
-      <div class="section-plus-btn">
-        <section class="latest-articles">
-          {% for article in latest %}
-            <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
-              <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
-              <div class="text">
-                <h3>{{article.title}}</h3>
-                <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
-              </div>
-            </a>
-          {% endfor %}
-        </section>
-        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
-      </div>
-      <div class="in-between-ads">
-        <div class="container">
-          <h2>ads</h2>
-        </div>
-      </div>
-      <div class="section-plus-btn">
-        <section class="popular-articles">
-          {% for article in popular %}
-            <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
-              <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
-              <div class="text">
-                <h3>{{article.title}}</h3>
-                <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
-              </div>
-            </a>
-          {% endfor %}
-        </section>
-        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
-      </div>
-    </div>
-  </section>
+  {% if count != None and count > 0 %}
   <section class="search-results">
     <div class="container">
       <div class="result-articles">
-        <div class="result-info">
-          <p>Search results for: <span class="search-words">Lorem ipsum</span></p>
-        </div>
-        <a href="#" target="_blank" class="article">
-          <img src="../../static/images/newsletter.png" alt="learn how to get rich">
+        {% for article in results %}
+        <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
+          <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
           <div class="text">
-            <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio, enim!</h3>
-            <time class="date"><i class="fa-solid fa-calendar-days"></i> May 10, 2023</time>
+            <h3>{{article.title}}</h3>
+            <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
           </div>
         </a>
-        <a href="#" target="_blank" class="article">
-          <img src="/images/header.png" alt="learn how to get rich">
-          <div class="text">
-            <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio, enim!</h3>
-            <time class="date"><i class="fa-solid fa-calendar-days"></i> May 10, 2023</time>
-          </div>
-        </a>
-        <a href="#" target="_blank" class="article">
-          <img src="/images/newsletter.png" alt="learn how to get rich">
-          <div class="text">
-            <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio, enim!</h3>
-            <time class="date"><i class="fa-solid fa-calendar-days"></i> May 10, 2023</time>
-          </div>
-        </a>
-        <a href="#" target="_blank" class="article">
-          <img src="/images/header.png" alt="learn how to get rich">
-          <div class="text">
-            <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio, enim!</h3>
-            <time class="date"><i class="fa-solid fa-calendar-days"></i> May 10, 2023</time>
-          </div>
-        </a>
-        <a href="#" target="_blank" class="article">
-          <img src="/images/newsletter.png" alt="learn how to get rich">
-          <div class="text">
-            <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio, enim!</h3>
-            <time class="date"><i class="fa-solid fa-calendar-days"></i> May 10, 2023</time>
-          </div>
-        </a>
-        <a href="#" target="_blank" class="article">
-          <img src="/images/header.png" alt="learn how to get rich">
-          <div class="text">
-            <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio, enim!</h3>
-            <time class="date"><i class="fa-solid fa-calendar-days"></i> May 10, 2023</time>
-          </div>
-        </a>
-        <a href="#" target="_blank" class="article">
-          <img src="/images/newsletter.png" alt="learn how to get rich">
-          <div class="text">
-            <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio, enim!</h3>
-            <time class="date"><i class="fa-solid fa-calendar-days"></i> May 10, 2023</time>
-          </div>
-        </a>
-        <a href="#" target="_blank" class="article">
-          <img src="/images/header.png" alt="learn how to get rich">
-          <div class="text">
-            <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio, enim!</h3>
-            <time class="date"><i class="fa-solid fa-calendar-days"></i> May 10, 2023</time>
-          </div>
-        </a>
-        <div class="results-pages">
-          <button class="button pages-btn backword-btn">Previous</button>
-          <button class="button pages-btn page-1">1</button>
-          <button class="button pages-btn page-2">2</button>
-          <button class="button pages-btn three-points">...</button>
-          <button class="button pages-btn last-page">8</button>
-          <button class="button pages-btn forword-btn">Next</button>
-        </div>
+        {% endfor %}
       </div>
-      <aside class="ads-others">
+      {% if count > 0 %}
+      <div class="results-pages">
+        <button class="button pages-btn backword-btn">Previous</button>
+        <button class="button pages-btn page-1">1</button>
+        <button class="button pages-btn page-2">2</button>
+        <button class="button pages-btn three-points">...</button>
+        <button class="button pages-btn last-page">8</button>
+        <button class="button pages-btn forword-btn">Next</button>
+      </div>
+      {% endif %}
+      <!-- <aside class="ads-others">
         <div class="company-ad">
           <img src="../../static/images/header.png" alt="">
         </div>
@@ -166,7 +78,50 @@
             <a class="button call-to-action-btn a-btn" href="#" target="_blank">Take a Look</a>
           </div>
         </div>
-      </aside>
+      </aside> -->
+    </div>
+  </section>
+  <div class="in-between-ads">
+    <div class="container">
+      <h2>ads</h2>
+    </div>
+  </div>
+  {% endif %}
+  <section class="home-articles">
+    <div class="container">
+      <div class="section-plus-btn">
+        <section class="latest-articles">
+          {% for article in latest %}
+          <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
+            <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
+            <div class="text">
+              <h3>{{article.title}}</h3>
+              <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+            </div>
+          </a>
+          {% endfor %}
+        </section>
+        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
+      </div>
+      <div class="in-between-ads">
+        <div class="container">
+          <h2>ads</h2>
+        </div>
+      </div>
+      <div class="section-plus-btn">
+        <section class="popular-articles">
+          {% for article in popular %}
+          <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
+            <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
+            <div class="text">
+              <h3>{{article.title}}</h3>
+              <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+            </div>
+          </a>
+          {% endfor %}
+        </section>
+        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
+      </div>
     </div>
   </section>
   <div class="in-between-ads">

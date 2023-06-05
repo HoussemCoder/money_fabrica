@@ -73,6 +73,18 @@ function show_when(tag) {
 }
 
 
+// display every section nicely when scroll down to it
+function nice_show(section) {
+    const element = document.querySelector(section)
+    const threshold = window.innerHeight * 1.1
+    
+    if (element.getBoundingClientRect().top <= threshold) {
+        element.classList.add("show-section")
+        element.classList.remove("initial")
+    }
+}
+
+
 // add or set new properties for a specific element
 function set_properties(tag, styles) {
     const element = document.querySelector(tag);

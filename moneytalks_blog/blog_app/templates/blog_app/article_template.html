@@ -20,7 +20,7 @@
       <img src="../../static/images/ads/money_game_bg.png" alt="The Money Game book" title="The Money Game book">
       <div class="text-btn">
         <h2>The Money Game</h2>
-        <p>Is a book that combines principles of a <strong>growth mindset</strong> with financial strategies to help readers achieve <strong>financial freedom</strong>.</p>
+        <p>Is a book that combines principles of the <strong>growth mindset</strong> with financial strategies to help readers achieve <strong>financial freedom</strong>.</p>
         <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="Read The Book">Read The Book</a>
       </div>
     </div>
@@ -78,11 +78,12 @@
       <div class="article-source">
         <p>
           <span>
-            <a href="/home.html">Home</a>
-          </span> >>
+            <a href="{% url 'home_page' %}" target="_blank">Home</a>
+          </span> <i class="fa-solid fa-angle-right"></i>
           <span>
-            <a href="#">{{article.category}}</a>
-          </span> >>
+            <a href="{% url 'category_page' category_slug=category_url %}" target="_blank">{{article.category}}</a>
+          <!-- </span> <i class="fa-solid fa-caret-right"></i> -->
+          </span> <i class="fa-solid fa-angle-right"></i>
           <span>{{article.title}}</span>
         </p>
       </div>

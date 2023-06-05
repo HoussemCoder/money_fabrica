@@ -18,3 +18,8 @@ class Categories(models.Model):
     logo = models.ImageField(unique=True)
     slug = models.CharField(max_length=200, unique=True)
     
+
+class UsersEmails(models.Model):
+    email = models.EmailField(max_length=255, unique=True)
+    created_at = models.DateField(auto_now_add=True)
+
