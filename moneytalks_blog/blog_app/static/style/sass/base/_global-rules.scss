@@ -43,8 +43,39 @@
     }
 }
 
+.light-bg {
+    background-color: map-get($map: $primary, $key: light-color);
+}
+
 .ellipsis {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.right-hidden {
+    padding-left: 200px;
+    opacity: 0;
+}
+
+.right-show {
+    padding-left: 0;
+    opacity: 1;
+    transition-delay: .4s;
+    transition-duration: .6s;
+    transition-property: padding-left, opacity;
+    transition-timing-function: ease-out;
+}
+
+.initial {
+    padding-top: 100px;
+    opacity: 0;
+}
+.show-section {
+    padding-top: 0px;
+    opacity: 1;
+    transition-duration: .6s;
+    transition-property: padding-top, opacity;
+    transition-timing-function: ease-out;
+}
+

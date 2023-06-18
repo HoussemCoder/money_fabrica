@@ -1,0 +1,90 @@
+// pop up windows
+
+@use '../abstracts/vars' as *;
+@use '../abstracts/colors' as *;
+@use '../abstracts/mixins' as *;
+
+
+// animate the svg bellow
+@keyframes nice-check-sign {
+    0% {transform: scale(0.2);}
+    50% {
+        transform: scale(1);
+        top: -25px;
+        transform: rotateY(180deg);
+    }
+    100% {top: 0px;}
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25%, 75% { transform: translateX(-10px); }
+    50%, 99% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {animation: shake .3s;}
+
+.error-msg {
+    display: none;
+    color: red;
+    transition: 1s;
+}
+
+.overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    z-index: 999;
+}
+
+.success-window {
+    display: none;
+    position: fixed;
+    top: 50vh;
+    top: 50dvh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 40px;
+        border-radius: map-get($map: $buttons, $key: btn-border-radius);
+        background-color: map-get($map: $primary, $key: light-color);
+        svg:not(.p-arrow) {
+            margin: 20px 0;
+            position: relative;
+            top: 0;
+            font-size: clamp(map-get($map: $f-sizes-extra-small, $key: h1-header-size), 10vw, map-get($map: $f-sizes-extra-large, $key: h1-header-size));
+            color: map-get($map: $primary, $key: first);
+            animation: nice-check-sign 1s;
+        }
+        p {
+            margin-bottom: 20px;
+            text-align: center;
+            .p-arrow {
+                @include font-styling("p");
+                color: map-get($map: $primary, $key: first);
+            }
+            span {
+                font-style: italic;
+                font-weight: bold;
+            }
+        }
+    }
+    @include breakpoints(medium) {
+        width: 70vw;
+        width: 70dvw;
+        .content {padding: 20px;}
+    }
+    @include breakpoints(extra-small) {
+        width: 90vw;
+        width: 90dvw;
+    }
+}

@@ -26,6 +26,16 @@ class SearchForm(forms.Form):
 
 
 class Newsletter(forms.Form):
-    email_form = forms.EmailField(
+    email = forms.EmailField(
         max_length=300,
-        widget=forms.EmailInput(attrs={"placeholder": "Enter your email address"}))
+        widget=forms.EmailInput(attrs={"class": "email-input", "placeholder": "Enter your email address"})
+        )
+
+
+class ResendEmail(forms.Form):
+    hidden_data = forms.CharField(
+        widget=forms.HiddenInput(attrs={"name": "email", "value": "{{email}}"})
+        )
+    form_type = forms.CharField(
+        widget=forms.HiddenInput(attrs={"name": "form_type", "value": "resend_email"})
+        )

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="#">
+  <meta name="description" content="Unlock your financial potential, discover expert insights, practical tips, and comprehensive analysis on investment strategies, money management, and wealth creation.">
   <meta name="author" content="H_coder">
   <!-- tab info and icon -->
   <title>Home | Money Talks</title>
@@ -20,22 +20,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Roboto:wght@100;300;500;900&family=Work+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
   <!-- javascript files -->
   <script src="{% static 'js/behaviors.js' %}" defer></script>
+  <script src="{% static 'js/json_handling.js' %}" defer></script>
   <script src="{% static 'js/all.min.js' %}" defer></script>
 </head>
-<body onscroll="show_when('go-up'), nice_show('.initial')">
+<body onscroll="show_when('go-up'), nice_show('.initial', 'show-section'), nice_show('.right-hidden', 'right-show')">
+  <div class="overlay"></div>
   <header class="main-header header" id="header">
     <nav>
       <div class="container">
         <a href="{% url 'home_page' %}" target="_blank">
           <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Logo" title="Money Talks">
         </a>
-        <button id="menu-icon" onclick="show_list('.nav-links'); change_icon_shape(this)">
+        <button id="menu-icon" onclick="show_list('.nav-links'); add_new_style(this, 'change')">
           <span></span>
           <span></span>
           <span></span>
         </i></button>
         <ul class="nav-links" id="menu" role="navigation">
-          <li><a class="active a-header" href="{% url 'home_page' %}" target="_blank">Home</a></li>
+          <li><a class="a-header" href="{% url 'home_page' %}" target="_blank">Home</a></li>
           <li><a class="a-header" href="{% url 'search_articles_page' %}" target="_blank">Articles</a></li>
           <li><a class="a-header" href="advertise.html" target="_blank">Advertise</a></li>
           <li><a class="a-header" href="contact.html" target="_blank">Contact</a></li>
@@ -61,21 +63,21 @@
   </header>
   <section class="all-sections">
     <div class="container">
-      <section class="mindset section-rules" id="mindset">
-        <h1>It's all about your MINDSET</h1>
+      <section class="mindset section-rules initial" id="mindset">
+        <h1>It's all about your Mindset</h1>
         <p>Changing your mindset to focus on creating value and seeking opportunities rather than 
           just earning money can be key to becoming wealthy. By developing an abundance mindset, 
           embracing risk and learning from failures, and focusing on long-term goals, you can open 
           yourself up to new possibilities and increase your chances of achieving financial success.
         </p>
-        <img src="../../static/images/home_mindset.png" alt="growth your mindset" title="growth your mindset">
+        <img src="../../static/images/home_mindset.png" alt="growth your mindset" title="growth your mindset" class="right-hidden">
       </section>
       <section class="articles-section section-rules initial">
         <div class="section-text">
           <h1>Build a Strong Mindset</h1>
           <p>We will help you build your own strong mindset to be able to dive into this big world of MONEY</p>
         </div>
-        <div class="articles-set">
+        <div class="articles-set initial">
           <a href="{% url 'article_page' keyword=first_mindset.slug %}" target="_blank" class="article">
             <img src="../../static/images/thumbnails/{{first_mindset.thumbnail}}" alt="growth your mindset">
             <div class="text">
@@ -98,7 +100,7 @@
       </section>
       <section class="money-game section-rules initial">
         <h1>The Money Game</h1>
-        <img src="../../static/images/ads/money_game.png" alt="The Money Game book" title="The Money Game book">
+        <img src="../../static/images/ads/money_game.png" alt="The Money Game book" title="The Money Game book" class="right-hidden">
         <p>is a guide to help you develop the right mindset to build wealth and financial freedom. 
           It offers practical strategies to transform your relationship with money and provides real-world 
           examples of successful individuals who have applied these principles to achieve abundance in their 
@@ -111,7 +113,7 @@
           <h1>It's Time To Get Rich</h1>
           <p>Unlock your potential wealth and learn the secrets to financial abundance with these informative articles on how to get rich</p>
         </div>
-        <div class="articles-set">
+        <div class="articles-set initial">
           <a href="{% url 'article_page' keyword=first_increase.slug %}" target="_blank" class="article">
             <img src="../../static/images/thumbnails/{{first_increase.thumbnail}}" alt="learn how to get rich">
             <div class="text">
@@ -121,12 +123,12 @@
             </div>
           </a>
           {% for article in incomes_articles %}
-            <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
-              <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
-              <div class="text">
-                <h3>{{article.title|truncatewords:6}}</h3>
-              </div>
-            </a>
+          <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
+            <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
+            <div class="text">
+              <h3>{{article.title|truncatewords:6}}</h3>
+            </div>
+          </a>
           {% endfor %}
         </div>
         <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
@@ -139,7 +141,7 @@
       <div class="section-plus-btn">
         <section class="latest-articles">
           {% for article in latest_articles %}
-            <a href="#" target="_blank" class="article">
+            <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article initial">
               <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
               <div class="text">
                 <h3>{{article.title}}</h3>
@@ -150,20 +152,30 @@
         </section>
         <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
       </div>
-      <div class="in-between-ads">
-        <div class="container">
-          <h2>ads</h2>
-        </div>
+    </div>
+    <div class="in-between-ads">
+      <div class="container">
+        <h2>ads</h2>
       </div>
     </div>
   </section>
   <footer>
+    <div class="success-window">
+      <div class="content">
+        <i class="fa-regular fa-circle-check"></i>
+        <p><i class="fa-solid fa-right-long p-arrow"></i> We have sent a confirmation email to <span class="enc_email">reg********</span>.<br>Please check your inbox (including spam/junk folders) to confirm your subscription.</p>
+        <p><i class="fa-solid fa-right-long p-arrow"></i> If you want to cancel your subscription please check the confirmation email and follow the instructions.</p>
+        <button class="done-btn call-to-action-btn" onclick="hide_window('.success-window')">Done!</button>
+      </div>
+    </div>
     <div class="newsletter">
       <div class="container">
         <p>Be The First Who Know...</p>
-        <form class="newsletter-form" action="#" method="post">
+        <form class="newsletter-form">
           <label for="#email"><span>Subscribe</span> for our newsletter:</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+          {% csrf_token %}
+          {{email_form.email}}
+          <span class="error-msg"></span>
           <button class="call-to-action-btn button" type="submit">Subscribe</button>
         </form>
       </div>
@@ -191,7 +203,7 @@
           <ul class="connect" role="navigation">
             Connect
             <li><a href="#">Contact us</a></li>
-            <li><a href="#">E-mail</a></li>
+            <!-- <li><a href="#">E-mail</a></li> -->
             <li><a href="#">Facebook</a></li>
             <li><a href="#">Instagram</a></li>
             <li><a href="#">Twitter</a></li>

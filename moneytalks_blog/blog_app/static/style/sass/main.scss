@@ -13,7 +13,7 @@
 
 // import files from 'components' folder
 @use './components/buttons';
-@use './components/cards';
+@use './components/windows';
 @use './components/forms';
 @use './components/icons';
 
@@ -25,11 +25,11 @@
 @use './layout/side-bar';
 
 // import files from 'pages' folder
+@use './pages/error404';
 @use './pages/home';
 @use './pages/articles';
+@use './pages/category';
 @use './pages/advertise';
 @use './pages/contact';
-@use './pages/shop';
-@use './pages/success-stories';
-@use './pages/category';
-@use './pages/error404';
+// @use './pages/shop';
+// @use './pages/success-stories';

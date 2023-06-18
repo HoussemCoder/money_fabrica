@@ -118,27 +118,15 @@
 }
 
 .all-sections {
-    .container > .initial {
-        padding-top: 100px;
-        opacity: 0;
-        transform: scale(0.6);
-    }
-    .container > .show-section {
-        padding-top: 0;
-        opacity: 1;
-        transform: scale(1);
-        transition-duration: .6s;
-        transition-property: padding-top, opacity, transform;
-        transition-timing-function: ease-out;
-
-    }
+    padding-top: 40px;
+    padding-inline: 20px;
     .mindset,
     .money-game {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-areas: 
-            "h1 img"
-            "p img";
+        "h1 img"
+        "p img";
         gap: clamp(10px, 5vw, 150px);
         > img {
             grid-area: img;

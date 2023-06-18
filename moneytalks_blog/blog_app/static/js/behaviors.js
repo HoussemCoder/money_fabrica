@@ -1,6 +1,15 @@
 /* add some behaviors to the pages */
 
 
+// hide the 'success subscruption window'
+function hide_window(window) {
+    const success_window = document.querySelector(window);
+    const body = document.querySelector(".overlay");
+
+    success_window.style.display = "none";
+    body.style.display = "none";
+}
+
 // display list by clicking on its icon
 function show_list(tag) {
     const nav_list = document.querySelector(tag);
@@ -13,21 +22,38 @@ function show_list(tag) {
 };
 
 // change the shape of the menu-icon when focusing
-function change_icon_shape(icon) {
+function change_shape(icon) {
     icon.classList.toggle("change");
 }
 
+
+// add some new styling by clicking (ex: here we talk about the nav links underline)
+function add_new_style(tag, _class) {
+    const page_title = document.title.split("|")[0].trim()
+    const links = document.querySelectorAll(tag)
+    
+    links.forEach(link => link.classList.remove(_class))
+
+    for (let link of links) {
+        let text = link.textContent.trim()
+        if (text === page_title) {
+            link.classList.add(_class);
+        }
+    }
+}
+
+add_new_style('.a-header', 'active')
 
 // display element bar by clicking on its icon
 function show_search_bar(tag) {
     const element = document.querySelector(tag);
 
-    if (element.style.bottom === '-100%') {
+    if (element.style.bottom === '-90%') {
         element.style.bottom = '0';
         element.style.zIndex = '-99';
     } else {
         element.style.zIndex = '10';
-        element.style.bottom = '-100%';
+        element.style.bottom = '-90%';
     }    
 }    
 
@@ -74,13 +100,17 @@ function show_when(tag) {
 
 
 // display every section nicely when scroll down to it
-function nice_show(section) {
-    const element = document.querySelector(section)
-    const threshold = window.innerHeight * 1.1
+function nice_show(old_style, new_style) {
+    const element = document.querySelector(old_style);
     
-    if (element.getBoundingClientRect().top <= threshold) {
-        element.classList.add("show-section")
-        element.classList.remove("initial")
+    if (element !== null && element !== undefined) {
+        const threshold = window.innerHeight * 0.8;
+        
+        if (element.getBoundingClientRect().top <= threshold) {
+            old_style = old_style.slice(1);
+            element.classList.add(new_style);
+            element.classList.remove(old_style);
+        }
     }
 }
 

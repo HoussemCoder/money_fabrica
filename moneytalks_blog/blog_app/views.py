@@ -1,10 +1,16 @@
-import re
+import re, string, secrets
+from datetime import datetime, timedelta
 from typing import Any
 from django.shortcuts import render
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest, HttpResponse, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin as login
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import FormView
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.conf import settings
 
 from .forms import *
 from .models import *
@@ -14,6 +20,7 @@ class HomePage(ListView):
     template_name = 'blog_app/home.html'
     model = Articles
     search_form = SearchForm()
+    email_form = Newsletter()
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
@@ -21,6 +28,7 @@ class HomePage(ListView):
         increase_incomes_list = self.model.objects.filter(category="Increase Your Incomes").order_by("views")[:4]
         dtl_vars = {
             "search_form": self.search_form,
+            "email_form": self.email_form,
             "first_mindset": mindset_list[0],
             "first_increase": increase_incomes_list[0],
             "mindset_articles": mindset_list[1:],
@@ -41,6 +49,7 @@ class CategoryPage(DetailView):
     template_name = "blog_app/category_template.html"
     slug_url_kwarg = "category_slug"
     search_form = SearchForm()
+    email_form = Newsletter()
 
     def get_object(self):
         return self.kwargs.get(self.slug_url_kwarg)
@@ -54,7 +63,8 @@ class CategoryPage(DetailView):
             "category": category_data,
             "started_articles": started_articles,
             "popular_articles": self.get_popular(),
-            "search_form": self.search_form
+            "search_form": self.search_form,
+            "email_form": self.email_form
         }
         context.update(dtl_vars)
         return context
@@ -75,6 +85,7 @@ class SearchArticlesPage(FormView):
         category_selected = self.request.GET.get("category", "All Categories")
         filter_selected = self.request.GET.get("filter", "popular")
         if "search" in self.request.GET:
+            print("hererere")
             try:
                 results = self.get_result_articles(keyword, filter_selected, category_selected)
                 return self.render_to_response(self.get_context_data(
@@ -113,6 +124,10 @@ class SearchArticlesPage(FormView):
 H2_PATTERN = re.compile(r"(\d+\.\s(.+)|(\s*Conclusion):)", flags=re.MULTILINE)
 H3_PATTERN = re.compile(r"(\s[a-z]\.\n*\s*(.+):)", flags=re.MULTILINE)
 P_PATTERN = re.compile(r"(\(*\s*[A-Z].+\.\)*)", flags=re.MULTILINE)
+# EMAIL_PATTERN = re.compile(r"^[\w\.-]+@[\w\.-]+\.\w+$")
+# def is_valid_email(self, email: str):
+#     return re.fullmatch(EMAIL_PATTERN, email) is not None
+
 
 class ArticlePage(DetailView):
     model = Articles
@@ -120,6 +135,7 @@ class ArticlePage(DetailView):
     context_object_name = 'article'
     slug_url_kwarg = 'keyword'
     search_form = SearchForm()
+    email_form = Newsletter()
 
     def get_object(self):
         return self.kwargs.get(self.slug_url_kwarg)
@@ -127,10 +143,12 @@ class ArticlePage(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["search_form"] = self.search_form
+        context["email_form"] = self.email_form
         keyword = self.get_object()
         article_list = self.model.objects.filter(slug__icontains=keyword)
         if article_list.exists():
-            dtl_vars = self.manage_article_content(article_list[0].content)
+            article = self.define_html_tags(article_list[0].content)
+            dtl_vars = self.split_article_content(article)
             related = self.get_related(article_list)
             context["category_url"] = self.get_category_slug(article_list[0])
             context["related"] = related
@@ -157,12 +175,8 @@ class ArticlePage(DetailView):
                 related.append(related_article)
         return related
 
-    ## function to split the article content and do some inclusions
-    def manage_article_content(self, article: str):
-        article = H2_PATTERN.sub(r"<h2>\1</h2>", article)
-        article = H3_PATTERN.sub(r"<h3>\1</h3>", article)
-        article = P_PATTERN.sub(r"<p>\1</p>", article)
-        # paragraphs = article.split("\r\n\r\n")
+    ## function to split the article content
+    def split_article_content(self, article: str):
         paragraphs = re.split("\r\n\r\n", article)
         first_para = paragraphs[0]
         mid_para_1 = "".join(paragraphs[1:len(paragraphs)//2])
@@ -175,16 +189,122 @@ class ArticlePage(DetailView):
             "last_para": last_para
             }
 
+    ## function to add headings and other html tags
+    def define_html_tags(self, article: str):
+        article = H2_PATTERN.sub(r"<h2>\1</h2>", article)
+        article = H3_PATTERN.sub(r"<h3>\1</h3>", article)
+        article = P_PATTERN.sub(r"<p>\1</p>", article)
+        return article
+
 
 class Subscriptions(FormView):
     template_name = "base.html"
-    form_class = Newsletter
     
-    
+    def get_form_class(self):
+        if self.request.POST.get("form_type") == "resend_email":
+            return ResendEmail
+        return Newsletter
 
+    def form_valid(self, form: Any):
+        email = form.cleaned_data["email"]
+        try:
+            validate_email(email)
+        except ValidationError:
+            response_data = {
+                "success": False,
+                "message": "Your email address entered is not valid. Please try again."
+            }
+            return JsonResponse(response_data)
+        confirmation_code = self.generate_confirmation_code()
+        try:
+            self.send_confirmation_email(email, confirmation_code)
+        except:
+            response_data = {
+                "success": False,
+                "message": "An error occurred during form submission. Please try again."
+            }
+            return JsonResponse(response_data)
+        expiration = self.generate_expiration_time()
+        self.save_data(email, confirmation_code, expiration)
+        response_data = {
+            "success": True,
+            "message": f"{email[:3]}********"
+        }
+        return JsonResponse(response_data)
+
+    def form_invalid(self, form: Any):
+        errors = form.errors
+        response_data = {
+            "success": False,
+            "message": errors["email"]
+        }
+        return JsonResponse(response_data)
+
+    def save_data(self, email, code, expiration):
+        new_email = UsersEmails(email=email, confirmation_code=code, expiration_time=expiration)
+        new_email.save()
+
+    def send_confirmation_email(self, send_to: str, code: str):
+        subject = "Confirm Your Subscription | Money Talks"
+        template = "emails/confirmation_email.html"
+        confirmation_url = "?token=" + code
+        context = {"confirmation_url": confirmation_url}
+        email_message = render_to_string(template, context)
+        email = EmailMessage(
+            subject=subject,
+            body=email_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[send_to]
+        )
+        return email.send()
+
+    def generate_confirmation_code(self, length=20):
+        characters = string.ascii_letters + string.digits
+        code = "".join(secrets.choice(characters) for _ in range(length))
+        similar = UsersEmails.objects.filter(confirmation_code=code)
+        while similar:
+            code = "".join(secrets.choice(characters) for _ in range(length))
+            similar = UsersEmails.objects.filter(confirmation_code=code)
+        return code
+
+    def generate_expiration_time(self):
+        expiration_time = datetime.now() + timedelta(hours=20)
+        return expiration_time
+
+
+class ConfirmEmail(DetailView):
+    template_name = "confirmation_url.html"
+    slug_url_kwarg = "token"
+    model = UsersEmails
+    search_form = SearchForm()
+    resend_form = ResendEmail()
+
+    def get(self, request, *args: Any, **kwargs: Any):
+        token = self.request.GET.get(self.slug_url_kwarg)
+        email = self.model.objects.get(confirmation_code=token)
+        if not email:
+            return self.render_to_response(self.get_context_data(no_email=True))
+        now = datetime.now()
+        if email.expiration_time > now:
+            self.delete_old_email(email)
+            return self.render_to_response(self.get_context_data(expired=True, email=email))
+        else:
+            return self.render_to_response(self.get_context_data(success=True))
+    
+    def delete_old_email(self, email):
+        try:
+            email.delete()
+        except self.model.DoesNotExist:
+            pass
+            
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = self.search_form
+        context["resend_form"] = self.resend_form
+        return context
 
 class Authorized(login, TemplateView):
-    login_url = "/admin"
+    login_url = "/pshl"
     
 
 def handle_404_error(request, exception):

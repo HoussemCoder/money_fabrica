@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="#">
-  <meta name="author" content="H_coder">
+  <meta name="description" content="Unlock your financial potential, discover expert insights, practical tips, and comprehensive analysis on investment strategies, money management, and wealth creation.">
+  <meta name="author" content="Money Talks Team">
   <!-- tab info and icon -->
   <title>{{article.title}}{% block title %}{% endblock %} | Money Talks</title>
   <link rel="icon" type="image/png" href="{% static 'images/logos/logo_light_icon.png' %}">
@@ -20,23 +20,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Roboto:wght@100;300;500;900&family=Work+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
   <!-- javascript files -->
   <script src="{% static 'js/behaviors.js' %}" defer></script>
+  <script src="{% static 'js/json_handling.js' %}" defer></script>
   <script src="{% static 'js/all.min.js' %}" defer></script>
 </head>
 <body onscroll="show_when('go-up')">
+  <div class="overlay"></div>
   <header class="main-header" id="header">
     <nav>
       <div class="container">
         <a href="{% url 'home_page' %}" target="_blank">
           <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Logo" title="Money Talks">
         </a>
-        <button id="menu-icon" onclick="show_list('.nav-links'); change_icon_shape(this);">
+        <button id="menu-icon" onclick="show_list('.nav-links'); change_shape(this);">
           <span></span>
           <span></span>
           <span></span>
         </i></button>
         <ul class="nav-links" role="navigation">
           <li><a class="a-header" href="{% url 'home_page' %}" target="_blank">Home</a></li>
-          <li><a class="active a-header" href="{% url 'search_articles_page' %}" target="_blank">Articles</a></li>
+          <li><a class="a-header" href="{% url 'search_articles_page' %}" target="_blank">Articles</a></li>
           <li><a class="a-header" href="advertise.html" target="_blank">Advertise</a></li>
           <li><a class="a-header" href="contact.html" target="_blank">Contact</a></li>
           <li><a class="a-header" href="shop.html" target="_blank">Shop</a></li>
@@ -45,14 +47,13 @@
             <i class="fa-solid fa-magnifying-glass-dollar a-header search-icon" onclick="show_search_bar('.search-menu-form')"></i>
             <form class="search-menu-form" action="{% url 'search_articles_page' %}" method="get">
               {{search_form.search}}
-              <!-- {{form.category}}
-              {{form.filter}} -->
-              <button class="search-btn button call-to-action-btn" type="submit" name="submit">Go</button>
+              <button class="search-btn button call-to-action-btn" type="submit">Go</button>
             </form>
           </li>
         </ul>
       </div>
     </nav>
+    {% block get_started %}
     <div class="get-started">
       <div class="how-to-icon" onclick="show_list('.get-started-list'); up_down('#arrow')"><p>How to...</p><i class="fa-solid fa-angle-down" id="arrow"></i></div>
       <div class="container get-started-list">
@@ -79,6 +80,7 @@
         </a>
       </div>
     </div>
+    {% endblock %}
   </header>
   {% block message %}
   <!-- custom message here, ex: for 404 error -->
@@ -88,19 +90,29 @@
   <!-- custom content for each page -->
   {% endblock %}
   <footer>
+    {% block newsletter %}
+    <div class="success-window">
+      <div class="content">
+        <i class="fa-regular fa-circle-check"></i>
+        <p><i class="fa-solid fa-right-long p-arrow"></i> We have sent a confirmation email to <span class="enc_email">reg********</span>.<br>Please check your inbox (including spam/junk folders) to confirm your subscription.</p>
+        <p><i class="fa-solid fa-right-long p-arrow"></i> If you want to cancel your subscription please check the confirmation email and follow the instructions.</p>
+        <button class="done-btn call-to-action-btn" onclick="hide_window('.success-window')">Done!</button>
+      </div>
+    </div>
     <div class="newsletter">
       <div class="container">
         <p>Be The First Who Know...</p>
-        <form class="newsletter-form" action="" method="post">
+        <form class="newsletter-form">
           <label for="#email"><span>Subscribe</span> for our newsletter:</label>
-          <!-- <input type="email" id="email" name="email" placeholder="Enter your email address" required> -->
           {% csrf_token %}
-          {{email_form.email_form}}
+          {{email_form.email}}
+          <span class="error-msg"></span>
           <button class="call-to-action-btn button" type="submit">Subscribe</button>
         </form>
       </div>
     </div>
     <button class="button go-to-up-btn" id="go-up" onclick="btn_action('header')" title="Go up"><i class="fa-solid fa-angles-up"></i></button>
+    {% endblock %}
     <div class="footer">
       <div class="container">
         <div class="logo-socials">
@@ -124,7 +136,7 @@
           <ul class="connect" role="navigation">
             Connect
             <li><a href="#">Contact us</a></li>
-            <li><a href="#">E-mail</a></li>
+            <!-- <li><a href="#">E-mail</a></li> -->
             <li><a href="#">Facebook</a></li>
             <li><a href="#">Instagram</a></li>
             <li><a href="#">Twitter</a></li>

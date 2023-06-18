@@ -35,7 +35,7 @@ section.ads-money-game {
             h2 {color: map-get($map: $primary, $key: first);}
             a {
                 margin-top: clamp(10px, 4vw, 20px);
-                padding: 10px 30px;
+                // padding: map-get($map: $, $key: );
             }
         }
     }

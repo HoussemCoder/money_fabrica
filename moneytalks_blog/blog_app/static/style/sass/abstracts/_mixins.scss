@@ -79,12 +79,14 @@
 @mixin buttons($type: '') {
     @if $type == 'action' {
         width: fit-content;
-        padding: 10px 40px;
-        background-color: map-get($map: $primary, $key: action-btn);
+        padding: 15px 40px;
+        // background-color: map-get($map: $primary, $key: action-btn);
+        background-image: linear-gradient(to bottom, map-get($map: $primary, $key: action-btn), map-get($map: $primary, $key: action-btn-border) 60%);
         border-color: map-get($map: $primary, $key: action-btn-border);
     } @else {
-        padding: 10px 20px;
-        background-color: map-get($map: $primary, $key: light-color);
+        padding: 15px 20px;
+        // background-color: map-get($map: $primary, $key: light-color);
+        background-image: linear-gradient(to bottom, map-get($map: $primary, $key: light-color), map-get($map: $primary, $key: dark-light-color));
         border-color: map-get($map: $primary, $key: dark-light-color);
     }
 }

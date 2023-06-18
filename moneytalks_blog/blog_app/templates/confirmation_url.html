@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Confirmation Email{% endblock %}
+
+{% block get_started %}{% endblock %}
+
+{% block content %}
+<!-- if no such email in our db -->
+{% if no_email %}{% endif %}
+
+<!-- if the token has been expired -->
+{% if expired %}
+<h2>Hmm!...</h2>
+<p>The link we sent you earliar has been expired.</p>
+<p>If you want to get a new confirmation email please click on that button</p>
+<form class="newsletter-form">
+    {% csrf_token %}
+    {{resend_form.hidden_data}}
+    {{resend_form.form_type}}
+    <button type="submit">Resend</button>
+    <span class="error-msg"></span>
+</form>
+{% endif %}
+{% endblock %}
+
+{% block newsletter %}{% endblock %}

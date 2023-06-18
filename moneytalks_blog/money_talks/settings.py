@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+BASE_URL = "www.moneytalks.com"
+
+DEFAULT_FROM_EMAIL = "support@moneytalks.com"
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Application definition
 
