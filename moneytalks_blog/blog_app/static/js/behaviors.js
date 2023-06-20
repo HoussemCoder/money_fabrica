@@ -2,12 +2,19 @@
 
 
 // hide the 'success subscruption window'
-function hide_window(window) {
-    const success_window = document.querySelector(window);
+function hide_window(window_) {
+    const success_window = document.querySelectorAll(window_);
     const body = document.querySelector(".overlay");
+    const email_input = document.querySelector(".email-input");
 
-    success_window.style.display = "none";
+    for (let window of success_window) {
+        window.style.display = "none";
+    }
     body.style.display = "none";
+
+    if (email_input === null) {
+        window.location.assign("/");
+    }
 }
 
 // display list by clicking on its icon
@@ -112,30 +119,6 @@ function nice_show(old_style, new_style) {
             element.classList.remove(old_style);
         }
     }
-}
-
-
-// add or set new properties for a specific element
-function set_properties(tag, styles) {
-    const element = document.querySelector(tag);
-    
-    for (let property in styles) {
-        element.style[property] = styles[property];
-    }    
-};    
-
-
-// to add a new class to an existing html element
-function add_class(clicked_tag, main_tag, class_name) {
-    const clicked_element = document.querySelector(clicked_tag);
-    const main_element = document.querySelector(main_tag);
-
-    clicked_element.addEventListener('click', () => {
-        if (!(main_element.classList.contains(class_name))) {
-            main_element.classList.add(class_name);
-        }
-    })
-
 }
 
 

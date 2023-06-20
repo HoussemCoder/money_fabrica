@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
       const xhr = new XMLHttpRequest();
   
-      xhr.open("POST", "<path:path>");
+      xhr.open("POST", "newsletter/");
   
       xhr.onload = function() {
         const error_msg = document.querySelector(".error-msg");
@@ -18,18 +18,29 @@ document.addEventListener("DOMContentLoaded", function() {
           var success = response.success;
           var message = response.message;
           if (success) {
-            const element = document.querySelector(".success-window");
             const enc_email = document.querySelector(".enc_email");
             const body = document.querySelector(".overlay");
-            
-            error_msg.style.display = "none"
-            enc_email.textContent = message;
-            body.style.display = "block";
-            element.style.display = "block";
-            email_input.value = "";
+            const all_elements = document.querySelectorAll(".success-window");
+            var element;
+            if_success(enc_email, body, all_elements, element)
           } else {
-            email_input.classList.add("shake");
-            setTimeout(() => {email_input.classList.remove("shake")}, 300)
+            const exist_email = response.exist;
+            if (exist_email) {
+              const submit_btn = document.querySelector(".submit-newsletter");
+              const delete_area = document.querySelector(".delete-area");
+              const delete_email = response.delete;
+              if (delete_email) {
+                
+              }
+
+              error_msg.textContent = message;
+              submit_btn.style.display = "none";
+              delete_area.style.display = "flex";
+            }
+            if (email_input !== null) {
+              email_input.classList.add("shake");
+              setTimeout(() => {email_input.classList.remove("shake")}, 300)
+            }
             error_msg.textContent = message;
             error_msg.style.display = "block";
           }
@@ -41,4 +52,20 @@ document.addEventListener("DOMContentLoaded", function() {
       xhr.send(form_data);
     });
   });
+
+
+function if_success(enc_email, body, all_elements, element) {
+  if (all_elements.length > 1) {
+    element = all_elements[1];
+  } else {
+    element = all_elements[0];
+  }
   
+  error_msg.style.display = "none"
+  body.style.display = "block";
+  element.style.display = "block";
+  enc_email.textContent = message;
+  if (email_input !== null) {
+    email_input.value = "";
+  }
+}

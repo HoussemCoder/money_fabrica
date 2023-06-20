@@ -24,5 +24,5 @@ class UsersEmails(models.Model):
     created_at = models.DateField(auto_now_add=True)
     confirmation_code = models.URLField(max_length=100, unique=True, blank=True)
     expiration_time = models.CharField(max_length=30, blank=True)
-    valid = models.BooleanField(default=False)
+    is_valid = models.BooleanField(default=False)
 

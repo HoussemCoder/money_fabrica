@@ -1,7 +1,8 @@
 import re, string, secrets
 from datetime import datetime, timedelta
 from typing import Any
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.http import Http404, HttpRequest, HttpResponse, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin as login
 from django.views.generic import TemplateView, ListView, DetailView
@@ -85,7 +86,6 @@ class SearchArticlesPage(FormView):
         category_selected = self.request.GET.get("category", "All Categories")
         filter_selected = self.request.GET.get("filter", "popular")
         if "search" in self.request.GET:
-            print("hererere")
             try:
                 results = self.get_result_articles(keyword, filter_selected, category_selected)
                 return self.render_to_response(self.get_context_data(
@@ -215,6 +215,21 @@ class Subscriptions(FormView):
                 "message": "Your email address entered is not valid. Please try again."
             }
             return JsonResponse(response_data)
+        if self.check_email(email):
+            response_data = {
+                "success": False,
+                "message": f"This email is already exist in our database, do you want to cancel your subscription?",
+                "exist": True
+            }
+            try:
+                decision = form.cleaned_data["delete"]
+                if decision == "yes":
+                    response_data["delete"] = True
+                elif decision == "no":
+                    response_data["delete"] = False
+            except KeyError:
+                pass
+            return JsonResponse(response_data)
         confirmation_code = self.generate_confirmation_code()
         try:
             self.send_confirmation_email(email, confirmation_code)
@@ -244,11 +259,21 @@ class Subscriptions(FormView):
         new_email = UsersEmails(email=email, confirmation_code=code, expiration_time=expiration)
         new_email.save()
 
+    def check_email(self, email: str):
+        try:
+            UsersEmails.objects.get(email=email)
+            return True
+        except UsersEmails.DoesNotExist:
+            return False
+
     def send_confirmation_email(self, send_to: str, code: str):
         subject = "Confirm Your Subscription | Money Talks"
         template = "emails/confirmation_email.html"
-        confirmation_url = "?token=" + code
-        context = {"confirmation_url": confirmation_url}
+        confirmation_url = code
+        context = {
+            "confirmation_url": confirmation_url,
+            "base_url": settings.BASE_URL
+            }
         email_message = render_to_string(template, context)
         email = EmailMessage(
             subject=subject,
@@ -278,25 +303,33 @@ class ConfirmEmail(DetailView):
     model = UsersEmails
     search_form = SearchForm()
     resend_form = ResendEmail()
+    object = None
 
     def get(self, request, *args: Any, **kwargs: Any):
-        token = self.request.GET.get(self.slug_url_kwarg)
+        token = self.kwargs.get(self.slug_url_kwarg)
         email = self.model.objects.get(confirmation_code=token)
         if not email:
-            return self.render_to_response(self.get_context_data(no_email=True))
+            return render(self.request, self.template_name, self.get_context_data(no_email=True))
         now = datetime.now()
-        if email.expiration_time > now:
+        expiration_time = datetime.strptime(email.expiration_time, "%Y-%m-%d %H:%M:%S.%f")
+        if expiration_time < now:
             self.delete_old_email(email)
-            return self.render_to_response(self.get_context_data(expired=True, email=email))
+            return render(self.request, self.template_name, self.get_context_data(expired=True, email=email.email))
         else:
-            return self.render_to_response(self.get_context_data(success=True))
+            self.confirmed_email(email)
+            success_url = reverse("home_page") + "?confirmed=true"
+            return redirect(success_url)
     
+    def confirmed_email(self, email):
+        email.is_valid = True
+        email.save()
+
     def delete_old_email(self, email):
         try:
             email.delete()
         except self.model.DoesNotExist:
             pass
-            
+
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context["search_form"] = self.search_form
@@ -304,7 +337,7 @@ class ConfirmEmail(DetailView):
         return context
 
 class Authorized(login, TemplateView):
-    login_url = "/pshl"
+    login_url = "/pshl/"
     
 
 def handle_404_error(request, exception):

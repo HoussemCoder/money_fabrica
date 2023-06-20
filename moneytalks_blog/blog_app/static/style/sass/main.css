@@ -282,6 +282,12 @@ button:hover:not(.filter-btn, .three-points),
   display: none;
   color: red;
   transition: 1s;
+  line-height: 1.5rem;
+}
+
+.delete-area {
+  display: none;
+  gap: 20px;
 }
 
 .overlay {
@@ -348,6 +354,32 @@ button:hover:not(.filter-btn, .three-points),
     width: 90vw;
     width: 90dvw;
   }
+}
+
+.resend-email {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+.resend-email .x-mark {
+  margin: 20px 0;
+  position: relative;
+  top: 0;
+  font-size: clamp(4rem, 10vw, 14.5rem);
+  color: red;
+  animation: shake 0.5s;
+}
+.resend-email p strong {
+  font-style: italic;
+}
+.resend-email form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
 }
 
 form:not(.newsletter-form) {

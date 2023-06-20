@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf import settings
 from django.views.defaults import page_not_found
 
 from . import views
@@ -12,5 +13,6 @@ urlpatterns = [
     path("category/<slug:category_slug>", views.CategoryPage.as_view(), name="category_page"),
     path("confirm/<str:token>", views.ConfirmEmail.as_view(), name="confirm_email"),
     path("author/", views.Authorized.as_view()),
-    path("<path:path>", views.Subscriptions.as_view(), name="newsletter_form"),
+    path("newsletter/", views.Subscriptions.as_view(), name="newsletter_form"),
+    path("<path:path>/newsletter/", views.Subscriptions.as_view(), name="newsletter_form"),
 ]

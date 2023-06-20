@@ -90,15 +90,15 @@
   <!-- custom content for each page -->
   {% endblock %}
   <footer>
-    {% block newsletter %}
     <div class="success-window">
       <div class="content">
         <i class="fa-regular fa-circle-check"></i>
-        <p><i class="fa-solid fa-right-long p-arrow"></i> We have sent a confirmation email to <span class="enc_email">reg********</span>.<br>Please check your inbox (including spam/junk folders) to confirm your subscription.</p>
+        <p><i class="fa-solid fa-right-long p-arrow"></i> We have sent a confirmation email to <span class="enc_email"></span>.<br>Please check your inbox (including spam/junk folders) to confirm your subscription.</p>
         <p><i class="fa-solid fa-right-long p-arrow"></i> If you want to cancel your subscription please check the confirmation email and follow the instructions.</p>
         <button class="done-btn call-to-action-btn" onclick="hide_window('.success-window')">Done!</button>
       </div>
     </div>
+    {% block newsletter %}
     <div class="newsletter">
       <div class="container">
         <p>Be The First Who Know...</p>
@@ -107,12 +107,18 @@
           {% csrf_token %}
           {{email_form.email}}
           <span class="error-msg"></span>
-          <button class="call-to-action-btn button" type="submit">Subscribe</button>
+          <div class="delete-area">
+            {{email_form.delete}}
+            {{email_form.keep}}
+            <!-- <button class="filter-btn button" type="submit">Delete</button>
+            <button class="call-to-action-btn button" type="submit">Keep it</button> -->
+          </div>
+          <button class="call-to-action-btn button submit-newsletter" type="submit">Subscribe</button>
         </form>
       </div>
     </div>
-    <button class="button go-to-up-btn" id="go-up" onclick="btn_action('header')" title="Go up"><i class="fa-solid fa-angles-up"></i></button>
     {% endblock %}
+    <button class="button go-to-up-btn" id="go-up" onclick="btn_action('header')" title="Go up"><i class="fa-solid fa-angles-up"></i></button>
     <div class="footer">
       <div class="container">
         <div class="logo-socials">
