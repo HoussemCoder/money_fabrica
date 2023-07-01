@@ -239,9 +239,12 @@ class Subscriptions(FormView):
                 email.save()
                 response_data["message"] = f"{email[:3]}********"
                 response_data["delete"] = True
+                print("hehehheeheh")
                 return JsonResponse(response_data)
             elif decision == "no":
                 response_data["delete"] = False        
+                return JsonResponse(response_data)
+            else:
                 return JsonResponse(response_data)
         confirmation_code = self.generate_confirmation_code()
         try:

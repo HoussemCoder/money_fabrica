@@ -28,7 +28,7 @@ class SearchForm(forms.Form):
 class Newsletter(forms.Form):
     email = forms.EmailField(
         max_length=300,
-        widget=forms.EmailInput(attrs={"class": "email-input", "placeholder": "Enter your email address", "value": "hh@jh.jkj"})
+        widget=forms.EmailInput(attrs={"class": "email-input", "placeholder": "Enter your email address", "value": "hcoder@gmail.com"})
     )
     delete = forms.CharField(
         required=False,

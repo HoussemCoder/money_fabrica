@@ -24,10 +24,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     if_success(error_msg, enc_email, body, element, message, email_input)
                 } else {
                     const exist_email = response.exist;
+                    const delete_decision = response.delete;
+                    error_msg.textContent = message;
+                    error_msg.style.display = "inline-block";
                     if (exist_email) {
                         const submit_btn = document.querySelector(".submit-newsletter");
                         const delete_area = document.querySelector(".delete-area");
-                        const delete_decision = response.delete;
+                        const decision_input = document.querySelector(".hidden-input");
                         error_msg.textContent = message;
                         submit_btn.style.display = "none";
                         delete_area.style.display = "flex";
@@ -37,19 +40,19 @@ document.addEventListener("DOMContentLoaded", function() {
                             error_msg.style.display = "none";
                             delete_area.style.display = "none";
                             submit_btn.style.display = "inline-block";
+                            decision_input.value = "";
                         } else if (delete_decision === false) {
                             error_msg.style.display = "none";
                             delete_area.style.display = "none";
                             submit_btn.style.display = "inline-block";
                             email_input.value = "";
+                            decision_input.value = "";
                         }
                     }
-                    if (email_input !== null) {
+                    if (email_input !== null && delete_decision !== false) {
                         email_input.classList.add("shake");
                         setTimeout(() => {email_input.classList.remove("shake")}, 300)
                     }
-                    error_msg.textContent = message;
-                    error_msg.style.display = "inline-block";
                 }
             } else {
             error_msg.textContent = "Something went wrong! please reload the page and try again";
