@@ -2,9 +2,8 @@
 
 window.onload = function() {
     if (window.location.search.includes("confirmed=true")) {
-        console.log("heheheeh")
         const overlay = document.querySelector(".overlay");
-        const element = document.querySelector(".confirmed");
+        const element = document.querySelector(".confirmed-window");
 
         overlay.style.display = "block";
         element.style.display = "block";

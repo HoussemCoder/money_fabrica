@@ -90,12 +90,19 @@
   <!-- custom content for each page -->
   {% endblock %}
   <footer>
-    <div class="success-window">
+    <div class="success-window send-email-window">
       <div class="content">
         <i class="fa-regular fa-circle-check"></i>
         <p><i class="fa-solid fa-right-long p-arrow"></i> We have sent a confirmation email to <span class="enc_email"></span>.<br>Please check your inbox (including spam/junk folders) to confirm your subscription.</p>
         <p><i class="fa-solid fa-right-long p-arrow"></i> If you want to cancel your subscription please check the confirmation email and follow the instructions.</p>
         <button class="done-btn call-to-action-btn" onclick="hide_window('.success-window')">Done!</button>
+      </div>
+    </div>
+    <div class="success-window delete-window">
+      <div class="content">
+        <i class="fa-regular fa-circle-check"></i>
+        <p><i class="fa-solid fa-right-long p-arrow"></i> We have sent a confirmation email to <span class="enc_email"></span>.<br>Please check your inbox (including spam/junk folders) to cancel your subscription.</p>
+        <button class="done-btn call-to-action-btn" onclick="hide_window('.delete-window')">Done!</button>
       </div>
     </div>
     {% block newsletter %}
@@ -108,10 +115,9 @@
           {{email_form.email}}
           <span class="error-msg"></span>
           <div class="delete-area">
-            {{email_form.delete}}
-            {{email_form.keep}}
-            <!-- <button class="filter-btn button" type="submit">Delete</button>
-            <button class="call-to-action-btn button" type="submit">Keep it</button> -->
+            <button type="submit" class="filter-btn button keep-it" onclick="set_value('.hidden-input', 'yes')">Delete</button>
+            <button type="submit" class="call-to-action-btn button " onclick="set_value('.hidden-input', 'no')">Keep it</button> 
+            <input type="hidden" name="delete" value="" class="hidden-input" onload="reset_value(this)">
           </div>
           <button class="call-to-action-btn button submit-newsletter" type="submit">Subscribe</button>
         </form>

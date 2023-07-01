@@ -1,5 +1,4 @@
 from django.urls import path
-from django.conf import settings
 from django.views.defaults import page_not_found
 
 from . import views

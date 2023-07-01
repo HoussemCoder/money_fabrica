@@ -28,17 +28,11 @@ class SearchForm(forms.Form):
 class Newsletter(forms.Form):
     email = forms.EmailField(
         max_length=300,
-        widget=forms.EmailInput(attrs={"class": "email-input", "placeholder": "Enter your email address"})
-        )
-    delete = forms.CharField(
-        label="Delete",
-        max_length=100,
-        widget=forms.TextInput(attrs={"type": "submit", "name": "delete", "value": "yes", "class": "filter-btn button"})
+        widget=forms.EmailInput(attrs={"class": "email-input", "placeholder": "Enter your email address", "value": "hh@jh.jkj"})
     )
-    keep = forms.CharField(
-        label="Keep it",
+    delete = forms.CharField(
+        required=False,
         max_length=100,
-        widget=forms.TextInput(attrs={"type": "submit", "name": "delete", "value": "no", "class": "call-to-action-btn button"})
     )
 
 
@@ -46,7 +40,7 @@ class ResendEmail(forms.Form):
     email = forms.EmailField(max_length=300)
     form_type = forms.CharField(
         widget=forms.HiddenInput(attrs={"name": "form_type", "value": "resend_email"})
-        )
+    )
 
 # class DeleteEmail(forms.Form):
 

@@ -1,17 +1,34 @@
 /* add some behaviors to the pages */
 
 
-// hide the 'success subscruption window'
+//add new value
+function set_value(element, value) {
+    const hidden_input = document.querySelector(element);
+
+    hidden_input.value = value;
+}
+
+// hide an area by clicking
+function hide_area(class_) {
+    const area = document.querySelector(class_);
+    const submit_btn = document.querySelector(".submit-newsletter");
+
+    area.style.display = "none";
+    submit_btn.style.display = "inline-block";
+}
+
+// hide the popups windows
 function hide_window(window_) {
-    const success_window = document.querySelectorAll(window_);
+    const popup_window = document.querySelectorAll(window_);
     const body = document.querySelector(".overlay");
     const email_input = document.querySelector(".email-input");
 
-    for (let window of success_window) {
+    for (let window of popup_window) {
         window.style.display = "none";
     }
     body.style.display = "none";
 
+    // if the page is the resend page
     if (email_input === null) {
         window.location.assign("/");
     }

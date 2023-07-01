@@ -26,7 +26,7 @@
 </head>
 <body onscroll="show_when('go-up'), nice_show('.initial', 'show-section'), nice_show('.right-hidden', 'right-show')">
   <div class="overlay"></div>
-  <div class="confirmed success-window">
+  <div class="success-window confirmed-window">
     <div class="content">
       <i class="fa-regular fa-circle-check"></i>
       <h2 style="padding-bottom: 20px;">You're all set</h2>
@@ -184,7 +184,7 @@
           {% csrf_token %}
           {{email_form.email}}
           <span class="error-msg"></span>
-          <button class="call-to-action-btn button" type="submit">Subscribe</button>
+          <button class="call-to-action-btn button submit-newsletter" type="submit">Subscribe</button>
         </form>
       </div>
     </div>

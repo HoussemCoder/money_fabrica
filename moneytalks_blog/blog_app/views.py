@@ -215,21 +215,34 @@ class Subscriptions(FormView):
                 "message": "Your email address entered is not valid. Please try again."
             }
             return JsonResponse(response_data)
-        if self.check_email(email):
+        if self.check_email_existence(email):
             response_data = {
                 "success": False,
-                "message": f"This email is already exist in our database, do you want to cancel your subscription?",
+                "message": "This email is already exist in our database, do you want to cancel your subscription?",
                 "exist": True
             }
-            try:
-                decision = form.cleaned_data["delete"]
-                if decision == "yes":
-                    response_data["delete"] = True
-                elif decision == "no":
-                    response_data["delete"] = False
-            except KeyError:
-                pass
-            return JsonResponse(response_data)
+            print(form.cleaned_data)
+            decision = form.cleaned_data["delete"]
+            if decision == "yes":
+                confirmation_code = self.generate_confirmation_code()
+                try:
+                    self.send_confirmation_delete(email, confirmation_code)
+                except:
+                    response_data = {
+                        "success": False,
+                        "message": "An error occurred during form submission. Please try again."
+                    }
+                    return JsonResponse(response_data)
+                expiration = self.generate_expiration_time()
+                email.confirmation_delete = confirmation_code
+                email.expiration_time = expiration
+                email.save()
+                response_data["message"] = f"{email[:3]}********"
+                response_data["delete"] = True
+                return JsonResponse(response_data)
+            elif decision == "no":
+                response_data["delete"] = False        
+                return JsonResponse(response_data)
         confirmation_code = self.generate_confirmation_code()
         try:
             self.send_confirmation_email(email, confirmation_code)
@@ -259,7 +272,7 @@ class Subscriptions(FormView):
         new_email = UsersEmails(email=email, confirmation_code=code, expiration_time=expiration)
         new_email.save()
 
-    def check_email(self, email: str):
+    def check_email_existence(self, email: str):
         try:
             UsersEmails.objects.get(email=email)
             return True
@@ -269,11 +282,26 @@ class Subscriptions(FormView):
     def send_confirmation_email(self, send_to: str, code: str):
         subject = "Confirm Your Subscription | Money Talks"
         template = "emails/confirmation_email.html"
-        confirmation_url = code
         context = {
-            "confirmation_url": confirmation_url,
+            "confirmation_url": code,
             "base_url": settings.BASE_URL
             }
+        email_message = render_to_string(template, context)
+        email = EmailMessage(
+            subject=subject,
+            body=email_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[send_to]
+        )
+        return email.send()
+    
+    def send_confirmation_delete(self, send_to: str, code: str):
+        subject = "Confirm Your Cancelation | Money Talks"
+        template = "emails/comfirmation_delete.html"
+        context = {
+            "delete_url": code,
+            "base_url": settings.BASE_URL
+        }
         email_message = render_to_string(template, context)
         email = EmailMessage(
             subject=subject,

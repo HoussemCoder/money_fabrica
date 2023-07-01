@@ -22,7 +22,8 @@ class Categories(models.Model):
 class UsersEmails(models.Model):
     email = models.EmailField(max_length=255, unique=True)
     created_at = models.DateField(auto_now_add=True)
-    confirmation_code = models.URLField(max_length=100, unique=True, blank=True)
+    confirmation_code = models.CharField(max_length=100, unique=True, blank=True)
+    confirmation_delete = models.CharField(max_length=100, blank=True)
     expiration_time = models.CharField(max_length=30, blank=True)
     is_valid = models.BooleanField(default=False)
 
