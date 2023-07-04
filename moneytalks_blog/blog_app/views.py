@@ -225,24 +225,25 @@ class Subscriptions(FormView):
             decision = form.cleaned_data["delete"]
             if decision == "yes":
                 confirmation_code = self.generate_confirmation_code()
-                try:
-                    self.send_confirmation_delete(email, confirmation_code)
-                except:
-                    response_data = {
-                        "success": False,
-                        "message": "An error occurred during form submission. Please try again."
-                    }
-                    return JsonResponse(response_data)
+                # try:
+                self.send_confirmation_delete(email, confirmation_code)
+                # except:
+                #     response_data = {
+                #         "success": False,
+                #         "message": "An error occurred during form submission. Please try again."
+                #     }
+                #     return JsonResponse(response_data)
                 expiration = self.generate_expiration_time()
-                email.confirmation_delete = confirmation_code
-                email.expiration_time = expiration
-                email.save()
+                email_db = UsersEmails.objects.get(email=email)
+                email_db.confirmation_delete = confirmation_code
+                email_db.expiration_time = expiration
+                email_db.save()
                 response_data["message"] = f"{email[:3]}********"
                 response_data["delete"] = True
                 print("hehehheeheh")
                 return JsonResponse(response_data)
             elif decision == "no":
-                response_data["delete"] = False        
+                response_data["delete"] = False
                 return JsonResponse(response_data)
             else:
                 return JsonResponse(response_data)
@@ -297,10 +298,10 @@ class Subscriptions(FormView):
             to=[send_to]
         )
         return email.send()
-    
+
     def send_confirmation_delete(self, send_to: str, code: str):
         subject = "Confirm Your Cancelation | Money Talks"
-        template = "emails/comfirmation_delete.html"
+        template = "emails/confirmation_delete.html"
         context = {
             "delete_url": code,
             "base_url": settings.BASE_URL
