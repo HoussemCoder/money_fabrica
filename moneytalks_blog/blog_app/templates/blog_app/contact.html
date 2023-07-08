@@ -3,4 +3,33 @@
 {% block title %}Contact{% endblock %}
 
 {% block content %}
+<div class="container">
+  <div class="contact-container">
+    <div class="contact-form">
+      <div class="contact-heading">
+        <h1>Contact us</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas ea magni ut. Deserunt, quod architecto! Earum fugiat vero consequuntur eaque.</p>
+      </div>
+      <div class="contact-body">
+        <form class="contact-detail">
+          {% csrf_token %}
+          {{contact_form.name}}
+          {{contact_form.email}}
+          {{contact_form.subject}}
+          {{contact_form.text}}
+          {{contact_form.attachment}}
+          <button type="submit" class="call-to-action-btn button">Send</button>
+        </form>
+      </div>
+    </div>
+    <div class="planner-ad">
+      <img src="../../static/images/ads/planner.png" alt="The Ultimate Guided Planner Only For Big Goals">
+      <div class="text-btn">
+        <h3>The Ultimate Guided Planner</h3>
+        <p><strong>only for big goals.</strong><br>Empower your ambitions with our comprehensive goal-oriented planner.</p>
+        <a class="button call-to-action-btn a-btn" href="#" target="_blank">Take a Look</a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

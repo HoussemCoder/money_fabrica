@@ -27,3 +27,10 @@ class UsersEmails(models.Model):
     expiration_time = models.CharField(max_length=30, blank=True)
     is_valid = models.BooleanField(default=False)
 
+
+class ContactsHistory(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=300)
+    subject = models.CharField(max_length=300)
+    text = models.TextField(max_length=5000)
+    attachment = models.FileField(null=True)

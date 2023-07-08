@@ -1,6 +1,6 @@
 import re, string, secrets
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, Dict
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import Http404, HttpRequest, HttpResponse, JsonResponse
@@ -197,6 +197,19 @@ class ArticlePage(DetailView):
         return article
 
 
+class ContactUs(FormView):
+    template_name = "blog_app/contact.html"
+    form_class = ContactForm
+
+    def form_valid(self, form: Any):
+        pass
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context["contact_form"] = self.form_class
+        return context
+
+
 class Subscriptions(FormView):
     template_name = "base.html"
     
@@ -225,14 +238,14 @@ class Subscriptions(FormView):
             decision = form.cleaned_data["delete"]
             if decision == "yes":
                 confirmation_code = self.generate_confirmation_code()
-                # try:
-                self.send_confirmation_delete(email, confirmation_code)
-                # except:
-                #     response_data = {
-                #         "success": False,
-                #         "message": "An error occurred during form submission. Please try again."
-                #     }
-                #     return JsonResponse(response_data)
+                try:
+                    self.send_confirmation_delete(email, confirmation_code)
+                except:
+                    response_data = {
+                        "success": False,
+                        "message": "An error occurred during form submission. Please try again."
+                    }
+                    return JsonResponse(response_data)
                 expiration = self.generate_expiration_time()
                 email_db = UsersEmails.objects.get(email=email)
                 email_db.confirmation_delete = confirmation_code

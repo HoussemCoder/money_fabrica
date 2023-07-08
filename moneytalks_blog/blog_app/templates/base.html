@@ -40,7 +40,7 @@
           <li><a class="a-header" href="{% url 'home_page' %}" target="_blank">Home</a></li>
           <li><a class="a-header" href="{% url 'search_articles_page' %}" target="_blank">Articles</a></li>
           <li><a class="a-header" href="advertise.html" target="_blank">Advertise</a></li>
-          <li><a class="a-header" href="contact.html" target="_blank">Contact</a></li>
+          <li><a class="a-header" href="{% url 'contact_page' %}" target="_blank">Contact</a></li>
           <li><a class="a-header" href="shop.html" target="_blank">Shop</a></li>
           <li><a class="a-header" href="success_stories.html" target="_blank">Success Stories</a></li>
           <li title="Search">
@@ -114,12 +114,12 @@
           {% csrf_token %}
           {{email_form.email}}
           <span class="error-msg"></span>
+          <button class="call-to-action-btn button submit-newsletter" type="submit">Subscribe</button>
           <div class="delete-area">
-            <button type="submit" class="filter-btn button keep-it" onclick="set_value('.hidden-input', 'yes')">Delete</button>
             <button type="submit" class="call-to-action-btn button " onclick="set_value('.hidden-input', 'no')">Keep it</button> 
+            <button type="submit" class="filter-btn button keep-it" onclick="set_value('.hidden-input', 'yes')">Delete</button>
             <input type="hidden" name="delete" value="" class="hidden-input" onload="reset_value(this)">
           </div>
-          <button class="call-to-action-btn button submit-newsletter" type="submit">Subscribe</button>
         </form>
       </div>
     </div>

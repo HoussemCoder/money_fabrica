@@ -42,6 +42,13 @@ class ResendEmail(forms.Form):
         widget=forms.HiddenInput(attrs={"name": "form_type", "value": "resend_email"})
     )
 
-# class DeleteEmail(forms.Form):
 
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=200)
+    email = forms.EmailField(max_length=300)
+    subject = forms.CharField(max_length=300)
+    text = forms.CharField(
+        widget=forms.Textarea()
+    )
+    attachment = forms.FileField(required=False)
 

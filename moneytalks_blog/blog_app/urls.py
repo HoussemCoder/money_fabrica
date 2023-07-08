@@ -10,6 +10,7 @@ urlpatterns = [
     path("articles/", views.SearchArticlesPage.as_view(), name="search_articles_page"),
     path("articles/<slug:keyword>", views.ArticlePage.as_view(), name="article_page"),
     path("category/<slug:category_slug>", views.CategoryPage.as_view(), name="category_page"),
+    path("contact/", views.ContactUs.as_view(), name="contact_page"),
     path("confirm/<str:token>", views.ConfirmEmail.as_view(), name="confirm_email"),
     path("author/", views.Authorized.as_view()),
     path("newsletter/", views.Subscriptions.as_view(), name="newsletter_form"),

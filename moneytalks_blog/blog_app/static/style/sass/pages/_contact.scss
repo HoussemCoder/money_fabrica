@@ -1,0 +1,21 @@
+// contact page styling
+
+
+.contact-container {
+    display: flex;
+    gap: 30px;
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        .contact-detail {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+    }
+}

@@ -2394,4 +2394,23 @@ section.main > .container aside {
 }
 .home-articles .container .section-plus-btn > a {
   margin-bottom: clamp(20px, 4vw, 40px);
+}
+
+.contact-container {
+  display: flex;
+  gap: 30px;
+}
+.contact-container .contact-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.contact-container .contact-form .contact-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }/*# sourceMappingURL=main.css.map */
