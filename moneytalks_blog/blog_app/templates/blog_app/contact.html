@@ -8,28 +8,43 @@
     <div class="contact-form">
       <div class="contact-heading">
         <h1>Contact us</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas ea magni ut. Deserunt, quod architecto! Earum fugiat vero consequuntur eaque.</p>
+        <p>Contact us today to explore our services, get answers to your questions, or discuss potential collaborations. We're here to help you achieve your goals and provide the support you need.</p>
       </div>
       <div class="contact-body">
-        <form class="contact-detail">
+        <form class="contact-detail" method="post">
           {% csrf_token %}
-          {{contact_form.name}}
-          {{contact_form.email}}
-          {{contact_form.subject}}
-          {{contact_form.text}}
-          {{contact_form.attachment}}
-          <button type="submit" class="call-to-action-btn button">Send</button>
+          <div class="single-field">
+            <span>Name<strong>*</strong></span> {{contact_form.name}}
+          </div>
+          <div class="single-field">
+            <span>Email<strong>*</strong></span> {{contact_form.email}}
+          </div>
+          <div class="single-field">
+            <span>Subject<strong>*</strong></span> {{contact_form.subject}}
+          </div>
+          <div class="single-field">
+            <span>Your Text<strong>*</strong></span> {{contact_form.text}}
+          </div>
+          <div class="single-field">
+            <span>Attachment</span> {{contact_form.attachment}}
+          </div>
+          <div class="contact-buttons">
+            <button type="submit" class="call-to-action-btn button">Send</button>
+            <button type="reset" class="filter-btn button">Reset</button>
+          </div>
         </form>
       </div>
     </div>
-    <div class="planner-ad">
-      <img src="../../static/images/ads/planner.png" alt="The Ultimate Guided Planner Only For Big Goals">
-      <div class="text-btn">
-        <h3>The Ultimate Guided Planner</h3>
-        <p><strong>only for big goals.</strong><br>Empower your ambitions with our comprehensive goal-oriented planner.</p>
-        <a class="button call-to-action-btn a-btn" href="#" target="_blank">Take a Look</a>
+    <aside>
+      <div class="planner-ad">
+        <img src="../../static/images/ads/planner.png" alt="The Ultimate Guided Planner Only For Big Goals">
+        <div class="text-btn">
+          <h3>The Ultimate Guided Planner</h3>
+          <p><strong>only for big goals.</strong><br>Empower your ambitions with our comprehensive goal-oriented planner.</p>
+          <a class="button call-to-action-btn a-btn" href="#" target="_blank">Take a Look</a>
+        </div>
       </div>
-    </div>
+    </aside>
   </div>
 </div>
 {% endblock %}

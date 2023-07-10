@@ -200,13 +200,17 @@ class ArticlePage(DetailView):
 class ContactUs(FormView):
     template_name = "blog_app/contact.html"
     form_class = ContactForm
+    search_form = SearchForm()
+    email_form = Newsletter()
 
     def form_valid(self, form: Any):
-        pass
+        ...
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context["contact_form"] = self.form_class
+        context["search_form"] = self.search_form
+        context["email_form"] = self.email_form
         return context
 
 

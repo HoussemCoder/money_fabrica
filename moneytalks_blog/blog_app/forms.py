@@ -44,11 +44,20 @@ class ResendEmail(forms.Form):
 
 
 class ContactForm(forms.Form):
-    name = forms.CharField(max_length=200)
-    email = forms.EmailField(max_length=300)
-    subject = forms.CharField(max_length=300)
+    name = forms.CharField(
+        max_length=200,
+        widget=forms.TextInput(attrs={"placeholder": "Type your actual name please"})
+    )
+    email = forms.EmailField(
+        max_length=300,
+        widget=forms.EmailInput(attrs={"placeholder": "Type your email address"})
+    )
+    subject = forms.CharField(
+        max_length=300,
+        widget=forms.TextInput(attrs={"placeholder": "Shortly describe your inquiry"})
+    )
     text = forms.CharField(
-        widget=forms.Textarea()
+        widget=forms.Textarea(attrs={"rows": 5, "placeholder": "Provide info as much as you can"})
     )
     attachment = forms.FileField(required=False)
 

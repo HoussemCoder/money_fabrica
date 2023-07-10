@@ -34,3 +34,5 @@ class ContactsHistory(models.Model):
     subject = models.CharField(max_length=300)
     text = models.TextField(max_length=5000)
     attachment = models.FileField(null=True)
+    date = models.DateField(auto_now_add=True)
+    checked = models.BooleanField(default=False)
