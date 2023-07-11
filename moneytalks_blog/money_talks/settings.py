@@ -33,6 +33,11 @@ DEFAULT_FROM_EMAIL = "support@moneytalks.com"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+# settings for media uploaded
+MEDIA_ROOT = "../blog_app/media_uploaded"
+
+MEDIA_URL = "/files/"
+
 # Application definition
 
 INSTALLED_APPS = [

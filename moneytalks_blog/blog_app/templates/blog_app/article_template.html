@@ -58,19 +58,19 @@
       </div>
       <!-- <p>We would love to hear your thoughts! Feel free to leave a comment and share your valuable insights after reading the article.</p> -->
       <div class="share-article">
-        <a class="button fb" href="#">
+        <a class="button fb" href="#" onclick="share_on_fb(event, '{{article.slug}}')">
           <i class="fa-brands fa-facebook-f"></i>
           <span>Share</span>
         </a>
-        <a class="button pin" href="#">
+        <a class="button pin" href="#" onclick="share_on_pin(event, '{{article.slug}}', '{{article.title}}', '{{article.thumbnail}}')">
           <i class="fa-brands fa-pinterest-p"></i>
           <span>Pin</span>
         </a>
-        <a class="button in" href="#">
+        <a class="button in" href="#" onclick="share_on_in(event, '{{article.slug}}', '{{article.title}')">
           <i class="fa-brands fa-linkedin-in"></i>
           <span>Share</span>
         </a>
-        <a class="button tw" href="#">
+        <a class="button tw" href="#" onclick="share_on_tw(event, '{{article.slug}}', '{{article.title}}')">
           <i class="fa-brands fa-twitter"></i>
           <span>Tweet</span>
         </a>

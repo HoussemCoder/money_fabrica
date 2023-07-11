@@ -47,6 +47,7 @@
                         @include font-styling("p");
                     }
                     textarea {
+                        width: 100%;
                         padding: 5px 10px;
                         border: 2px solid map-get($map: $primary, $key: first);
                         border-radius: 10px;
@@ -64,4 +65,27 @@
         }
     }
     aside {grid-area: planner;}
+    @include breakpoints(medium) {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        aside {
+            margin-left: 0;
+            .planner-ad img {width: 60%;}
+        }
+    }
+    @include breakpoints(extra-small) {
+        .contact-form {
+            .contact-body {
+                .contact-detail {
+                    padding: 20px;
+                    .single-field {
+                        display: flex;
+                        flex-direction: column;
+                        input {padding: 5px 15px;}
+                    }
+                }
+            }
+        }
+    }
 }

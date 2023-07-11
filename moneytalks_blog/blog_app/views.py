@@ -204,7 +204,21 @@ class ContactUs(FormView):
     email_form = Newsletter()
 
     def form_valid(self, form: Any):
-        ...
+        name = form.cleaned_data["name"]
+        email = form.cleaned_data["email"]
+        subject = form.cleaned_data["subject"]
+        text = form.cleaned_data["text"]
+        try:
+            self.send_contact_email(name, email, subject, text)
+        except:
+            pass
+        self.save_contact_data(name, email, subject, text)
+        response_data = {"success": True}
+        return JsonResponse(response_data)
+    
+    def form_invalid(self, form: Any):
+        response_data = {"success": False}
+        return JsonResponse(response_data)
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
@@ -212,6 +226,25 @@ class ContactUs(FormView):
         context["search_form"] = self.search_form
         context["email_form"] = self.email_form
         return context
+
+    def send_contact_email(self, name, sender, subject, text):
+        message = f"From: {name}/n/n{text}"
+        email = EmailMessage(
+            subject=subject,
+            body=message,
+            from_email=sender,
+            to=[settings.DEFAULT_FROM_EMAIL]
+        )
+        return email.send()
+    
+    def save_contact_data(self, name, email, subject, text):
+        new_contact = ContactsHistory(
+            name=name,
+            email=email,
+            subject=subject,
+            message=text
+        )
+        new_contact.save()
 
 
 class Subscriptions(FormView):

@@ -59,5 +59,4 @@ class ContactForm(forms.Form):
     text = forms.CharField(
         widget=forms.Textarea(attrs={"rows": 5, "placeholder": "Provide info as much as you can"})
     )
-    attachment = forms.FileField(required=False)
 

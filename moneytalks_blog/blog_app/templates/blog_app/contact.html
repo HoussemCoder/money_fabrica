@@ -11,7 +11,7 @@
         <p>Contact us today to explore our services, get answers to your questions, or discuss potential collaborations. We're here to help you achieve your goals and provide the support you need.</p>
       </div>
       <div class="contact-body">
-        <form class="contact-detail" method="post">
+        <form class="contact-detail" method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="single-field">
             <span>Name<strong>*</strong></span> {{contact_form.name}}
@@ -23,10 +23,7 @@
             <span>Subject<strong>*</strong></span> {{contact_form.subject}}
           </div>
           <div class="single-field">
-            <span>Your Text<strong>*</strong></span> {{contact_form.text}}
-          </div>
-          <div class="single-field">
-            <span>Attachment</span> {{contact_form.attachment}}
+            <span>Message<strong>*</strong></span> {{contact_form.text}}
           </div>
           <div class="contact-buttons">
             <button type="submit" class="call-to-action-btn button">Send</button>

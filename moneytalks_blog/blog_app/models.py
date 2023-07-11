@@ -32,7 +32,6 @@ class ContactsHistory(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField(max_length=300)
     subject = models.CharField(max_length=300)
-    text = models.TextField(max_length=5000)
-    attachment = models.FileField(null=True)
+    message = models.TextField(max_length=10000)
     date = models.DateField(auto_now_add=True)
     checked = models.BooleanField(default=False)

@@ -2449,6 +2449,7 @@ section.main > .container aside {
   color: #333333;
 }
 .contact-container .contact-form .contact-body .contact-detail .single-field textarea {
+  width: 100%;
   padding: 5px 10px;
   border: 2px solid #2ecc71;
   border-radius: 10px;
@@ -2465,4 +2466,29 @@ section.main > .container aside {
 }
 .contact-container aside {
   grid-area: planner;
+}
+@media (max-width: 992px) {
+  .contact-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  .contact-container aside {
+    margin-left: 0;
+  }
+  .contact-container aside .planner-ad img {
+    width: 60%;
+  }
+}
+@media (max-width: 450px) {
+  .contact-container .contact-form .contact-body .contact-detail {
+    padding: 20px;
+  }
+  .contact-container .contact-form .contact-body .contact-detail .single-field {
+    display: flex;
+    flex-direction: column;
+  }
+  .contact-container .contact-form .contact-body .contact-detail .single-field input {
+    padding: 5px 15px;
+  }
 }/*# sourceMappingURL=main.css.map */
