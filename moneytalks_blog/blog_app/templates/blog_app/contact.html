@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Contact{% endblock %}
+
+{% block contact_json %}
+<script src="{% static 'js/contact_json_handling.js' %}" defer></script>
+{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -11,25 +17,35 @@
         <p>Contact us today to explore our services, get answers to your questions, or discuss potential collaborations. We're here to help you achieve your goals and provide the support you need.</p>
       </div>
       <div class="contact-body">
-        <form class="contact-detail" method="post" enctype="multipart/form-data">
+        <form class="contact-detail">
           {% csrf_token %}
           <div class="single-field">
-            <span>Name<strong>*</strong></span> {{contact_form.name}}
+            <label>Name<strong>*</strong></label> {{contact_form.name}}
           </div>
           <div class="single-field">
-            <span>Email<strong>*</strong></span> {{contact_form.email}}
+            <label>Email<strong>*</strong></label> {{contact_form.email}}
+            <span class="email-error-msg"></span>
           </div>
           <div class="single-field">
-            <span>Subject<strong>*</strong></span> {{contact_form.subject}}
+            <label>Subject<strong>*</strong></label> {{contact_form.subject}}
           </div>
           <div class="single-field">
-            <span>Message<strong>*</strong></span> {{contact_form.text}}
+            <label>Message<strong>*</strong></label> {{contact_form.text}}
           </div>
+          <span class="error-msg"></span>
           <div class="contact-buttons">
             <button type="submit" class="call-to-action-btn button">Send</button>
             <button type="reset" class="filter-btn button">Reset</button>
           </div>
         </form>
+        <div class="success-window send-contact-window">
+          <div class="content">
+            <i class="fa-regular fa-circle-check"></i>
+            <h2>Thank you for contacting us!</h2>
+            <p><i class="fa-solid fa-right-long p-arrow"></i> We have received your inquiry and will get back to you shortly.</p>
+            <button class="done-btn call-to-action-btn" onclick="hide_window('.send-contact-window')">Done!</button>
+          </div>
+        </div>
       </div>
     </div>
     <aside>

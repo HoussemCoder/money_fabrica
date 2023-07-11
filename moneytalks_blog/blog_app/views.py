@@ -212,12 +212,23 @@ class ContactUs(FormView):
             self.send_contact_email(name, email, subject, text)
         except:
             pass
-        self.save_contact_data(name, email, subject, text)
+        if not self.check_if_exists(name, email, subject, text):
+            self.save_contact_data(name, email, subject, text)
         response_data = {"success": True}
         return JsonResponse(response_data)
-    
+
     def form_invalid(self, form: Any):
-        response_data = {"success": False}
+        if "email" in form.errors:
+            error = form.errors["email"]
+            email_status = True
+        else:
+            error = "An error occurred during form submission. Please try again."
+            email_status = False
+        response_data = {
+            "success": False,
+            "email_error": email_status,
+            "message": error
+        }
         return JsonResponse(response_data)
 
     def get_context_data(self, **kwargs: Any):
@@ -228,7 +239,7 @@ class ContactUs(FormView):
         return context
 
     def send_contact_email(self, name, sender, subject, text):
-        message = f"From: {name}/n/n{text}"
+        message = f"{text} ___From: {name}"
         email = EmailMessage(
             subject=subject,
             body=message,
@@ -246,6 +257,11 @@ class ContactUs(FormView):
         )
         new_contact.save()
 
+    def check_if_exists(self, name, email, subject, text):
+        matched_record = ContactsHistory.objects.filter(name=name, email=email, subject=subject, text=text)
+        if matched_record.exists():
+            return True
+        return False
 
 class Subscriptions(FormView):
     template_name = "base.html"
@@ -271,7 +287,6 @@ class Subscriptions(FormView):
                 "message": "This email is already exist in our database, do you want to cancel your subscription?",
                 "exist": True
             }
-            print(form.cleaned_data)
             decision = form.cleaned_data["delete"]
             if decision == "yes":
                 confirmation_code = self.generate_confirmation_code()

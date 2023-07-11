@@ -278,7 +278,8 @@ button:hover:not(.filter-btn, .three-points),
   animation: shake 0.3s;
 }
 
-.error-msg {
+.error-msg,
+.email-error-msg {
   display: none;
   color: red;
   transition: 1s;
@@ -2429,18 +2430,16 @@ section.main > .container aside {
 }
 .contact-container .contact-form .contact-body .contact-detail .single-field {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-template-areas: "labal input";
+  display: flex;
 }
-.contact-container .contact-form .contact-body .contact-detail .single-field span {
-  grid-area: labal;
+.contact-container .contact-form .contact-body .contact-detail .single-field label {
+  flex: 1;
 }
-.contact-container .contact-form .contact-body .contact-detail .single-field span strong {
+.contact-container .contact-form .contact-body .contact-detail .single-field label strong {
   color: tomato;
 }
 .contact-container .contact-form .contact-body .contact-detail .single-field input {
-  grid-area: input;
+  flex: 4;
   padding: 0px 15px;
   border: 2px solid #2ecc71;
   border-radius: 10px;
@@ -2449,6 +2448,7 @@ section.main > .container aside {
   color: #333333;
 }
 .contact-container .contact-form .contact-body .contact-detail .single-field textarea {
+  flex: 4;
   width: 100%;
   padding: 5px 10px;
   border: 2px solid #2ecc71;

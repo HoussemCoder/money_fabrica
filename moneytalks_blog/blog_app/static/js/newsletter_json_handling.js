@@ -1,15 +1,15 @@
-/* handling the post forms with Ajax */
+/* handling newsletter post form with Ajax */
 
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector(".newsletter-form").addEventListener("submit", function(event) {
         event.preventDefault();
-  
+
         const form_data = new FormData(event.target);
-  
+
         const xhr = new XMLHttpRequest();
-  
+
         xhr.open("POST", "newsletter/");
-  
+
         xhr.onload = function() {
             const error_msg = document.querySelector(".error-msg");
             if (xhr.status === 200) {
@@ -55,8 +55,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 }
             } else {
-            error_msg.textContent = "Something went wrong! please reload the page and try again";
-            error_msg.style.display = "inline-block";
+                error_msg.textContent = "Something went wrong! please reload the page and try again";
+                error_msg.style.display = "inline-block";
             }
         };
         xhr.send(form_data);

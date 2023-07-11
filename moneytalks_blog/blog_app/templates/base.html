@@ -20,8 +20,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Roboto:wght@100;300;500;900&family=Work+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
   <!-- javascript files -->
   <script src="{% static 'js/behaviors.js' %}" defer></script>
-  <script src="{% static 'js/json_handling.js' %}" defer></script>
+  <script src="{% static 'js/newsletter_json_handling.js' %}" defer></script>
   <script src="{% static 'js/all.min.js' %}" defer></script>
+  {% block contact_json %}{% endblock %}
 </head>
 <body onscroll="show_when('go-up')">
   <div class="overlay"></div>

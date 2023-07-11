@@ -25,7 +25,8 @@
 
 .shake {animation: shake .3s;}
 
-.error-msg {
+.error-msg,
+.email-error-msg {
     display: none;
     color: red;
     transition: 1s;
