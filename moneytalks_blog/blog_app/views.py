@@ -1,6 +1,6 @@
 import re, string, secrets
 from datetime import datetime, timedelta
-from typing import Any, Dict
+from typing import Any
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import Http404, HttpRequest, HttpResponse, JsonResponse
@@ -253,12 +253,13 @@ class ContactUs(FormView):
             name=name,
             email=email,
             subject=subject,
-            message=text
+            message=text,
+            checked=False
         )
         new_contact.save()
 
     def check_if_exists(self, name, email, subject, text):
-        matched_record = ContactsHistory.objects.filter(name=name, email=email, subject=subject, text=text)
+        matched_record = ContactsHistory.objects.filter(name=name, email=email, subject=subject, message=text)
         if matched_record.exists():
             return True
         return False
