@@ -306,7 +306,6 @@ class Subscriptions(FormView):
                 email_db.save()
                 response_data["message"] = f"{email[:3]}********"
                 response_data["delete"] = True
-                print("hehehheeheh")
                 return JsonResponse(response_data)
             elif decision == "no":
                 response_data["delete"] = False

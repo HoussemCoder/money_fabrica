@@ -139,12 +139,12 @@
   <div class="container flex-box">
     <header>
       <img class="logo" src="../static/images/logos/logo_light.png" alt="Money Talks" title="Money Talks">
-      <h1>Thank you!</h1>
+      <h2>So this is the end?</h2>
       <p>We sent you this email to confirm your subscription for our newsletter</p>
     </header>
     <section class="offers flex-box">
       <ul>
-        You will get:
+        If you cancel your subscription you will lose:
         <li><i class="fa-solid fa-right-long"></i> Notifications about any new matirial we put on the Money Talks</li>
         <li><i class="fa-solid fa-right-long"></i> Tips and tricks about your financial life</li>
         <li><i class="fa-solid fa-right-long"></i> Exclusive offers and opportunities</li>
@@ -152,23 +152,20 @@
       <p>Stay updated with <strong style="font-style: italic;">Money Talks</strong> and unlock endless financial possibilities.</p>
     </section>
     <section class="confirm flex-box">
-      <p><i class="fa fa-bolt fa-fw fa-2x"></i> To confirm your subscription please click on that button <i class="fa fa-bolt fa-fw fa-2x"></i></p>
-      <a href="{{base_url}}{% url 'confirm_email' token=delete_url %}" target="_blank">Confirm Now</a>
+      <p><i class="fa fa-bolt fa-fw fa-2x"></i> To cancel your subscription please click on that button <i class="fa fa-bolt fa-fw fa-2x"></i></p>
+      <div class="decision-btns">
+        <a href="{{base_url}}{% url 'confirm_email' token=delete_url %}" target="_blank">Cancel</a>
+        <a href="{{base_url}}{% url 'home_page' %}" target="_blank">Keep it</a>
+      </div>
     </section>
     <div class="down">
       <i class="fa-solid fa-circle-down"></i>
       <!-- <i class="fa-solid fa-circle-down"></i>
       <i class="fa-solid fa-circle-down"></i> -->
     </div>
-    <section class="cancel flex-box">
-      <ul>
-        If you want to cancel your subscription please do the following:
-        <li><i class="fa-sharp fa-solid fa-circle fa-2xs"></i> Rewrite the email which you used in your subscription</li>
-        <li><i class="fa-sharp fa-solid fa-circle fa-2xs"></i> Hit the submit button</li>
-        <li><i class="fa-sharp fa-solid fa-circle fa-2xs"></i> You will get the choice to keep or cancel your subscription</li>
-      </ul>
-    </section>
     <footer class="flex-box">
+      <p>If you believe this email is not for you please delete it, or <a href="{{base_url}}{% url 'contact_page' %}">Contact Us</a>.</p>
+      <br>
       <p>Follow us on social media</p>
       <div class="social-icons">
         <a id="fb" href="#" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
