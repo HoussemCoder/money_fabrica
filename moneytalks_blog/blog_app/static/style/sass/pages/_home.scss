@@ -36,6 +36,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -35%);
+        // .h1-header {line-height: 9rem;}
     }
     @include breakpoints(large) {
         .heading-section .all {
@@ -59,6 +60,9 @@
                 @include font-styling(map-get($map: $f-sizes-extra-large, $key: p-header-size))
             }
         }
+    }
+    @include breakpoints(medium) {
+        .heading-section .all {.h1-header {line-height: 9rem;}}
     }
     @include breakpoints(small) {
         .heading-section .all {

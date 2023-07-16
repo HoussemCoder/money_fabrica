@@ -42,8 +42,8 @@
           <li><a class="a-header" href="{% url 'search_articles_page' %}" target="_blank">Articles</a></li>
           <li><a class="a-header" href="{% url 'contact_page' %}" target="_blank">Contact</a></li>
           <!-- <li><a class="a-header" href="advertise.html" target="_blank">Advertise</a></li> -->
-          <li><a class="a-header" href="shop.html" target="_blank">Shop</a></li>
-          <li><a class="a-header" href="success_stories.html" target="_blank">Success Stories</a></li>
+          <li><a class="a-header" href="{% url 'under_dev' %}" target="_blank">Shop</a></li>
+          <li><a class="a-header" href="{% url 'under_dev' %}" target="_blank">Success Stories</a></li>
           <li title="Search">
             <i class="fa-solid fa-magnifying-glass-dollar a-header search-icon" onclick="show_search_bar('.search-menu-form')"></i>
             <form class="search-menu-form" action="{% url 'search_articles_page' %}" method="get">
@@ -111,7 +111,7 @@
       <div class="container">
         <p>Be The First Who Know...</p>
         <form class="newsletter-form">
-          <label for="#email"><span>Subscribe</span> for our newsletter:</label>
+          <label for="#email"><span>Subscribe</span> to our newsletter:</label>
           {% csrf_token %}
           {{email_form.email}}
           <span class="error-msg"></span>
@@ -162,7 +162,7 @@
           </ul>
         </div>
       </div>
-      <p>&copy; 2023 <span>Money Talks.</span> All Rights Reserved</p>
+      <p>&copy; 2023 <span>Money Fábrica.</span> All Rights Reserved</p>
     </div>
   </footer>
 </body>

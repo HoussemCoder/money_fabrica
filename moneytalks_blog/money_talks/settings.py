@@ -27,9 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-BASE_URL = "https://www.moneytalks.com"
+BASE_URL = "https://www.moneyfabrica.com"
 
-DEFAULT_FROM_EMAIL = "support@moneytalks.com"
+DEFAULT_FROM_EMAIL = "support@moneyfabrica.com"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 

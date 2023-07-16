@@ -14,5 +14,6 @@ urlpatterns = [
     path("confirm/<str:token>", views.ConfirmEmail.as_view(), name="confirm_email"),
     path("author/", views.Authorized.as_view()),
     path("newsletter/", views.Subscriptions.as_view(), name="newsletter_form"),
+    path("under_dev/", views.under_dev, name="under_dev"),
     path("<path:path>/newsletter/", views.Subscriptions.as_view(), name="newsletter_form"),
 ]

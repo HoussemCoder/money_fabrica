@@ -47,8 +47,8 @@
         <ul class="nav-links" id="menu" role="navigation">
           <li><a class="a-header" href="{% url 'home_page' %}" target="_blank">Home</a></li>
           <li><a class="a-header" href="{% url 'search_articles_page' %}" target="_blank">Articles</a></li>
-          <li><a class="a-header" href="advertise.html" target="_blank">Advertise</a></li>
-          <li><a class="a-header" href="contact.html" target="_blank">Contact</a></li>
+          <!-- <li><a class="a-header" href="advertise.html" target="_blank">Advertise</a></li> -->
+          <li><a class="a-header" href="{% url 'contact_page' %}" target="_blank">Contact</a></li>
           <li><a class="a-header" href="shop.html" target="_blank">Shop</a></li>
           <li><a class="a-header" href="success_stories.html" target="_blank">Success Stories</a></li>
           <li title="Search">
@@ -63,7 +63,7 @@
     </nav>
     <div class="heading-section">
       <div class="all">
-        <h1 class="h1-header">Millionaire Road</h1>
+        <h1 class="h1-header">Money Fábrica</h1>
         <p class="p-header">Expand Your Incomes And Reach Your<br class="break"> Financial Freedom</p>
         <button class="button call-to-action-btn" id="go-to-mindset" onclick="btn_action('mindset')" title="See how...">Want to know how?</button>
       </div>
@@ -180,7 +180,7 @@
       <div class="container">
         <p>Be The First Who Know...</p>
         <form class="newsletter-form">
-          <label for="#email"><span>Subscribe</span> for our newsletter:</label>
+          <label for="#email"><span>Subscribe</span> to our newsletter:</label>
           {% csrf_token %}
           {{email_form.email}}
           <span class="error-msg"></span>
@@ -224,7 +224,7 @@
           </ul>
         </div>
       </div>
-      <p>&copy; 2023 <span>Money Talks.</span> All Rights Reserved</p>
+      <p>&copy; 2023 <span>Money Fábrica.</span> All Rights Reserved</p>
     </div>
   </footer>
 </body>

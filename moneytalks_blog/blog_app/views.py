@@ -433,9 +433,20 @@ class ConfirmEmail(DetailView):
         context["resend_form"] = self.resend_form
         return context
 
+
 class Authorized(login, TemplateView):
     login_url = "/pshl/"
     
+
+def under_dev(request):
+    search_form = SearchForm()
+    email_form = Newsletter()
+    context = {
+        "search_form": search_form,
+        "email_form": email_form
+        }
+    return render(request, "blog_app/under_development.html", context)
+
 
 def handle_404_error(request, exception):
     view = SearchArticlesPage()
