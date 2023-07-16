@@ -21,7 +21,7 @@
         <div class="btns">
           {{search_form.category}}
           {{search_form.filter}}
-          <button class="search-btn button call-to-action-btn" id="go" type="submit" name="submit">Go</button>
+          <button class="search-btn button call-to-action-btn" id="go" type="submit">Go</button>
         </div>
       </form>
     </div>
@@ -90,7 +90,7 @@
         <section class="latest-articles">
           {% for article in latest %}
           <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
-            <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
+            <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="{{article.title}}">
             <div class="text">
               <h3>{{article.title}}</h3>
               <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
@@ -98,7 +98,7 @@
           </a>
           {% endfor %}
         </section>
-        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
+        <button class="button call-to-action-btn a-btn" id="latest-btn">See More...</button>
       </div>
       <div class="in-between-ads">
         <div class="container">

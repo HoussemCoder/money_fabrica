@@ -49,8 +49,8 @@
           <li><a class="a-header" href="{% url 'search_articles_page' %}" target="_blank">Articles</a></li>
           <!-- <li><a class="a-header" href="advertise.html" target="_blank">Advertise</a></li> -->
           <li><a class="a-header" href="{% url 'contact_page' %}" target="_blank">Contact</a></li>
-          <li><a class="a-header" href="shop.html" target="_blank">Shop</a></li>
-          <li><a class="a-header" href="success_stories.html" target="_blank">Success Stories</a></li>
+          <li><a class="a-header" href="{% url 'under_dev' %}" target="_blank">Shop</a></li>
+          <li><a class="a-header" href="{% url 'under_dev' %}" target="_blank">Success Stories</a></li>
           <li title="Search">
             <i class="fa-solid fa-magnifying-glass-dollar a-header search-icon" onclick="show_search_bar('.search-menu-form')"></i>
             <form class="search-menu-form form-trans-bg" action="{% url 'search_articles_page' %}" method="get" target="_blank">
@@ -104,7 +104,7 @@
             </a>
           {% endfor %}
         </div>
-        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
+        <a class="button call-to-action-btn a-btn" href="{{base_url}}{% url 'search_articles_page' %}?search=&category=Build+a+Strong+Mindset&filter=popular" target="_blank" title="See More...">See More...</a>
       </section>
       <section class="money-game section-rules initial">
         <h1>The Money Game</h1>
@@ -139,7 +139,7 @@
           </a>
           {% endfor %}
         </div>
-        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
+        <a class="button call-to-action-btn a-btn" href="{{base_url}}{% url 'search_articles_page' %}?search=&category=Increase+Your+Incomes&filter=popular" target="_blank" title="See More...">See More...</a>
       </section>
     </div>
     <button class="button go-to-up-btn" id="go-up" onclick="btn_action('header')" title="Go up"><i class="fa-solid fa-angles-up"></i></button>

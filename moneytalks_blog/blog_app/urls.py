@@ -12,6 +12,7 @@ urlpatterns = [
     path("category/<slug:category_slug>", views.CategoryPage.as_view(), name="category_page"),
     path("contact/", views.ContactUs.as_view(), name="contact_page"),
     path("confirm/<str:token>", views.ConfirmEmail.as_view(), name="confirm_email"),
+    path("confirm/<str:token>", views.ConfirmDelete.as_view(), name="confirm_delete"),
     path("author/", views.Authorized.as_view()),
     path("newsletter/", views.Subscriptions.as_view(), name="newsletter_form"),
     path("under_dev/", views.under_dev, name="under_dev"),

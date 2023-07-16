@@ -154,7 +154,7 @@
     <section class="confirm flex-box">
       <p>To cancel your subscription please click on that button</p>
       <div class="decision-btns">
-        <a href="{{base_url}}{% url 'confirm_email' token=delete_url %}" target="_blank">Cancel</a>
+        <a href="{{base_url}}{% url 'confirm_delete' token=delete_url %}" target="_blank">Cancel</a>
         <a href="{{base_url}}" target="_blank">Keep it</a>
       </div>
     </section>

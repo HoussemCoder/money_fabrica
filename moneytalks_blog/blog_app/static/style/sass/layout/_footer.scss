@@ -67,7 +67,7 @@ footer {
         }
     }
     .footer {
-        background-image: linear-gradient(to bottom, map-get($map: $primary, $key: first), #1b7240);
+        background-image: linear-gradient(to bottom, map-get($map: $primary, $key: first), map-get($map: $primary, $key: third));
         background-color: map-get($map: $primary, $key: first);
         .container {
             padding-top: 40px;

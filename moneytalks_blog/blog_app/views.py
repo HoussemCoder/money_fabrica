@@ -39,7 +39,7 @@ class HomePage(ListView):
         context.update(dtl_vars)
         return context
     
-    ## function to get the popular articles
+    ## function to get the latest articles
     def get_latest(self):
         popular_list = Articles.objects.order_by("pub_date")[:9]
         return popular_list
@@ -107,8 +107,8 @@ class SearchArticlesPage(FormView):
         return results
 
     def get_latest_popular_articles(self):
-        latest = Articles.objects.order_by("pub_date")[:9]
-        popular = Articles.objects.order_by("views")[:9]
+        latest = Articles.objects.order_by("pub_date")
+        popular = Articles.objects.order_by("views")
         latest_popular = {"latest": latest, "popular": popular}
         return latest_popular
 
@@ -432,6 +432,10 @@ class ConfirmEmail(DetailView):
         context["search_form"] = self.search_form
         context["resend_form"] = self.resend_form
         return context
+
+
+class ConfirmDelete(DetailView):
+    ...
 
 
 class Authorized(login, TemplateView):
