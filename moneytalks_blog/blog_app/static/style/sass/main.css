@@ -397,8 +397,8 @@ form:not(.newsletter-form) {
   align-items: center;
   justify-content: space-evenly;
   gap: clamp(1px, 2vw, 25px);
-  background-color: #155430;
-  background-image: linear-gradient(to top, #00A700, #155430);
+  background-color: #185f37;
+  background-image: linear-gradient(to top, #00A700, #185f37);
   border-radius: 20px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
@@ -912,7 +912,7 @@ footer .newsletter .container p {
   }
 }
 footer .footer {
-  background-image: linear-gradient(to bottom, #00A700, #155430);
+  background-image: linear-gradient(to bottom, #00A700, #185f37);
   background-color: #00A700;
 }
 footer .footer .container {
@@ -1049,7 +1049,7 @@ footer .footer > p {
 
 .main-header nav {
   background-color: #00A700;
-  background-image: linear-gradient(to bottom, #00A700, #155430);
+  background-image: linear-gradient(to bottom, #00A700, #185f37);
 }
 .main-header nav .container {
   height: clamp(100px, 7vw, 200px);
@@ -1171,7 +1171,7 @@ footer .footer > p {
   }
   .main-header nav .container .nav-links li a.active, .main-header nav .container .nav-links .search-icon.active {
     padding-left: 60px;
-    border-left: 8px solid #155430;
+    border-left: 8px solid #185f37;
   }
   .main-header nav .container .nav-links li:last-child {
     border-bottom: 1px solid #c0c0c0;
@@ -1345,7 +1345,7 @@ footer .footer > p {
     justify-content: center;
     align-items: center;
     padding: 5px 20px;
-    background-image: linear-gradient(to top, #00A700, #155430);
+    background-image: linear-gradient(to top, #00A700, #185f37);
     border-bottom-left-radius: 100px;
     border-bottom-right-radius: 100px;
     transition: 0.2s;
@@ -1982,7 +1982,7 @@ footer .footer > p {
   text-align: left;
 }
 .sections-container .browse-text h2 span {
-  color: #155430;
+  color: #185f37;
 }
 .sections-container .search-articles {
   margin-top: 20px;
@@ -2264,7 +2264,7 @@ section.main > .container .starting-articles {
 }
 section.main > .container .starting-articles h3 {
   padding: 10px 20px;
-  background-color: #155430;
+  background-color: #185f37;
   color: white;
   text-align: center;
   margin: clamp(20px, 5vw, 50px) 0;

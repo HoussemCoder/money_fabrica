@@ -142,29 +142,29 @@ function nice_show(old_style, new_style) {
 // add social media sharing urls
 function share_on_fb(event, slug) {
     event.preventDefault();
-    var article_url = encodeURIComponent("https://www.moneytalks.com/" + slug);
+    var article_url = encodeURIComponent("https://www.moneyfabrica.com/" + slug);
     var share_url = "https://www.facebook.com/sharer/sharer.php?u=" + article_url;
     window.open(share_url, "_blank", "width=500, height=600");
 }
 
 function share_on_pin(event, slug, title, img) {
     event.preventDefault();
-    var article_url = encodeURIComponent("https://www.moneytalks.com/" + slug);
-    var article_img = "https://www.moneytalks.com/static/images/thumbnails/" + img;
+    var article_url = encodeURIComponent("https://www.moneyfabrica.com/" + slug);
+    var article_img = "https://www.moneyfabrica.com/static/images/thumbnails/" + img;
     var share_url = "https://www.pinterest.com/pin/create/button/?url=" + article_url + "&media=" + article_img + "&description=" + title;
     window.open(share_url, "_blank", "width=500, height=600");
 }
 
 function share_on_in(event, slug, title) {
     event.preventDefault();
-    var article_url = encodeURIComponent("https://www.moneytalks.com/" + slug);
+    var article_url = encodeURIComponent("https://www.moneyfabrica.com/" + slug);
     var share_url = "https://www.linkedin.com/shareArticle?url=" + article_url + "&title=" + title + "&summary=";
     window.open(share_url, "_blank", "width=500, height=600");
 }
 
 function share_on_tw(event, slug, title) {
     event.preventDefault();
-    var article_url = encodeURIComponent("https://www.moneytalks.com/" + slug);
+    var article_url = encodeURIComponent("https://www.moneyfabrica.com/" + slug);
     var share_url = "https://twitter.com/intent/tweet?url=" + article_url + "&text=" + title;
     window.open(share_url, "_blank", "width=500, height=600");
 }
