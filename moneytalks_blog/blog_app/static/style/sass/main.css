@@ -2105,7 +2105,7 @@ footer .footer > p {
 .sections-container .home-articles .container .section-plus-btn .popular-articles::before {
   content: "Popular Articles";
 }
-.sections-container .home-articles .container .section-plus-btn > a {
+.sections-container .home-articles .container .section-plus-btn > button {
   margin-bottom: clamp(20px, 4vw, 40px);
 }
 .sections-container .search-results {

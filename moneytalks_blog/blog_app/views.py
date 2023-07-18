@@ -1,6 +1,6 @@
 import re, string, secrets
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, Dict
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import Http404, HttpRequest, HttpResponse, JsonResponse
@@ -264,8 +264,37 @@ class ContactUs(FormView):
             return True
         return False
 
+
+class LoadMoreArticles(ListView):
+    template_name = "404.html"
+    search_form = SearchForm()
+    email_form = Newsletter()
+    model = Articles
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = self.search_form
+        context["email_form"] = self.email_form
+        latest_popular = SearchArticlesPage().get_latest_popular_articles()
+        context.update(latest_popular)
+        return context
+    
+    def get_popular_articles(self):
+        ...
+
+
 class Subscriptions(FormView):
-    template_name = "base.html"
+    template_name = "404.html"
+    search_form = SearchForm()
+    email_form = Newsletter()
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = self.search_form
+        context["email_form"] = self.email_form
+        latest_popular = SearchArticlesPage().get_latest_popular_articles()
+        context.update(latest_popular)
+        return context
     
     def get_form_class(self):
         if self.request.POST.get("form_type") == "resend_email":
@@ -293,16 +322,17 @@ class Subscriptions(FormView):
                 confirmation_code = self.generate_confirmation_code()
                 try:
                     self.send_confirmation_delete(email, confirmation_code)
+                    print("done")
                 except:
                     response_data = {
                         "success": False,
                         "message": "An error occurred during form submission. Please try again."
                     }
                     return JsonResponse(response_data)
-                expiration = self.generate_expiration_time()
+                expiration = self.generate_expiration_time(hours=15)
                 email_db = UsersEmails.objects.get(email=email)
                 email_db.confirmation_delete = confirmation_code
-                email_db.expiration_time = expiration
+                email_db.delete_expiration = expiration
                 email_db.save()
                 response_data["message"] = f"{email[:3]}********"
                 response_data["delete"] = True
@@ -338,7 +368,7 @@ class Subscriptions(FormView):
         return JsonResponse(response_data)
 
     def save_data(self, email, code, expiration):
-        new_email = UsersEmails(email=email, confirmation_code=code, expiration_time=expiration)
+        new_email = UsersEmails(email=email, confirmation_code=code, confirm_expiration=expiration)
         new_email.save()
 
     def check_email_existence(self, email: str):
@@ -349,7 +379,7 @@ class Subscriptions(FormView):
             return False
 
     def send_confirmation_email(self, send_to: str, code: str):
-        subject = "Confirm Your Subscription | Money Talks"
+        subject = "Confirm Your Subscription | Money Fábrica"
         template = "emails/confirmation_email.html"
         context = {
             "confirmation_url": code,
@@ -365,7 +395,7 @@ class Subscriptions(FormView):
         return email.send()
 
     def send_confirmation_delete(self, send_to: str, code: str):
-        subject = "Confirm Your Cancelation | Money Talks"
+        subject = "Confirm Your Cancelation | Money Fábrica"
         template = "emails/confirmation_delete.html"
         context = {
             "delete_url": code,
@@ -389,13 +419,13 @@ class Subscriptions(FormView):
             similar = UsersEmails.objects.filter(confirmation_code=code)
         return code
 
-    def generate_expiration_time(self):
-        expiration_time = datetime.now() + timedelta(hours=20)
+    def generate_expiration_time(self, hours=48):
+        expiration_time = datetime.now() + timedelta(hours=hours)
         return expiration_time
 
 
 class ConfirmEmail(DetailView):
-    template_name = "confirmation_url.html"
+    template_name = "confirm_token.html"
     slug_url_kwarg = "token"
     model = UsersEmails
     search_form = SearchForm()
@@ -408,7 +438,7 @@ class ConfirmEmail(DetailView):
         if not email:
             return render(self.request, self.template_name, self.get_context_data(no_email=True))
         now = datetime.now()
-        expiration_time = datetime.strptime(email.expiration_time, "%Y-%m-%d %H:%M:%S.%f")
+        expiration_time = datetime.strptime(email.confirm_expiration, "%Y-%m-%d %H:%M:%S.%f")
         if expiration_time < now:
             self.delete_old_email(email)
             return render(self.request, self.template_name, self.get_context_data(expired=True, email=email.email))
@@ -435,7 +465,38 @@ class ConfirmEmail(DetailView):
 
 
 class ConfirmDelete(DetailView):
-    ...
+    template_name = "confirm_token.html"
+    slug_url_kwarg = "token"
+    model = UsersEmails
+    search_form = SearchForm()
+    resend_form = ResendEmail()
+    object = None
+
+    def get(self, request, *args: Any, **kwargs: Any):
+        token = self.kwargs.get(self.slug_url_kwarg)
+        email = self.model.objects.get(confirmation_delete=token)
+        if not email:
+            return render(self.request, self.template_name, self.get_context_data(delete=True, no_email=True))
+        now = datetime.now()
+        expiration_time = datetime.strptime(email.delete_expiration, "%Y-%m-%d %H:%M:%S.%f")
+        if expiration_time < now:
+            return render(self.request, self.template_name, self.get_context_data(delete=True, expired=True))
+        else:
+            self.delete_old_email(email)
+            success_url = reverse("home_page")
+            return redirect(success_url)
+    
+    def delete_old_email(self, email):
+        try:
+            email.delete()
+        except self.model.DoesNotExist:
+            pass
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = self.search_form
+        context["resend_form"] = self.resend_form
+        return context
 
 
 class Authorized(login, TemplateView):

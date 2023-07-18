@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # BASE_URL = "https://www.moneyfabrica.com"
-BASE_URL = "127.0.0.1:8000/"
+BASE_URL = "127.0.0.1:8000"
 
 DEFAULT_FROM_EMAIL = "support@moneyfabrica.com"
 

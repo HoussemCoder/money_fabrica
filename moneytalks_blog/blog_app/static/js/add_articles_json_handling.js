@@ -6,11 +6,11 @@
 function loadMoreArticles() {
     // Make an AJAX request to retrieve more articles
     // Replace '/get-more-articles/' with the URL of your Django view or API endpoint
-    fetch('/get-more-articles/')
+    fetch('articles/')
       .then(response => response.json())
       .then(data => {
         // Process the response data and append the new articles to the existing list
-        const articlesContainer = document.getElementById('articles-container');
+        const articlesContainer = document.getElementById('popular-articles');
         data.articles.forEach(article => {
           const articleElement = createArticleElement(article);
           articlesContainer.appendChild(articleElement);

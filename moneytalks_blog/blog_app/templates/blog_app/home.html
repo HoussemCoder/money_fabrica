@@ -8,7 +8,7 @@
   <meta name="description" content="Unlock your financial potential, discover expert insights, practical tips, and comprehensive analysis on investment strategies, money management, and wealth creation.">
   <meta name="author" content="H_coder">
   <!-- tab info and icon -->
-  <title>Home | Money Talks</title>
+  <title>Home | Money Fábrica</title>
   <link rel="icon" type="image/png" href="{% static 'images/logos/logo_light_icon.png' %}">
   <!-- main css file -->
   <link rel="stylesheet" type="text/css" href="{% static 'style/sass/main.css' %}">
@@ -114,7 +114,7 @@
           examples of successful individuals who have applied these principles to achieve abundance in their 
           lives. With this book, you'll learn how to shift your mindset from scarcity to abundance and take 
           control of your financial future.</p>
-        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="Read The Book">Read The Book</a>
+        <a class="button call-to-action-btn a-btn" href="https://amzn.to/3OiIRRz" target="_blank" title="Read The Book">Read The Book</a>
       </section>
       <section class="articles-section make-money section-rules initial">
         <div class="section-text">
@@ -168,12 +168,19 @@
     </div>
   </section>
   <footer>
-    <div class="success-window">
+    <div class="success-window send-email-window">
       <div class="content">
         <i class="fa-regular fa-circle-check"></i>
         <p><i class="fa-solid fa-right-long p-arrow"></i> We have sent a confirmation email to <span class="enc_email"></span>.<br>Please check your inbox (including spam/junk folders) to confirm your subscription.</p>
         <p><i class="fa-solid fa-right-long p-arrow"></i> If you want to cancel your subscription please check the confirmation email and follow the instructions.</p>
         <button class="done-btn call-to-action-btn" onclick="hide_window('.success-window')">Done!</button>
+      </div>
+    </div>
+    <div class="success-window delete-window">
+      <div class="content">
+        <i class="fa-regular fa-circle-check"></i>
+        <p><i class="fa-solid fa-right-long p-arrow"></i> We have sent a confirmation email to <span class="enc_email"></span>.<br>Please check your inbox (including spam/junk folders) to cancel your subscription.</p>
+        <button class="done-btn call-to-action-btn" onclick="hide_window('.delete-window')">Done!</button>
       </div>
     </div>
     <div class="newsletter">
@@ -185,6 +192,11 @@
           {{email_form.email}}
           <span class="error-msg"></span>
           <button class="call-to-action-btn button submit-newsletter" type="submit">Subscribe</button>
+          <div class="delete-area">
+            <button type="submit" class="call-to-action-btn button " onclick="set_value('.hidden-input', 'no')">Keep it</button> 
+            <button type="submit" class="filter-btn button keep-it" onclick="set_value('.hidden-input', 'yes')">Delete</button>
+            <input type="hidden" name="delete" value="" class="hidden-input" onload="reset_value(this)">
+          </div>
         </form>
       </div>
     </div>
