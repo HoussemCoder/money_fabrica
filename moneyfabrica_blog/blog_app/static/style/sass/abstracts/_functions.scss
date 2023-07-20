@@ -1,0 +1,13 @@
+// helper functions
+
+@function get-line-height-p($f-size) {
+    @return $f-size * 2;
+}
+
+@function get-line-height-h1($f-size) {
+    @return $f-size * 1.4;
+}
+
+@function get-line-height($f-size, $factor: 1.6) {
+    @return $f-size * $factor;
+}

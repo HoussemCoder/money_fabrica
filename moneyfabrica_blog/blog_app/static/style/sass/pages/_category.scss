@@ -1,0 +1,177 @@
+/// category pages styling
+
+@use '../abstracts/colors' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/vars' as *;
+
+section.main {
+    margin-top: clamp(40px, 8vw, 100px);
+    margin-bottom: clamp(40px, 8vw, 100px);
+    > .container {
+        display: grid;
+        grid-template-columns: 2.5fr 1fr;
+        grid-template-areas: "head planner"
+                             "posts planner";
+        gap: clamp(20px, 4vw, 40px);
+        .cat-head {
+            grid-area: head;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .cat-title {
+                display: flex;
+                align-items: center;
+                gap: clamp(20px, 3vw, 40px);
+                h1 {color: map-get($map: $primary, $key: dark-color);}
+                img {width: 20%;}
+            }
+        }
+        .starting-articles {
+            grid-area: posts;
+            h3 {
+                padding: 10px 20px;
+                background-color: map-get($map: $primary, $key: third);
+                color: map-get($map: $primary, $key: second);
+                text-align: center;
+                margin: clamp(20px, 5vw, 50px) 0;
+            }
+            .container {
+                max-width: 95%;
+                display: flex;
+                flex-direction: column;
+                row-gap: clamp(10px, 4vw, 30px);
+                a {
+                    display: flex;
+                    align-items: center;
+                    gap: clamp(10px, 3vw, 20px);
+                    width: fit-content;
+                    @include font-styling("a");
+                    font-weight: bold;
+                    color: map-get($map: $primary, $key: dark-color);
+                    transition: .2s;
+                    svg {
+                        font-size: map-get($map: $f-sizes, $key: h3-size);
+                        align-self: flex-start;
+                        color: map-get($map: $primary, $key: first);
+                        position: relative;
+                        top: 10px;
+                    }
+                    span {
+                        position: relative;
+                        &::before {
+                            content: "";
+                            width: 10%;
+                            height: 3px;
+                            background-color: map-get($map: $primary, $key: first);
+                            position: absolute;
+                            bottom: -1%;
+                        }
+                    }
+                    &:hover {
+                        color: map-get($map: $primary, $key: first);
+                        transition: .3s;
+                    }
+                }
+            }
+        }
+        aside {
+            grid-area: planner;
+        }
+        @include breakpoints(medium) {
+            aside {display: none;}
+            grid-template-columns: 1fr;
+            grid-template-areas: "head" "posts";
+        }
+        @include breakpoints(extra-small) {
+            .cat-head {
+                .cat-title {
+                    flex-direction: column-reverse;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+.home-articles {
+    .container {
+        .section-plus-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid map-get($map: $primary, $key: dark-light-color);
+            border-radius: 15px;
+            section {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+                gap: clamp(20px, 3vw, 40px);
+                padding: clamp(20px, 5vw, 50px);
+                position: relative;
+                &::before {
+                    content: "";
+                    @include font-styling("h3");
+                    white-space: nowrap;
+                    padding-inline: 20px;
+                    position: absolute;
+                    top: clamp(-27px, -2vw, -20px);
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background-color: map-get($map: $primary, $key: second);
+                }
+                a {
+                    display: flex;
+                    flex-direction: column;
+                    gap: clamp(20px, 3vw, 30px);
+                    z-index: 333;
+                    img {
+                        border-radius: 15px;
+                        width: 100%;
+                        transition: .3s;
+                    }
+                    .text {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        color: map-get($map: $primary, $key: dark-color);
+                        h3 {
+                            font-weight: bolder;
+                            position: relative;
+                            transition: .3s;
+                            &::before {
+                                content: "";
+                                width: 15%;
+                                height: 3px;
+                                background-color: map-get($map: $primary, $key: first);
+                                position: absolute;
+                                bottom: -5px;
+                            }
+                        }
+                        time {
+                            width: fit-content;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            color: map-get($map: $primary, $key: dark-color-2);
+                        }
+                    }
+                    &:hover {
+                        * {
+                            transition: .3s;
+                            transition-delay: .2s;
+                        }
+                        img {transform: scale(1.1);}
+                        .text {
+                            h3 {
+                                color: map-get($map: $primary, $key: first);
+                                transition-delay: .2s;
+                            }
+                        }
+                    }
+                }
+                @include breakpoints(large) {grid-template-columns: repeat(3, minmax(min(250px, 100%), 1fr));}
+            }
+            .latest-articles::before {content: "Latest Articles";}
+            .popular-articles::before {content: "Popular Articles";}
+            & > a {margin-bottom: clamp(20px, 4vw, 40px);}
+        }
+    }
+}
+

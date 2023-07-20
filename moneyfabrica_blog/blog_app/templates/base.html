@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Unlock your financial potential, discover expert insights, practical tips, and comprehensive analysis on investment strategies, money management, and wealth creation.">
+  <meta name="author" content="Money Talks Team">
+  <!-- tab info and icon -->
+  <title>{{article.title}}{% block title %}{% endblock %} | Money Talks</title>
+  <link rel="icon" type="image/png" href="{% static 'images/logos/logo_light_icon.png' %}">
+  <!-- main css file -->
+  <link rel="stylesheet" type="text/css" href="{% static 'style/sass/main.css' %}">
+  <!-- font awesome library -->
+  <link rel="stylesheet" href="{% static 'style/sass/all.min.css' %}">
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Roboto:wght@100;300;500;900&family=Work+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+  <!-- javascript files -->
+  <script src="{% static 'js/add_articles_json_handling.js' %}" defer></script>
+  <script src="{% static 'js/behaviors.js' %}" defer></script>
+  <script src="{% static 'js/newsletter_json_handling.js' %}" defer></script>
+  <script src="{% static 'js/all.min.js' %}" defer></script>
+  {% block contact_json %}{% endblock %}
+</head>
+<body onscroll="show_when('go-up')">
+  <div class="overlay"></div>
+  <header class="main-header" id="header">
+    <nav>
+      <div class="container">
+        <a href="{% url 'home_page' %}" target="_blank">
+          <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Logo" title="Money Talks">
+        </a>
+        <button id="menu-icon" onclick="show_list('.nav-links'); change_shape(this);">
+          <span></span>
+          <span></span>
+          <span></span>
+        </i></button>
+        <ul class="nav-links" role="navigation">
+          <li><a class="a-header" href="{% url 'home_page' %}" target="_blank">Home</a></li>
+          <li><a class="a-header" href="{% url 'search_articles_page' %}" target="_blank">Articles</a></li>
+          <li><a class="a-header" href="{% url 'contact_page' %}" target="_blank">Contact</a></li>
+          <!-- <li><a class="a-header" href="advertise.html" target="_blank">Advertise</a></li> -->
+          <li><a class="a-header" href="{% url 'under_dev' %}" target="_blank">Shop</a></li>
+          <li><a class="a-header" href="{% url 'under_dev' %}" target="_blank">Success Stories</a></li>
+          <li title="Search">
+            <i class="fa-solid fa-magnifying-glass-dollar a-header search-icon" onclick="show_search_bar('.search-menu-form')"></i>
+            <form class="search-menu-form" action="{% url 'search_articles_page' %}" method="get">
+              {{search_form.search}}
+              <button class="search-btn button call-to-action-btn" type="submit">Go</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    {% block get_started %}
+    <div class="get-started">
+      <div class="how-to-icon" onclick="show_list('.get-started-list'); up_down('#arrow')"><p>How to...</p><i class="fa-solid fa-angle-down" id="arrow"></i></div>
+      <div class="container get-started-list">
+        <img class="how-to-img" src="../../static/images/logos/how_to.png" alt="how to...">
+        <a href="{% url 'category_page' category_slug='build-a-strong-mindset' %}" target="_blank" class="option">
+          <img src="../../static/images/logos/build_mindset.png" alt="">
+          <h3>Build a strong mindset</h3>
+        </a>
+        <a href="{% url 'category_page' category_slug='increase-your-incomes' %}" target="_blank" class="option">
+          <img src="../../static/images/logos/expand_incomes.png" alt="">
+          <h3>Increase your incomes</h3>
+        </a>
+        <a href="{% url 'category_page' category_slug='develop-new-skills' %}" target="_blank" class="option">
+          <img src="../../static/images/logos/develop_skills.png" alt="">
+          <h3>Develop new skills</h3>
+        </a>
+        <a href="{% url 'category_page' category_slug='get-remote-jobs' %}" target="_blank" class="option">
+          <img src="../../static/images/logos/remote_jobs.png" alt="">
+          <h3>Get remote jobs</h3>
+        </a>
+        <a href="{% url 'category_page' category_slug='start-a-business' %}" target="_blank" class="option">
+          <img src="../../static/images/logos/start_business.png" alt="">
+          <h3>Start a business</h3>
+        </a>
+      </div>
+    </div>
+    {% endblock %}
+  </header>
+  {% block message %}
+  <!-- custom message here, ex: for 404 error -->
+  {% endblock %}
+
+  {% block content %}
+  <!-- custom content for each page -->
+  {% endblock %}
+  <footer>
+    <div class="success-window send-email-window">
+      <div class="content">
+        <i class="fa-regular fa-circle-check"></i>
+        <p><i class="fa-solid fa-right-long p-arrow"></i> We have sent a confirmation email to <span class="enc_email"></span>.<br>Please check your inbox (including spam/junk folders) to confirm your subscription.</p>
+        <p><i class="fa-solid fa-right-long p-arrow"></i> If you want to cancel your subscription please check the confirmation email and follow the instructions.</p>
+        <button class="done-btn call-to-action-btn" onclick="hide_window('.success-window')">Done!</button>
+      </div>
+    </div>
+    <div class="success-window delete-window">
+      <div class="content">
+        <i class="fa-regular fa-circle-check"></i>
+        <p><i class="fa-solid fa-right-long p-arrow"></i> We have sent a confirmation email to <span class="enc_email"></span>.<br>Please check your inbox (including spam/junk folders) to cancel your subscription.</p>
+        <button class="done-btn call-to-action-btn" onclick="hide_window('.delete-window')">Done!</button>
+      </div>
+    </div>
+    {% block newsletter %}
+    <div class="newsletter">
+      <div class="container">
+        <p>Be The First Who Know...</p>
+        <form class="newsletter-form">
+          <label for="#email"><span>Subscribe</span> to our newsletter:</label>
+          {% csrf_token %}
+          {{email_form.email}}
+          <span class="error-msg"></span>
+          <button class="call-to-action-btn button submit-newsletter" type="submit">Subscribe</button>
+          <div class="delete-area">
+            <button type="submit" class="call-to-action-btn button " onclick="set_value('.hidden-input', 'no')">Keep it</button> 
+            <button type="submit" class="filter-btn button keep-it" onclick="set_value('.hidden-input', 'yes')">Delete</button>
+            <input type="hidden" name="delete" value="" class="hidden-input" onload="reset_value(this)">
+          </div>
+        </form>
+      </div>
+    </div>
+    {% endblock %}
+    <button class="button go-to-up-btn" id="go-up" onclick="btn_action('header')" title="Go up"><i class="fa-solid fa-angles-up"></i></button>
+    <div class="footer">
+      <div class="container">
+        <div class="logo-socials">
+          <a href="{% url 'home_page' %}" target="_blank">
+            <img class="logo" src="../../static/images/logos/logo_dark.png" alt="Money Talks Logo" title="Money Talks Logo">
+          </a>
+          <p>Follow us on social media</p>
+          <div class="social-icons">
+            <a id="fb" href="https://www.facebook.com/moneyfabrica" target="_blank" title="Facebook"><i class="fa-brands fa-square-facebook"></i></a>
+            <a id="insta" href="https://www.instagram.com/money_fabrica/" target="_blank" title="Instagram"><i class="fa-brands fa-square-instagram"></i></a>
+            <a id="tw" href="https://twitter.com/MoneyFabrica" target="_blank" title="Twitter"><i class="fa-brands fa-square-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <ul class="about" role="navigation">
+            About
+            <li><a href="#">Who are we?</a></li>
+            <!-- <li><a href="#">Our goals</a></li> -->
+            <!-- <li><a href="#">Developer</a></li> -->
+          </ul>
+          <ul class="connect" role="navigation">
+            Connect
+            <li><a href="{% url 'contact_page' %}">Contact us</a></li>
+            <!-- <li><a href="#">E-mail</a></li> -->
+            <li><a href="https://www.facebook.com/moneyfabrica" target="_blank">Facebook</a></li>
+            <li><a href="https://www.instagram.com/money_fabrica/" target="_blank">Instagram</a></li>
+            <li><a href="https://twitter.com/MoneyFabrica" target="_blank">Twitter</a></li>
+          </ul>
+          <ul class="legal" role="navigation">
+            Legal
+            <li><a href="#">Terms of use</a></li>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Cookie policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <p>&copy; 2023 <span>Money Fábrica.</span> All Rights Reserved</p>
+    </div>
+  </footer>
+</body>
+</html>

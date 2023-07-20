@@ -1,0 +1,124 @@
+/// ads styling
+
+@use '../abstracts/colors' as *;
+@use '../abstracts/vars' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/functions' as *;
+
+section.ads-money-game {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: clamp(30px, 4vw, 60px) clamp(20px, 4vw, 50px);
+    background-image: url(../../images/ads/bg2.png);
+    background-repeat: repeat;
+    background-size: contain;
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(20px, 4vw, 60px);
+        padding: clamp(20px, 3vw, 30px);
+        background-color: map-get($map: $primary, $key: second);
+        box-shadow: 0 0 10px map-get($map: $primary, $key: dark-color);
+        img {
+            flex: 0.8;
+            width: 40%;
+            height: 40%;
+        }
+        .text-btn {
+            flex: 1.3;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            h2 {color: map-get($map: $primary, $key: first);}
+            a {
+                margin-top: clamp(10px, 4vw, 20px);
+                // padding: map-get($map: $, $key: );
+            }
+        }
+    }
+    @include breakpoints(small) {
+        .container {
+            flex-direction: column;
+            img {width: 80%;}
+        }
+    }
+    @include breakpoints(extra-large) {.container {padding: 60px; img {width: 40%;}}}
+}
+
+aside {
+    margin-left: clamp(20px, 3vw, 30px);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 30px);
+    .company-ad {
+        img {
+            width: 100%;
+            height: 600px;
+        }
+    }
+    .planner-ad {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(10px, 3vw, 20px);
+        padding: clamp(5px, 5vw, 10px) clamp(10px, 5vw, 20px);
+        box-shadow: 0 0 5px map-get($map: $primary, $key: dark-light-color);
+        position: sticky;
+        top: -180px;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        .text-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(10px, 4vw, 20px);
+            text-align: center;
+            h3 {
+                color: map-get($map: $primary, $key: first);
+            }
+            p {
+                line-height: get-line-height(map-get($map: $f-sizes, $key: p-size), 1.8);
+                strong {
+                    font-weight: bolder;
+                    text-transform: uppercase;
+                }
+            }
+            a {
+                padding: 10px 30px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+
+.in-between-ads {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    .container {
+        height: 100%;
+        padding: 60px;
+        box-shadow: 0 0 5px map-get($map: $primary, $key: dark-light-color);
+        background-image: url(../../../images/ads/bg2.png);
+        background-repeat: repeat;
+        background-size: contain;
+        font-size: map-get($map: $f-sizes, $key: h1-size);
+        color: map-get($map: $primary, $key: second);
+        position: relative;
+        * {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: map-get($map: $primary, $key: second);
+        }
+    }
+}
+

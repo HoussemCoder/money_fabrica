@@ -1,0 +1,90 @@
+// contact page styling
+
+@use '../abstracts/mixins' as *;
+@use '../abstracts/colors' as *;
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    grid-template-areas: "form planner";
+    gap: clamp(20px, 4vw, 40px);
+    margin: 40px 0;
+    .contact-form {
+        grid-area: form;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        gap: 30px;
+        .contact-heading {
+            h1 {margin-bottom: 20px;}
+        }
+        .contact-body {
+            width: 100%;
+            .contact-detail {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: start;
+                gap: 50px;
+                padding: 40px;
+                border: 1px solid map-get($map: $primary, $key: first);
+                border-radius: 10px;
+                .single-field {
+                    width: 100%;
+                    display: flex;
+                    label {
+                        flex: 1;
+                        strong {color: tomato;}
+                    }
+                    input {
+                        flex: 4;
+                        padding: 0px 15px;
+                        border: 2px solid map-get($map: $primary, $key: first);
+                        border-radius: 10px;
+                        @include font-styling("p");
+                    }
+                    textarea {
+                        flex: 4;
+                        width: 100%;
+                        padding: 5px 10px;
+                        border: 2px solid map-get($map: $primary, $key: first);
+                        border-radius: 10px;
+                        border-bottom-right-radius: 0;
+                        @include font-styling("p");
+                        font-family: inherit;
+                    }
+                }
+                .contact-buttons {
+                    align-self: center;
+                    display: flex;
+                    gap: 20px;
+                }
+            }
+        }
+    }
+    aside {grid-area: planner;}
+    @include breakpoints(medium) {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        aside {
+            margin-left: 0;
+            .planner-ad img {width: 60%;}
+        }
+    }
+    @include breakpoints(extra-small) {
+        .contact-form {
+            .contact-body {
+                .contact-detail {
+                    padding: 20px;
+                    .single-field {
+                        display: flex;
+                        flex-direction: column;
+                        input {padding: 5px 15px;}
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Confirmation Email{% endblock %}
+
+{% block get_started %}{% endblock %}
+
+{% block content %}
+<!-- if no such email in our db -->
+{% if no_email %}
+<div class="container resend-email">
+  <i class="fa-regular fa-circle-xmark x-mark"></i>
+  <h2>Hmm!</h2>
+  <p>Something went wrong! We didn't find your email in our database</p>
+  <p>If you want to subscribe for our newsletter and get a new <strong>confirmation email</strong> please click on that button</p>
+  <form class="newsletter-form">
+    {% csrf_token %}
+    {{resend_form.hidden_data}}
+    {{resend_form.form_type}}
+    <button class="button call-to-action-btn" type="submit">Resend</button>
+    <span class="error-msg"></span>
+  </form>
+</div>
+{% endif %}
+
+<!-- if the token has been expired -->
+{% if expired %}
+<div class="container resend-email">
+  <i class="fa-regular fa-circle-xmark x-mark"></i>
+  <h2>Hmm!</h2>
+  <p>The link we sent you earliar has been expired.</p>
+  <p>If you want to get a new <strong>confirmation email</strong> please click on that button</p>
+  <form class="newsletter-form">
+    {% csrf_token %}
+    {{resend_form.form_type}}
+    <input type="hidden" name="email" value="{{email}}">
+    <button class="button call-to-action-btn" type="submit">Resend<a href="{url 'home_page'}" class="resend-a"></a> </button>
+    <span class="error-msg"></span>
+  </form>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block newsletter %}{% endblock %}

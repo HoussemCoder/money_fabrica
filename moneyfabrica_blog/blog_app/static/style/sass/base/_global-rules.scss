@@ -1,0 +1,81 @@
+// grid system
+
+@use '../abstracts/colors' as *;
+@use '../abstracts/vars' as *;
+@use '../abstracts/mixins' as *;
+
+// grid columns
+// $grid-col: 12;
+
+// @for $col-num from 1 through $grid-col {
+//     .col-#{$col-num} {
+//         width: percentage(calc($col-num / $grid-col));
+//     }
+// }
+
+.container {
+    max-width: 92%;
+    margin-inline: auto;
+    @include breakpoints(extra-small) {
+        // max-width: 95%;
+        // padding-inline: 20px;
+    }
+    @include breakpoints(large) {
+        max-width: 70%;
+        padding-inline: 25px;
+    }
+    @include breakpoints(extra-large) {
+        max-width: 45%;
+        padding-inline: 30px;
+    }
+}
+
+.section-rules {
+    margin: 40px 0;
+    padding: 40px 0;
+    @include breakpoints(extra-large) {
+        margin: 70px 0;
+        padding: 70px 0;
+    }
+    @include breakpoints(extra-small) {
+        margin: 20px 0;
+        padding: 20px 0;
+    }
+}
+
+.light-bg {
+    background-color: map-get($map: $primary, $key: light-color);
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.right-hidden {
+    padding-left: 200px;
+    opacity: 0;
+}
+
+.right-show {
+    padding-left: 0;
+    opacity: 1;
+    transition-delay: .4s;
+    transition-duration: .6s;
+    transition-property: padding-left, opacity;
+    transition-timing-function: ease-out;
+}
+
+.initial {
+    padding-top: 100px;
+    opacity: 0;
+}
+.show-section {
+    padding-top: 0px;
+    opacity: 1;
+    transition-duration: .6s;
+    transition-property: padding-top, opacity;
+    transition-timing-function: ease-out;
+}
+

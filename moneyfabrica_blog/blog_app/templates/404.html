@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Not Found|Money Talks{% endblock %}
+    
+{% block message %}
+<div class="message">
+  <div class="container">
+      <h1>Not Found | Error 404</h1>
+      <p>The page you are looking for does not exists. You can click the back button, return to the <a href="{% url 'home_page' %}">Home page</a>, or use the search bar below to find what you are looking for. Or, check out these popular posts.</p>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<section class="sections-container">
+  <div class="browse-text">
+    <h1>Browse Articles</h1>
+    <p>Explore our collection of informative articles that offer practical advice on building wealth and developing a winning mindset</p>
+  </div>
+  <section class="search-articles">
+    <div class="container">
+      <form class="search-menu-form" action="{% url 'search_articles_page' %}" method="get" target="_blank">
+        {{search_form.search}}
+        <div class="btns">
+          {{search_form.category}}
+          {{search_form.filter}}
+          <button class="search-btn button call-to-action-btn" id="go" type="submit" name="go-submit">Go</button>
+        </div>
+      </form>
+    </div>
+  </section>
+  <section class="ads-money-game">
+    <div class="container">
+      <img src="../../static/images/ads/money_game_bg.png" alt="The Money Game book" title="The Money Game book">
+      <div class="text-btn">
+        <h2>The Money Game</h2>
+        <p>Is a book that combines principles of a <strong>growth mindset</strong> with financial strategies to help readers achieve <strong>financial freedom</strong>.</p>
+        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="Read The Book">Read The Book</a>
+      </div>
+    </div>
+  </section>
+  <section class="home-articles">
+    <div class="container">
+      <div class="section-plus-btn">
+        <section class="latest-articles">
+          {% for article in latest %}
+            <a href="#" target="_blank" class="article">
+              <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
+              <div class="text">
+                <h3>{{article.title}}</h3>
+                <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+              </div>
+            </a>
+          {% endfor %}
+        </section>
+        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
+      </div>
+      <div class="in-between-ads">
+        <div class="container">
+          <h2>ads</h2>
+        </div>
+      </div>
+      <div class="section-plus-btn">
+        <section class="popular-articles">
+          {% for article in popular %}
+            <a href="#" target="_blank" class="article">
+              <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
+              <div class="text">
+                <h3>{{article.title}}</h3>
+                <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+              </div>
+            </a>
+          {% endfor %}
+        </section>
+        <a class="button call-to-action-btn a-btn" href="#" target="_blank" title="See More...">See More...</a>
+      </div>
+    </div>
+  </section>
+  <div class="in-between-ads">
+    <div class="container">
+      <h2>ads</h2>
+    </div>
+  </div>
+</section>
+{% endblock %}

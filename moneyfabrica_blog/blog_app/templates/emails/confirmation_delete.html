@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Unlock your financial potential, discover expert insights, practical tips, and comprehensive analysis on investment strategies, money management, and wealth creation.">
+  <meta name="author" content="Money Talks Team">
+  <!-- tab info and icon -->
+  <title>Confirm Your Subscription | Money Fábrica</title>
+  <!-- <link rel="icon" type="image/png" href="{% static 'images/logos/logo_light_icon.png' %}"> -->
+  <link rel="icon" type="image/png" href="https://www.moneyfabrica.com/static/images/logos/logo_light_icon.png">
+  <!-- font awesome library -->
+  <!-- <link rel="stylesheet" href="{% static 'style/sass/all.min.css' %}"> -->
+  <link rel="stylesheet" href="https://www.moneyfabrica.com/static/style/sass/all.min.css">
+  <style>
+    *, *::after, *::before {
+      box-sizing: border-box;
+    }
+    .flex-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    html {
+      font-family: Helvetica, roboto, sans-serif;
+      font-size: 18px;
+      line-height: 28px;
+      font-style: normal;
+      letter-spacing: 0.5px;
+    }
+    .container {
+      width: fit-content;
+      margin-inline: auto;
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #999;
+    }
+    header {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    header img {
+      width: 300px;
+    }
+    header h1 {
+      margin-top: 10px;
+      margin-bottom: 30px;
+      font-size: 50px;
+      position: relative;
+    }
+    header h1::before {
+      content: "";
+      width: 30%;
+      height: 2px;
+      background-color: black;
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .offers ul,
+    .cancel ul {
+      padding-left: 0;
+      list-style: none;
+      font-weight: bold;
+    }
+    .offers ul li,
+    .cancel ul li {
+      margin-top: 20px;
+      font-weight: normal;
+    }
+    .offers ul li i {
+      font-size: 22px;
+      color: #2ecc71;
+    }
+    .offers p {
+      padding: 10px;
+      color: white;
+      background-color: #1b7240;
+    }
+    .confirm {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .confirm p {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+      font-style: italic;
+    }
+    .confirm p i {color: #2ecc71;}
+    .confirm a {
+      padding: 20px 100px;
+      background-image: linear-gradient(to bottom, #f9d71c, #ffbd59 60%);
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+    }
+    .down {margin-top: 40px;}
+    .down i {
+      font-size: 40px;
+      color: #2ecc71;
+    }
+    footer {margin-top: 20px;}
+    footer .social-icons {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    footer .social-icons a i {
+      font-size: 40px;
+      color: #c13584;
+    }
+    footer .social-icons a:first-child i {color: #1877f2;}
+    footer .social-icons a:last-child i {color: #1da1f2;}
+    footer p:last-child {
+      text-align: center;
+      color: #999;
+    }
+  </style>
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Roboto:wght@100;300;500;900&family=Work+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+  <!-- javascript files -->
+  <script src="{% static 'js/behaviors.js' %}" defer></script>
+  <script src="{% static 'js/json_handling.js' %}" defer></script>
+  <script src="{% static 'js/all.min.js' %}" defer></script>
+</head>
+<body>
+  <div class="container flex-box">
+    <header>
+      <img class="logo" src="https://www.moneyfabrica.com/static/images/logos/logo_light.png" alt="Money Talks" title="Money Talks">
+      <h2>So this is the end?</h2>
+      <p>We sent you this email because you want to cancel your subscription to our newsletter</p>
+    </header>
+    <section class="offers flex-box">
+      <ul>
+        If you cancel your subscription you will lose:
+        <li><i class="fa-solid fa-right-long"></i> Notifications about any new matirial we put on the Money Talks</li>
+        <li><i class="fa-solid fa-right-long"></i> Tips and tricks about your financial life</li>
+        <li><i class="fa-solid fa-right-long"></i> Exclusive offers and opportunities</li>
+      </ul>
+      <p>Stay updated with <strong style="font-style: italic;">Money Fábrica</strong> and unlock endless financial possibilities.</p>
+    </section>
+    <section class="confirm flex-box">
+      <p>To cancel your subscription please click on that button</p>
+      <div class="decision-btns">
+        <a href="{{base_url}}{% url 'confirm_delete' token=delete_url %}" target="_blank">Cancel</a>
+        <a href="{{base_url}}" target="_blank">Keep it</a>
+      </div>
+    </section>
+    <div class="down">
+      <i class="fa-solid fa-circle-down"></i>
+      <!-- <i class="fa-solid fa-circle-down"></i>
+      <i class="fa-solid fa-circle-down"></i> -->
+    </div>
+    <footer class="flex-box">
+      <p>If you believe this email is not for you please delete it, or <a href="{{base_url}}{% url 'contact_page' %}">Contact Us</a>.</p>
+      <br>
+      <p>Follow us on social media</p>
+      <div class="social-icons">
+        <a id="fb" href="#" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a id="insta" href="#" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a id="tw" href="#" target="_blank" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+      </div>
+      <p>&copy; 2023 <span>Money Fábrica.</span> All Rights Reserved</p>
+    </footer>
+  </div>
+</body>
+</html>

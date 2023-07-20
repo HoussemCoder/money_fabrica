@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Articles{% endblock %}
+
+{% block content %}
+<section class="sections-container">
+  {% if count == None %}
+  <div class="browse-text">
+    <h1>Browse Articles</h1>
+    <p>Explore our collection of informative articles that offer practical advice on building wealth and developing a winning mindset</p>
+  </div>
+  {% else %}
+  <div class="browse-text" style="align-items: flex-start;">
+    <h2><span>{{count}}</span> Search results for: <span class="search-words">'{{keyword}}'</span> in <span>'{{category}}'</span></h2>
+  </div>
+  {% endif %}
+  <section class="search-articles">
+    <div class="container">
+      <form class="search-menu-form" action="{% url 'search_articles_page' %}" method="get">
+        {{search_form.search}}
+        <div class="btns">
+          {{search_form.category}}
+          {{search_form.filter}}
+          <button class="search-btn button call-to-action-btn" id="go" type="submit">Go</button>
+        </div>
+      </form>
+    </div>
+  </section>
+  <section class="ads-money-game">
+    <div class="container">
+      <img src="../../static/images/ads/money_game_bg.png" alt="The Money Game book" title="The Money Game book">
+      <div class="text-btn">
+        <h2>The Money Game</h2>
+        <p>Is a book that combines principles of the <strong>growth mindset</strong> with financial strategies to help readers achieve <strong>financial freedom</strong>.</p>
+        <a class="button call-to-action-btn a-btn" href="https://amzn.to/3OiIRRz" target="_blank" title="Read The Book">Read The Book</a>
+      </div>
+    </div>
+  </section>
+  {% if count != None and count > 0 %}
+  <section class="search-results">
+    <div class="container">
+      <div class="result-articles">
+        {% for article in results %}
+        <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
+          <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
+          <div class="text">
+            <h3>{{article.title}}</h3>
+            <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% if count > 0 %}
+      <div class="results-pages">
+        <button class="button pages-btn backword-btn">Previous</button>
+        <button class="button pages-btn page-1">1</button>
+        <button class="button pages-btn page-2">2</button>
+        <button class="button pages-btn three-points">...</button>
+        <button class="button pages-btn last-page">8</button>
+        <button class="button pages-btn forword-btn">Next</button>
+      </div>
+      {% endif %}
+      <!-- <aside class="ads-others">
+        <div class="company-ad">
+          <img src="../../static/images/header.png" alt="">
+        </div>
+        <div class="company-ad">
+          <img src="../../static/images/newsletter.png" alt="">
+        </div>
+        <div class="planner-ad">
+          <img src="../../static/images/ads/planner.png" alt="The Ultimate Guided Planner Only For Big Goals">
+          <div class="text-btn">
+            <h3>The Ultimate Guided Planner</h3>
+            <p><strong>only for big goals.</strong><br>Empower your ambitions with our comprehensive goal-oriented planner.</p>
+            <a class="button call-to-action-btn a-btn" href="#" target="_blank">Take a Look</a>
+          </div>
+        </div>
+      </aside> -->
+    </div>
+  </section>
+  <div class="in-between-ads">
+    <div class="container">
+      <h2>ads</h2>
+    </div>
+  </div>
+  {% endif %}
+  <section class="home-articles">
+    <div class="container">
+      <div class="section-plus-btn">
+        <section class="latest-articles">
+          {% for article in latest %}
+          <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
+            <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="{{article.title}}">
+            <div class="text">
+              <h3>{{article.title}}</h3>
+              <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+            </div>
+          </a>
+          {% endfor %}
+        </section>
+        <button class="button call-to-action-btn a-btn" id="see-more" onclick="load_more_articles('latest')">See More...</button>
+      </div>
+      <div class="in-between-ads">
+        <div class="container">
+          <h2>ads</h2>
+        </div>
+      </div>
+      <div class="section-plus-btn">
+        <section class="popular-articles">
+          {% for article in popular %}
+          <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
+            <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
+            <div class="text">
+              <h3>{{article.title}}</h3>
+              <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+            </div>
+          </a>
+          {% endfor %}
+        </section>
+        <button class="button call-to-action-btn a-btn" id="see-more" onclick="load_more_articles('popular')">See More...</button>
+      </div>
+    </div>
+  </section>
+  <div class="in-between-ads">
+    <div class="container">
+      <h2>ads</h2>
+    </div>
+  </div>
+</section>
+{% endblock %}

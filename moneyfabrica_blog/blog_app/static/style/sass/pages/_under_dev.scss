@@ -1,0 +1,20 @@
+// 'under development' pages styling
+
+@use '../abstracts/colors' as *;
+
+.container {
+    .under-dev-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin: 60px 0;
+        p svg, p i {color: map-get($map: $primary, $key: first);}
+        p span {
+            color: map-get($map: $primary, $key: first);
+            font-style: italic;
+            text-decoration: underline;
+        }
+    }
+}
