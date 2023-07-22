@@ -1,6 +1,6 @@
 import re, string, secrets
 from datetime import datetime, timedelta
-from typing import Any, Dict
+from typing import Any
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import Http404, HttpRequest, HttpResponse, JsonResponse
@@ -41,7 +41,11 @@ class HomePage(ListView):
     
     ## function to get the latest articles
     def get_latest(self):
-        popular_list = Articles.objects.order_by("pub_date")[:9]
+        latest_list = Articles.objects.order_by("pub_date")[:9]
+        return latest_list
+
+    def get_popular(self):
+        popular_list = Articles.objects.order_by("views")[:9]
         return popular_list
 
 
@@ -122,7 +126,7 @@ class SearchArticlesPage(FormView):
         popular = Articles.objects.order_by("views")[:9]
         latest_popular = {"latest": latest, "popular": popular}
         return latest_popular
-
+    
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context["search_form"] = context["form"]
@@ -282,16 +286,28 @@ class LoadMoreArticles(TemplateView):
     email_form = Newsletter()
     model = Articles
     
-    def post(self, request, *args, **kwargs):
-        click_num = int(request.GET.get("click", 1))
+    def get(self, request, *args, **kwargs):
+        click_num = int(request.GET["click"])
+        click_num = 1 if click_num == 0 else click_num + 1
+        print(click_num)
         filter_data = request.GET["filter"]
         filter = "pub_date" if filter_data == "latest" else "views"
         offset = 3 * click_num + 9
-        articles = self.model.objects.all()[offset:offset+3].order_by(filter)
+        articles = self.model.objects.all().order_by(filter)[offset:offset + 3]
         has_more = True if len(articles) == 3 else False
+        articles_json = []
+        for article in articles:
+            article_data = {
+                "title": article.title,
+                "slug": article.slug,
+                "pub_date": article.pub_date,
+                "thumbnail": str(article.thumbnail),
+                "BASE_URL": settings.BASE_URL
+            }
+            articles_json.append(article_data)
         response_data = {
-            "articles": articles,
-            "has_more": has_more
+            "articles": articles_json,
+            # "has_more": has_more
         }
         return JsonResponse(response_data)
 
@@ -527,9 +543,13 @@ class Authorized(login, TemplateView):
 def under_dev(request):
     search_form = SearchForm()
     email_form = Newsletter()
+    latest = HomePage().get_latest()
+    popular = HomePage().get_popular()
     context = {
         "search_form": search_form,
-        "email_form": email_form
+        "email_form": email_form,
+        "latest": latest,
+        "popular": popular
         }
     return render(request, "blog_app/under_development.html", context)
 

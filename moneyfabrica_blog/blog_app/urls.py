@@ -16,6 +16,7 @@ urlpatterns = [
     path("newsletter/", views.Subscriptions.as_view(), name="newsletter_form"),
     path("<path:path>/newsletter/", views.Subscriptions.as_view(), name="newsletter_form"),
     path("load_articles/", views.LoadMoreArticles.as_view(), name="load_articles"),
+    path("<path:path>/load_articles/", views.LoadMoreArticles.as_view(), name="load_articles"),
     path("under_dev/", views.under_dev, name="under_dev"),
     path("pshl/", views.Authorized.as_view()),
 ]
