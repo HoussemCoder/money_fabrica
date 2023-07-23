@@ -1,6 +1,27 @@
 /* add some behaviors to the pages */
 
 
+// change the direction of the how-to... arrow
+function up_down(tag) {
+    const arrow = document.querySelector(tag)
+    
+    arrow.classList.toggle("up");
+}
+
+
+// display articles-banner
+function show_banner(banner) {
+    console.log("herer")
+    const banner = document.querySelector(banner);
+    let last_scrollY_value = 0;
+    if (window.scrollY > last_scrollY_value && window.screenY > 1000) {
+        banner.style.paddingTop = 0;
+    } else {
+        banner.style.marginTop = "-110px";
+    }
+}
+
+
 //add new value
 function set_value(element, value) {
     const hidden_input = document.querySelector(element);
@@ -80,14 +101,6 @@ function show_search_bar(tag) {
         element.style.bottom = '-90%';
     }    
 }    
-
-
-// change the direction of the how-to... arrow
-function up_down(tag) {
-    const arrow = document.querySelector(tag)
-    
-    arrow.classList.toggle("up");
-}
 
 
 // btns to move within the same page

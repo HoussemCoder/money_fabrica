@@ -1,0 +1,37 @@
+// terms-of-use page styling
+
+@use '../abstracts/mixins' as *;
+@use '../abstracts/colors' as *;
+
+.terms-plus-ads {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    grid-template-areas: "terms planner";
+    gap: clamp(20px, 4vw, 40px);
+    margin: 40px 0;
+    .terms-container {
+        grid-area: terms;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        .terms-heading {
+            display: flex;
+            flex-direction: column;
+        }
+        .terms-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+    aside {grid-area: planner;}
+    @include breakpoints(medium) {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        aside {
+            margin-left: 0;
+            .planner-ad img {width: 60%;}
+        }
+    }
+}

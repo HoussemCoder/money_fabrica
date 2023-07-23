@@ -5,17 +5,28 @@
 {% block get_started %}{% endblock %}
 
 {% block content %}
+
 <!-- if no such email in our db -->
-{% if no_email %}
+{% if no_email and delete %}
 <div class="container resend-email">
   <i class="fa-regular fa-circle-xmark x-mark"></i>
   <h2>Hmm!</h2>
   <p>Something went wrong! We didn't find your email in our database</p>
+  <p>If your email doesn't exist in our database it means you've already canceled your subscription, so no more ation needed from your side.</p>
+</div>
+{% endif %}
+{% if no_email and not delete %}
+<div class="container resend-email">
+  <i class="fa-regular fa-circle-xmark x-mark"></i>
+  <h2>Hmm!</h2>
+  <p>Something went wrong! We didn't find your email in our database</p>
+  {% if delete %}
+  <p>If you want to unsubscription and get a new <strong>confirmation email</strong> please click on that button</p>
   <p>If you want to subscribe for our newsletter and get a new <strong>confirmation email</strong> please click on that button</p>
   <form class="newsletter-form">
     {% csrf_token %}
-    {{resend_form.hidden_data}}
     {{resend_form.form_type}}
+    <input type="hidden" name="email" value="{{email}}">
     <button class="button call-to-action-btn" type="submit">Resend</button>
     <span class="error-msg"></span>
   </form>

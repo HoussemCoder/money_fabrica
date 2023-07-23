@@ -50,6 +50,7 @@
           <li><a class="a-header" href="{% url 'search_articles_page' %}" target="_blank">Articles</a></li>
           <!-- <li><a class="a-header" href="advertise.html" target="_blank">Advertise</a></li> -->
           <li><a class="a-header" href="{% url 'contact_page' %}" target="_blank">Contact</a></li>
+          <li><a class="a-header" href="{% url 'about_page' %}" target="_blank">About</a></li>
           <li><a class="a-header" href="{% url 'under_dev' %}" target="_blank">Shop</a></li>
           <li><a class="a-header" href="{% url 'under_dev' %}" target="_blank">Success Stories</a></li>
           <li title="Search">
@@ -145,29 +146,31 @@
     </div>
     <button class="button go-to-up-btn" id="go-up" onclick="btn_action('header')" title="Go up"><i class="fa-solid fa-angles-up"></i></button>
   </section>
-  <section class="home-articles initial">
-    <div class="container">
-      <div class="section-plus-btn">
-        <section class="latest-articles">
-          {% for article in latest_articles %}
-            <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article initial">
-              <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
-              <div class="text">
-                <h3>{{article.title}}</h3>
-                <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
-              </div>
-            </a>
-          {% endfor %}
-        </section>
-        <button class="button call-to-action-btn a-btn" id="see-more" onclick="load_more_articles('latest')">See More...</button>
-      </div>
-    </div>
-    <div class="in-between-ads">
+  <div class="sections-container">
+    <section class="home-articles initial">
       <div class="container">
-        <h2>ads</h2>
+        <div class="section-plus-btn">
+          <section class="latest-articles">
+            {% for article in latest_articles %}
+              <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article initial">
+                <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
+                <div class="text">
+                  <h3>{{article.title}}</h3>
+                  <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+                </div>
+              </a>
+            {% endfor %}
+          </section>
+          <button class="button call-to-action-btn a-btn" id="see-more-latest" onclick="load_more_articles('latest')">See More...</button>
+        </div>
       </div>
-    </div>
-  </section>
+      <div class="in-between-ads">
+        <div class="container">
+          <h2>ads</h2>
+        </div>
+      </div>
+    </section>
+  </div>
   <footer>
     <div class="success-window send-email-window">
       <div class="content">
@@ -217,7 +220,7 @@
         <div class="footer-links">
           <ul class="about" role="navigation">
             About
-            <li><a href="#">Who are we?</a></li>
+            <li><a href="{% url 'about_page' %}" target="_blank">Who are we?</a></li>
             <!-- <li><a href="#">Our goals</a></li> -->
             <!-- <li><a href="#">Developer</a></li> -->
           </ul>
@@ -231,9 +234,9 @@
           </ul>
           <ul class="legal" role="navigation">
             Legal
-            <li><a href="#">Terms of use</a></li>
-            <li><a href="#">Privacy policy</a></li>
-            <li><a href="#">Cookie policy</a></li>
+            <li><a href="{% url 'terms_page' %}" target="_blank">Terms of use</a></li>
+            <li><a href="{% url 'privacy_page' %}" target="_blank">Privacy policy</a></li>
+            <li><a href="{% url 'cookie_page' %}" target="_blank">Cookie policy</a></li>
           </ul>
         </div>
       </div>

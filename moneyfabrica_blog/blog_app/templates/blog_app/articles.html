@@ -88,7 +88,7 @@
     <div class="container">
       <div class="section-plus-btn">
         <section class="latest-articles">
-          {% for article in latest %}
+          {% for article in latest_articles %}
           <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
             <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="{{article.title}}">
             <div class="text">
@@ -107,7 +107,7 @@
       </div>
       <div class="section-plus-btn">
         <section class="popular-articles">
-          {% for article in popular %}
+          {% for article in popular_articles %}
           <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
             <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
             <div class="text">

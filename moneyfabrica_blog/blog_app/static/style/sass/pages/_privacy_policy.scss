@@ -1,0 +1,47 @@
+// privacy-of-use page styling
+
+@use '../abstracts/mixins' as *;
+@use '../abstracts/colors' as *;
+
+.privacy-plus-ads {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    grid-template-areas: "privacy planner";
+    gap: clamp(20px, 4vw, 40px);
+    margin: 40px 0;
+    .privacy-container {
+        grid-area: privacy;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        .privacy-heading {
+            display: flex;
+            flex-direction: column;
+        }
+        .privacy-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .privacy-section {
+                ul {
+                    padding-left: 40px;
+                    li {
+                        @include font-styling("p");
+                        font-weight: normal;
+                    }
+                }
+                a:hover {text-decoration: underline;}
+            }
+        }
+    }
+    aside {grid-area: planner;}
+    @include breakpoints(medium) {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        aside {
+            margin-left: 0;
+            .planner-ad img {width: 60%;}
+        }
+    }
+}

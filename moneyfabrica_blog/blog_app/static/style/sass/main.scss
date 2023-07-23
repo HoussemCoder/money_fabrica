@@ -12,6 +12,7 @@
 @use './base/typography';
 
 // import files from 'components' folder
+@use './components/banners';
 @use './components/buttons';
 @use './components/form_handling';
 @use './components/forms';
@@ -31,6 +32,10 @@
 @use './pages/category';
 @use './pages/advertise';
 @use './pages/contact';
+@use './pages/about';
+@use './pages/terms_of_use';
+@use './pages/privacy_policy';
+@use './pages/cookie_policy';
 @use './pages/under_dev';
 // @use './pages/shop';
 // @use './pages/success-stories';

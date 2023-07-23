@@ -1,0 +1,31 @@
+// banners styling
+
+@use "../abstracts/colors" as *;
+@use "../abstracts/functions" as *;
+
+.articles-banner {
+    margin-top: -110px;
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    overflow: hidden;
+    background-color: map-get($map: $primary, $key: second);
+    box-shadow: 0px 5px 5px 0px map-get($map: $primary, $key: dark-light-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    transition: margin-top 0.3s ease;
+    .item {
+        display: flex;
+        align-items: center;
+        img {
+            width: 100px;
+            height: 100px;
+        }
+        p {
+            font-size: 0.9rem;
+            line-height: get_line_height(1rem, 1);
+        }
+    }
+}

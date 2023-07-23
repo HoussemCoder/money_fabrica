@@ -182,6 +182,33 @@ time {
   font-size: initial;
 }
 
+.articles-banner {
+  margin-top: -110px;
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0px 5px 5px 0px #c0c0c0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  transition: margin-top 0.3s ease;
+}
+.articles-banner .item {
+  display: flex;
+  align-items: center;
+}
+.articles-banner .item img {
+  width: 100px;
+  height: 100px;
+}
+.articles-banner .item p {
+  font-size: 0.9rem;
+  line-height: 1rem;
+}
+
 button,
 .button {
   font-size: clamp(0.9rem, 1.6vw, 1.2rem);
@@ -2511,6 +2538,135 @@ section.main > .container aside {
   }
   .contact-container .contact-form .contact-body .contact-detail .single-field input {
     padding: 5px 15px;
+  }
+}
+
+.about-plus-ads {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  grid-template-areas: "about planner";
+  gap: clamp(20px, 4vw, 40px);
+  margin: 40px 0;
+}
+.about-plus-ads .about-container {
+  grid-area: about;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.about-plus-ads .about-container .about-heading {
+  display: flex;
+  flex-direction: column;
+}
+.about-plus-ads .about-container .about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.about-plus-ads aside {
+  grid-area: planner;
+}
+@media (max-width: 992px) {
+  .about-plus-ads {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  .about-plus-ads aside {
+    margin-left: 0;
+  }
+  .about-plus-ads aside .planner-ad img {
+    width: 60%;
+  }
+}
+
+.terms-plus-ads {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  grid-template-areas: "terms planner";
+  gap: clamp(20px, 4vw, 40px);
+  margin: 40px 0;
+}
+.terms-plus-ads .terms-container {
+  grid-area: terms;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.terms-plus-ads .terms-container .terms-heading {
+  display: flex;
+  flex-direction: column;
+}
+.terms-plus-ads .terms-container .terms-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.terms-plus-ads aside {
+  grid-area: planner;
+}
+@media (max-width: 992px) {
+  .terms-plus-ads {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  .terms-plus-ads aside {
+    margin-left: 0;
+  }
+  .terms-plus-ads aside .planner-ad img {
+    width: 60%;
+  }
+}
+
+.privacy-plus-ads {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  grid-template-areas: "privacy planner";
+  gap: clamp(20px, 4vw, 40px);
+  margin: 40px 0;
+}
+.privacy-plus-ads .privacy-container {
+  grid-area: privacy;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.privacy-plus-ads .privacy-container .privacy-heading {
+  display: flex;
+  flex-direction: column;
+}
+.privacy-plus-ads .privacy-container .privacy-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.privacy-plus-ads .privacy-container .privacy-content .privacy-section ul {
+  padding-left: 40px;
+}
+.privacy-plus-ads .privacy-container .privacy-content .privacy-section ul li {
+  font-size: clamp(1.1rem, 2vw, 1.2rem);
+  line-height: clamp(1.8rem, 6vw, 2.4rem);
+  color: #333333;
+  font-weight: normal;
+}
+.privacy-plus-ads .privacy-container .privacy-content .privacy-section a:hover {
+  text-decoration: underline;
+}
+.privacy-plus-ads aside {
+  grid-area: planner;
+}
+@media (max-width: 992px) {
+  .privacy-plus-ads {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  .privacy-plus-ads aside {
+    margin-left: 0;
+  }
+  .privacy-plus-ads aside .planner-ad img {
+    width: 60%;
   }
 }
 

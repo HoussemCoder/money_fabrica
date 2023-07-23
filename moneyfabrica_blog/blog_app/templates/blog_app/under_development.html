@@ -21,7 +21,7 @@
       </div>
       <div class="section-plus-btn">
         <section class="latest-articles">
-          {% for article in latest %}
+          {% for article in latest_articles %}
           <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
             <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="{{article.title}}">
             <div class="text">
@@ -31,7 +31,7 @@
           </a>
           {% endfor %}
         </section>
-        <button class="button call-to-action-btn a-btn" id="see-more" onclick="load_more_articles('latest')">See More...</button>
+        <button class="button call-to-action-btn a-btn" id="see-more-latest" onclick="load_more_articles('latest')">See More...</button>
       </div>
       <div class="in-between-ads">
         <div class="container">
@@ -40,7 +40,7 @@
       </div>
       <div class="section-plus-btn">
         <section class="popular-articles">
-          {% for article in popular %}
+          {% for article in popular_articles %}
           <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
             <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
             <div class="text">
@@ -50,7 +50,7 @@
           </a>
           {% endfor %}
         </section>
-        <button class="button call-to-action-btn a-btn" id="see-more" onclick="load_more_articles('popular')">See More...</button>
+        <button class="button call-to-action-btn a-btn" id="see-more-popular" onclick="load_more_articles('popular')">See More...</button>
       </div>
     </div>
     <div class="in-between-ads">

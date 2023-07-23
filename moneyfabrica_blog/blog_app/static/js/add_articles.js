@@ -4,8 +4,14 @@ var click_num = 0;
 var latest_clicks = 0;
 var popular_clicks = 0;
 
-
 function load_more_articles(filter) {
+    if (filter === "latest") {
+        latest_clicks += 1
+        click_num = latest_clicks;
+    } else {
+        popular_clicks += 1
+        click_num = popular_clicks;
+    }
     fetch(`load_articles/?click=${encodeURIComponent(click_num)}&filter=${encodeURIComponent(filter)}`, {
         method: "GET",
         headers: {
@@ -32,16 +38,9 @@ function load_more_articles(filter) {
                 load_btn = document.getElementById("see-more-popular");
             }
             load_btn.disabled = true;
-            load_btn.style.display = "none";
+            load_btn.style.backgroundImage = "linear-gradient(to bottom, #fafafa, #c0c0c0)";
+            load_btn.textContent = "No More";
         }
-        if (filter === "latest") {
-            latest_clicks += 1
-            click_num = latest_clicks;
-        } else {
-            popular_clicks += 1
-            click_num = popular_clicks;
-        }
-        console.log(latest_clicks, popular_clicks, click_num)
     })
     .catch(error => {
         console.error(`Error:`, error);
@@ -53,15 +52,8 @@ function create_new_article(article) {
     articleDiv.classList.add("article");
     articleDiv.href = `http://${article.BASE_URL}/articles/${article.slug}`;
     articleDiv.target = "_blank";
-    //// using innerHTML
-    // article_div.innerHTML = `
-    //     <img src="../../static/images/thumbnails/${article.thumbnail}" alt="${article.title}">
-    //       <div class="text">
-    //         <h3>${article.title}</h3>
-    //         <time class="date"><i class="fa-solid fa-calendar-days"></i> ${article.pub_date}</time>
-    //       </div>
-    // `;
-    //// using the manualy method
+    
+    //// using the manualy method for creating a new article block
     const imgElement = document.createElement('img');
     imgElement.src = `../../static/images/thumbnails/${article.thumbnail}`;
     imgElement.alt = article.title;
@@ -77,12 +69,21 @@ function create_new_article(article) {
     const pubDateTextNode = document.createTextNode(` ${article_pub_date}`);
     timeElement.appendChild(pubDateTextNode);
     timeElement.insertBefore(iconElement, pubDateTextNode)
-
+    
     textDiv.appendChild(h3Element);
     textDiv.appendChild(timeElement);
-
+    
     articleDiv.appendChild(imgElement);
     articleDiv.appendChild(textDiv);
+    
+    //// using innerHTML
+    // article_div.innerHTML = `
+    //     <img src="../../static/images/thumbnails/${article.thumbnail}" alt="${article.title}">
+    //       <div class="text">
+    //         <h3>${article.title}</h3>
+    //         <time class="date"><i class="fa-solid fa-calendar-days"></i> ${article.pub_date}</time>
+    //       </div>
+    // `;
 
     return articleDiv
 }

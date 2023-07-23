@@ -17,6 +17,26 @@ from .forms import *
 from .models import *
 
 
+class GetArticlesFromDB:
+    model = Articles
+
+    def get_latest(self):
+        latest_list = self.model.objects.order_by("pub_date")[:9]
+        return latest_list
+
+    def get_popular(self):
+        popular_list = self.model.objects.order_by("views")[:9]
+        return popular_list
+
+    def get_liked(self):
+        liked_list = self.model.objects.order_by("likes")[:6]
+        return liked_list
+
+    def get_started_articles(self, category_data):
+        started_articles = Articles.objects.filter(category=category_data.title)[:5]
+        return started_articles
+    
+
 class HomePage(ListView):
     template_name = 'blog_app/home.html'
     model = Articles
@@ -27,6 +47,7 @@ class HomePage(ListView):
         context = super().get_context_data(**kwargs)
         mindset_list = self.model.objects.filter(category="Build a Strong Mindset").order_by("views")[:4]
         increase_incomes_list = self.model.objects.filter(category="Increase Your Incomes").order_by("views")[:4]
+        latest = GetArticlesFromDB().get_latest()
         dtl_vars = {
             "search_form": self.search_form,
             "email_form": self.email_form,
@@ -34,19 +55,10 @@ class HomePage(ListView):
             "first_increase": increase_incomes_list[0],
             "mindset_articles": mindset_list[1:],
             "incomes_articles": increase_incomes_list[1:],
-            "latest_articles": self.get_latest()
+            "latest_articles": latest,
         }
         context.update(dtl_vars)
         return context
-    
-    ## function to get the latest articles
-    def get_latest(self):
-        latest_list = Articles.objects.order_by("pub_date")[:9]
-        return latest_list
-
-    def get_popular(self):
-        popular_list = Articles.objects.order_by("views")[:9]
-        return popular_list
 
 
 class CategoryPage(ListView):
@@ -70,25 +82,19 @@ class CategoryPage(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         category_data = self.get_category_data()
-        started_articles = self.get_started_articles(category_data)
+        started_articles = GetArticlesFromDB().get_started_articles(category_data)
+        popular = GetArticlesFromDB().get_popular()
+        liked = GetArticlesFromDB().get_liked()
         dtl_vars = {
             "category": category_data,
             "started_articles": started_articles,
-            "popular_articles": self.get_popular(),
+            "popular_articles": popular,
+            "liked_articles": liked,
             "search_form": self.search_form,
             "email_form": self.email_form
         }
         context.update(dtl_vars)
         return context
-
-    def get_started_articles(self, category_data):
-        started_articles = Articles.objects.filter(category=category_data.title)[:5]
-        return started_articles
-
-    ## function to get the popular articles
-    def get_popular(self):
-        popular_list = Articles.objects.order_by("views")[:9]
-        return popular_list
 
 
 class SearchArticlesPage(FormView):
@@ -121,17 +127,13 @@ class SearchArticlesPage(FormView):
             results = Articles.objects.filter(title__icontains=keyword, category=category_selected).order_by(filter_selected)
         return results
 
-    def get_latest_popular_articles(self):
-        latest = Articles.objects.order_by("pub_date")[:9]
-        popular = Articles.objects.order_by("views")[:9]
-        latest_popular = {"latest": latest, "popular": popular}
-        return latest_popular
-    
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context["search_form"] = context["form"]
         context["email_form"] = self.email_form
-        context.update(self.get_latest_popular_articles())
+        context["latest_articles"] = GetArticlesFromDB().get_latest()
+        context["popular_articles"] = GetArticlesFromDB().get_popular()
+        context["liked_articles"] = GetArticlesFromDB().get_liked()
         return context
 
 
@@ -288,11 +290,9 @@ class LoadMoreArticles(TemplateView):
     
     def get(self, request, *args, **kwargs):
         click_num = int(request.GET["click"])
-        click_num = 1 if click_num == 0 else click_num + 1
-        print(click_num)
         filter_data = request.GET["filter"]
         filter = "pub_date" if filter_data == "latest" else "views"
-        offset = 3 * click_num + 9
+        offset = 3 * click_num + 6
         articles = self.model.objects.all().order_by(filter)[offset:offset + 3]
         has_more = True if len(articles) == 3 else False
         articles_json = []
@@ -307,7 +307,7 @@ class LoadMoreArticles(TemplateView):
             articles_json.append(article_data)
         response_data = {
             "articles": articles_json,
-            # "has_more": has_more
+            "has_more": has_more
         }
         return JsonResponse(response_data)
 
@@ -315,8 +315,8 @@ class LoadMoreArticles(TemplateView):
         context = super().get_context_data(**kwargs)
         context["search_form"] = self.search_form
         context["email_form"] = self.email_form
-        latest_popular = SearchArticlesPage().get_latest_popular_articles()
-        context.update(latest_popular)
+        context["latest_articles"] = GetArticlesFromDB().get_latest()
+        context["popular_articles"] = GetArticlesFromDB().get_popular()
         return context
 
 
@@ -329,8 +329,8 @@ class Subscriptions(FormView):
         context = super().get_context_data(**kwargs)
         context["search_form"] = self.search_form
         context["email_form"] = self.email_form
-        latest_popular = SearchArticlesPage().get_latest_popular_articles()
-        context.update(latest_popular)
+        context["latest_articles"] = GetArticlesFromDB().get_latest()
+        context["popular_articles"] = GetArticlesFromDB().get_popular()
         return context
     
     def get_form_class(self):
@@ -473,7 +473,7 @@ class ConfirmEmail(DetailView):
         token = self.kwargs.get(self.slug_url_kwarg)
         email = self.model.objects.get(confirmation_code=token)
         if not email:
-            return render(self.request, self.template_name, self.get_context_data(no_email=True))
+            return render(self.request, self.template_name, self.get_context_data(delete=False, no_email=True))
         now = datetime.now()
         expiration_time = datetime.strptime(email.confirm_expiration, "%Y-%m-%d %H:%M:%S.%f")
         if expiration_time < now:
@@ -543,15 +543,59 @@ class Authorized(login, TemplateView):
 def under_dev(request):
     search_form = SearchForm()
     email_form = Newsletter()
-    latest = HomePage().get_latest()
-    popular = HomePage().get_popular()
+    latest = GetArticlesFromDB().get_latest()
+    popular = GetArticlesFromDB().get_popular()
+    liked = GetArticlesFromDB().get_liked()
     context = {
         "search_form": search_form,
         "email_form": email_form,
-        "latest": latest,
-        "popular": popular
+        "latest_articles": latest,
+        "popular_articles": popular,
+        "liked_articles": liked
         }
     return render(request, "blog_app/under_development.html", context)
+
+
+def about_us(request):
+    search_form = SearchForm()
+    email_form = Newsletter()
+    liked = GetArticlesFromDB().get_liked()
+    context = {
+        "search_form": search_form,
+        "email_form": email_form,
+        "liked_articles": liked
+        }
+    return render(request, "blog_app/about.html", context)
+
+
+def terms_of_use(request):
+    search_form = SearchForm()
+    email_form = Newsletter()
+    context = {
+        "search_form": search_form,
+        "email_form": email_form,
+        }
+    return render(request, "legal/terms_of_use.html", context)
+
+
+def privacy_policy(request):
+    search_form = SearchForm()
+    email_form = Newsletter()
+    context = {
+        "search_form": search_form,
+        "email_form": email_form,
+        }
+    return render(request, "legal/privacy_policy.html", context)
+
+
+def cookie_policy(request):
+    search_form = SearchForm()
+    email_form = Newsletter()
+    context = {
+        "search_form": search_form,
+        "email_form": email_form,
+        }
+    return render(request, "legal/cookie_policy.html", context)
 
 
 def handle_404_error(request, exception):

@@ -46,29 +46,31 @@
     </div>
   </div>
 </section>
-<section class="home-articles">
-  <div class="container">
-    <div class="in-between-ads">
-      <div class="container">
-        <h2>ads</h2>
+<div class="sections-container">
+  <section class="home-articles">
+    <div class="container">
+      <div class="in-between-ads">
+        <div class="container">
+          <h2>ads</h2>
+        </div>
+      </div>
+      <div class="section-plus-btn">
+        <section class="popular-articles">
+          {% for article in popular_articles %}
+            <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
+              <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
+              <div class="text">
+                <h3>{{article.title}}</h3>
+                <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
+              </div>
+            </a>
+          {% endfor %}
+        </section>
+        <button class="button call-to-action-btn a-btn" id="see-more-popular" onclick="load_more_articles('popular')">See More...</button>
       </div>
     </div>
-    <div class="section-plus-btn">
-      <section class="popular-articles">
-        {% for article in popular_articles %}
-          <a href="{% url 'article_page' keyword=article.slug %}" target="_blank" class="article">
-            <img src="../../static/images/thumbnails/{{article.thumbnail}}" alt="learn how to get rich">
-            <div class="text">
-              <h3>{{article.title}}</h3>
-              <time class="date"><i class="fa-solid fa-calendar-days"></i> {{article.pub_date}}</time>
-            </div>
-          </a>
-        {% endfor %}
-      </section>
-      <button class="button call-to-action-btn a-btn" id="see-more" onclick="load_more_articles('popular')">See More...</button>
-    </div>
-  </div>
-</section>
+  </section>
+</div>
 <div class="in-between-ads">
   <div class="container">
     <h2>ads</h2>
