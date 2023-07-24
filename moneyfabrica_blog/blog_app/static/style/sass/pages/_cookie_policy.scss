@@ -1,0 +1,38 @@
+// cookie-policy page styling
+
+@use '../abstracts/mixins' as *;
+@use '../abstracts/colors' as *;
+
+.cookie-plus-ads {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    grid-template-areas: "cookie planner";
+    gap: clamp(20px, 4vw, 40px);
+    margin: 40px 0;
+    .cookie-container {
+        grid-area: cookie;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        .cookie-heading {
+            display: flex;
+            flex-direction: column;
+        }
+        .cookie-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .cookie-section {a:hover {text-decoration: underline;}}
+        }
+    }
+    aside {grid-area: planner;}
+    @include breakpoints(medium) {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        aside {
+            margin-left: 0;
+            .planner-ad img {width: 60%;}
+        }
+    }
+}

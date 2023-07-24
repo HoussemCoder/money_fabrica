@@ -86,7 +86,7 @@
                 border-radius: 15px;
                 section {
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+                    grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr));
                     gap: clamp(20px, 3vw, 40px);
                     padding: clamp(20px, 5vw, 50px);
                     position: relative;
@@ -170,7 +170,7 @@
             }
             .result-articles {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
                 gap: clamp(20px, 3vw, 40px);
                 padding: clamp(20px, 5vw, 50px);
                 a {

@@ -4,6 +4,8 @@
 @use "../abstracts/vars" as *;
 
 .social-media-side-bar {
+    margin-left: -40px;
+    opacity: 0;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -11,9 +13,12 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
+    transition: .2s;
+    z-index: 9999;
     a {
         font-size: map-get($map: $f-sizes, $key: h2-size);
         line-height: 0;
+        background-color: map-get($map: $primary, $key: second);
         color: #C13584;
         transition: .2s;
         &:hover {

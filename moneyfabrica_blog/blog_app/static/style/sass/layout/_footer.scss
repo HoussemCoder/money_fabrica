@@ -24,25 +24,25 @@ footer {
                 width: 35%;
             }
         }
-        @include breakpoints(extra-large) {
-            .container {
-                padding: 160px 0;
-                p {
-                    width: 25%;
-                    font-size: map-get($map: $f-sizes-extra-large, $key: h1-size);
-                    line-height: get-line-height-h1(5rem);
-                }
-                form {
-                    label {
-                        font-size: map-get($map: $f-sizes-extra-large, $key: h3-size);
-                    }
-                    input {
-                        padding: 20px 40px;
-                        font-size: map-get($map: $f-sizes-extra-large, $key: p-size);
-                    }
-                }
-            }
-        }
+        // @include breakpoints(extra-large) {
+        //     .container {
+        //         padding: 160px 0;
+        //         p {
+        //             width: 25%;
+        //             font-size: map-get($map: $f-sizes-extra-large, $key: h1-size);
+        //             line-height: get-line-height-h1(5rem);
+        //         }
+        //         form {
+        //             label {
+        //                 font-size: map-get($map: $f-sizes-extra-large, $key: h3-size);
+        //             }
+        //             input {
+        //                 padding: 20px 40px;
+        //                 font-size: map-get($map: $f-sizes-extra-large, $key: p-size);
+        //             }
+        //         }
+        //     }
+        // }
         @include breakpoints(medium) {
             .container {
                 flex-direction: column;
@@ -50,7 +50,7 @@ footer {
                 gap: clamp(10px, 8vh, 150px);
                 p {
                     width: fit-content;
-                    line-height: get-line-height-p(3rem);
+                    // line-height: get-line-height-p(3rem);
                 }
                 form {
                     width: fit-content;
@@ -159,32 +159,32 @@ footer {
             }
         }
     }
-    @include breakpoints(extra-large) {
-        .footer {
-            .container {
-                gap: 200px;
-                .logo-socials {
-                    flex: 1;
-                    justify-content: center;
-                    a .logo {
-                        margin-inline: auto;
-                        img {width: 70%;}
-                    }
-                    p {font-size: map-get($map: $f-sizes-large, $key: p-header-size);}
-                    .social-icons {
-                        margin-top: 50px;
-                        a {font-size: map-get($map: $f-sizes-extra-large, $key: h1-size);}
-                    }    
-                }
-                .footer-links {
-                    flex: 1.5;
-                    ul {
-                        font-size: map-get($map: $f-sizes-extra-large, $key: h2-size);
-                        li a {font-size: map-get($map: $f-sizes-extra-large, $key: h3-size);}
-                    }
-                }
-            }
-            > p {font-size: map-get($map: $f-sizes-extra-large, $key: h3-size);}
-        }
-    }
+    // @include breakpoints(extra-large) {
+    //     .footer {
+    //         .container {
+    //             gap: 200px;
+    //             .logo-socials {
+    //                 flex: 1;
+    //                 justify-content: center;
+    //                 a .logo {
+    //                     margin-inline: auto;
+    //                     img {width: 70%;}
+    //                 }
+    //                 p {font-size: map-get($map: $f-sizes-large, $key: p-header-size);}
+    //                 .social-icons {
+    //                     margin-top: 50px;
+    //                     a {font-size: map-get($map: $f-sizes-extra-large, $key: h1-size);}
+    //                 }    
+    //             }
+    //             .footer-links {
+    //                 flex: 1.5;
+    //                 ul {
+    //                     font-size: map-get($map: $f-sizes-extra-large, $key: h2-size);
+    //                     li a {font-size: map-get($map: $f-sizes-extra-large, $key: h3-size);}
+    //                 }
+    //             }
+    //         }
+    //         > p {font-size: map-get($map: $f-sizes-extra-large, $key: h3-size);}
+    //     }
+    // }
 }

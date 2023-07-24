@@ -41,7 +41,7 @@
 @mixin font-styling($text: '', $section: '') {
     @if $text == 'h1' {
         font-size: clamp(map-get($map: $f-sizes-extra-small, $key: h1-size), 5vw, map-get($map: $f-sizes-extra-large, $key: h1-size));
-        line-height: clamp(get-line-height-h1(map-get($map: $f-sizes-extra-small, $key: h1-size)), 7vw, get-line-height-p(map-get($map: $f-sizes-extra-large, $key: h1-size)));
+        line-height: clamp(get-line-height-h1(map-get($map: $f-sizes-extra-small, $key: h1-size)), 7vw, get-line-height-h1(map-get($map: $f-sizes-extra-large, $key: h1-size)));
         color: map-get($map: $font-color, $key: h1-color);
     } @else if $text == 'h2' {
         font-size: clamp(map-get($map: $f-sizes-extra-small, $key: h2-size), 3vw, map-get($map: $f-sizes-extra-large, $key: h2-size));
@@ -49,7 +49,7 @@
         color: map-get($map: $font-color, $key: h2-color);
     } @else if $text == 'h3' {
         font-size: clamp(map-get($map: $f-sizes-extra-small, $key: h3-size), 2vw, map-get($map: $f-sizes-extra-large, $key: h3-size));
-        line-height: clamp(get-line-height-h1(map-get($map: $f-sizes-small, $key: h3-size)), 3vw, get-line-height-p(map-get($map: $f-sizes-extra-large, $key: h3-size)));
+        line-height: clamp(get-line-height-h1(map-get($map: $f-sizes-small, $key: h3-size)), 2.8vw, get-line-height-p(map-get($map: $f-sizes-extra-large, $key: h3-size)));
         color: map-get($map: $font-color, $key: h3-color);
     } @else if $text == 'p' {
         font-size: clamp(map-get($map: $f-sizes-small, $key: p-size), 2vw, map-get($map: $f-sizes-extra-large, $key: p-size));
@@ -85,8 +85,8 @@
         border-color: map-get($map: $primary, $key: action-btn-border);
     } @else {
         padding: 15px 20px;
-        // background-color: map-get($map: $primary, $key: light-color);
-        background-image: linear-gradient(to bottom, map-get($map: $primary, $key: light-color), map-get($map: $primary, $key: dark-light-color));
+        // background-color: map-get($map: $primary, $key: dark-light-color-2);
+        background-image: linear-gradient(to bottom, map-get($map: $primary, $key: light-color), map-get($map: $primary, $key: dark-light-color-2));
         border-color: map-get($map: $primary, $key: dark-light-color);
     }
 }

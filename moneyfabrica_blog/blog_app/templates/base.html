@@ -25,10 +25,10 @@
   <script src="{% static 'js/all.min.js' %}" defer></script>
   {% block contact_json %}{% endblock %}
 </head>
-<body onscroll="show_when('go-up'), show_banner('.articles-banner')">
+<body onscroll="show_when('go-up'), show_banner('.articles-banner'), social_bar('.social-media-side-bar')">
   <div class="overlay"></div>
   {% block articles_banner %}
-  <div class="container banner-container">
+  <div class="banner-container">
     <div class="articles-banner">
       <button class="scroll-btn" id="left-banner"><i class="fa-solid fa-angle-left"></i></button>
       <div class="articles-group">

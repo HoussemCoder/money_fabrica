@@ -42,6 +42,7 @@
         grid-template-columns: 2.5fr 1fr;
         grid-template-areas: "article aside"
                              "after-article aside";
+        position: relative;
         article {
             grid-area: article;
             .all-text {

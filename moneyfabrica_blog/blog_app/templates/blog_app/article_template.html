@@ -3,11 +3,6 @@
 {% block title %}{{article.title}}{% endblock %}
 
 {% block content %}
-<div class="social-media-side-bar">
-  <a id="fb" href="https://www.facebook.com/moneyfabrica" target="_blank" title="Facebook"><i class="fa-brands fa-square-facebook"></i></a>
-  <a id="insta" href="https://www.instagram.com/money_fabrica/" target="_blank" title="Instagram"><i class="fa-brands fa-square-instagram"></i></a>
-  <a id="tw" href="https://twitter.com/MoneyFabrica" target="_blank" title="Twitter"><i class="fa-brands fa-square-twitter"></i></a>
-</div>
 <div class="main-section">
   <div class="article-header">
     <div class="container">
@@ -33,6 +28,11 @@
     </div>
   </section>
   <div class="container">
+    <div class="social-media-side-bar">
+      <a id="fb" href="https://www.facebook.com/moneyfabrica" target="_blank" title="Facebook"><i class="fa-brands fa-square-facebook"></i></a>
+      <a id="insta" href="https://www.instagram.com/money_fabrica/" target="_blank" title="Instagram"><i class="fa-brands fa-square-instagram"></i></a>
+      <a id="tw" href="https://twitter.com/MoneyFabrica" target="_blank" title="Twitter"><i class="fa-brands fa-square-twitter"></i></a>
+    </div>
     <article>
       <div class="all-text">
         {{first_para|safe}}

@@ -9,10 +9,26 @@ function up_down(tag) {
 }
 
 
+// show the social-side-bar
+function social_bar(tag) {
+    const bar = document.querySelector(tag);
+    const bottom_height = document.body.scrollHeight - 1400
+    if (bar) {
+        if (window.scrollY > 800 && window.scrollY < bottom_height) {
+            bar.style.marginLeft = 0;
+            bar.style.opacity = 1;
+        } else {
+            bar.style.marginLeft = "-40px";
+            bar.style.opacity = 0;
+        }
+    }
+}
+
+
 // hide or show some elements depending on the height of the page
 function show_when(tag) {
     const element = document.getElementById(tag);
-
+    
     if (window.scrollY >= window.innerHeight * 1.1) {
         element.style.display = "block";
     } else {
@@ -25,12 +41,14 @@ function show_when(tag) {
 var last_scrollY_value = 0;
 function show_banner(tag) {
     const banner = document.querySelector(tag);
-    if (window.scrollY < last_scrollY_value && window.scrollY > 800) {
-        banner.style.marginTop = "0";
-    } else {
-        banner.style.marginTop = "-110px";
+    if (banner) {
+        if (window.scrollY < last_scrollY_value && window.scrollY > 800) {
+            banner.style.marginTop = "0";
+        } else {
+            banner.style.marginTop = "-110px";
+        }
+        last_scrollY_value = window.scrollY;
     }
-    last_scrollY_value = window.scrollY;
 }
 
 

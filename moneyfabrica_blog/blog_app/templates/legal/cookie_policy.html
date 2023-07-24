@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Cookie Policy{% endblock %}
+
+{% block content %}
+{% block articles_banner %}{% endblock %}
+<div class="container">
+  <div class="cookie-plus-ads">
+    <div class="cookie-container">
+      <div class="cookie-heading">
+        <h1>Cookie Policy</h1>
+        <p><i>Last updated: Juily 24, 2023</i></p>
+        <br>
+        <p>This Cookie Policy explains how Money Fabrica ("we," "us," or "our") uses cookies and similar tracking technologies on our website. By using our website, you consent to the use of cookies as described in this policy.</p>
+      </div>
+      <div class="cookie-content">
+        <section class="cookie-section">
+          <h2>What are Cookies?</h2>
+          <p>Cookies are small text files that are placed on your device (computer, smartphone, tablet, etc.) when you visit a website. They are widely used to make websites work more efficiently, improve user experience, and provide information to website owners.</p>
+        </section>
+        <section class="cookie-section">
+          <h2>Essential Cookies:</h2>
+          <p>We use essential cookies that are necessary for the proper functioning of our website. These cookies enable core functionality such as session management, user authentication, and remembering user preferences during a single visit.</p>
+        </section>
+        <section class="cookie-section">
+          <h2>Security Cookies:</h2>
+          <p>We use security cookies, including the CSRF token, to help protect our website from security threats, such as cross-site request forgery (CSRF) attacks.</p>
+        </section>
+        <section class="cookie-section">
+          <h2>Third-Party Cookies:</h2>
+          <p>At present, we do not use any third-party cookies on our website. However, in the future, we may consider using third-party cookies for analytics and advertising purposes. Any such use will be governed by this Cookie Policy, and we will update this policy accordingly.</p>
+        </section>
+        <section class="cookie-section">
+          <h2>Analytics Cookies:</h2>
+          <p>We do not currently use analytics cookies. However, we may use analytics tools in the future to collect information about how users interact with our website. Any data collected will be used to analyze website performance and improve user experience.</p>
+        </section>
+        <section class="cookie-section">
+          <h2>Managing Cookies:</h2>
+          <p>You have the option to manage or disable cookies through your web browser settings. However, please note that disabling essential cookies may impact the functionality and performance of our website.</p>
+        </section>
+        <section class="cookie-section">
+          <h2>Cookie Consent:</h2>
+          <p>By using our website, you consent to the use of essential cookies and security cookies as described in this Cookie Policy. For any non-essential cookies (if used in the future), we will provide a cookie consent banner or pop-up to obtain your explicit consent.</p>
+        </section>
+        <section class="cookie-section">
+          <h2>Changes to this Policy:</h2>
+          <p>We may update this Cookie Policy from time to time to reflect changes in our use of cookies or for legal or regulatory reasons. Any changes will be posted on this page, and the "Last updated" date at the top will indicate the latest revision.</p>
+        </section>
+        <section class="cookie-section">
+          <h2>Contact Us:</h2>
+          <p>If you have any questions or concerns about our use of cookies or this Cookie Policy, please  <a href="{% url 'contact_page' %}">Contact-Us</a>.</p>
+        </section>
+      </div>
+    </div>
+    <aside>
+      <div class="planner-ad">
+        <img src="../../static/images/ads/planner.png" alt="The Ultimate Guided Planner Only For Big Goals">
+        <div class="text-btn">
+          <h3>The Ultimate Guided Planner</h3>
+          <p><strong>only for big goals.</strong><br>Empower your ambitions with our comprehensive goal-oriented planner.</p>
+          <a class="button call-to-action-btn a-btn" href="#" target="_blank">Take a Look</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

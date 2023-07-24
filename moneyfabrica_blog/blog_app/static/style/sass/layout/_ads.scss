@@ -45,7 +45,7 @@ section.ads-money-game {
             img {width: 80%;}
         }
     }
-    @include breakpoints(extra-large) {.container {padding: 60px; img {width: 40%;}}}
+    // @include breakpoints(extra-large) {.container {padding: 60px; img {width: 40%;}}}
 }
 
 aside {
