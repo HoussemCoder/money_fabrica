@@ -182,31 +182,71 @@ time {
   font-size: initial;
 }
 
-.articles-banner {
+.banner-container {
+  position: relative;
+}
+.banner-container .scroll-btn {
+  display: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #c0c0c0;
+  opacity: 0.2;
+  position: absolute;
+  z-index: 9999;
+}
+.banner-container .scroll-btn:first-child {
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+.banner-container .scroll-btn:last-child {
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+.banner-container .scroll-btn:hover {
+  opacity: 0.8;
+  transition: 0.2s;
+}
+.banner-container .articles-banner {
   margin-top: -110px;
   display: flex;
   justify-content: space-between;
-  height: 100px;
-  overflow: hidden;
   background-color: white;
   box-shadow: 0px 5px 5px 0px #c0c0c0;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 9990;
   transition: margin-top 0.3s ease;
 }
-.articles-banner .item {
+.banner-container .articles-banner .articles-group {
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+}
+.banner-container .articles-banner .articles-group .item {
   display: flex;
   align-items: center;
 }
-.articles-banner .item img {
+.banner-container .articles-banner .articles-group .item img {
   width: 100px;
   height: 100px;
 }
-.articles-banner .item p {
+.banner-container .articles-banner .articles-group .item p {
   font-size: 0.9rem;
   line-height: 1rem;
+  transition: 0.3s;
+}
+.banner-container .articles-banner .articles-group .item:hover p {
+  color: #e39751;
+  transition: 0.3s;
+}
+@media (max-width: 992px) {
+  .banner-container {
+    display: none;
+  }
 }
 
 button,
@@ -1394,6 +1434,32 @@ footer .footer > p {
     transform: rotate(-180deg);
     transition: 0.2s;
   }
+}
+
+.social-media-side-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.social-media-side-bar a {
+  font-size: 2.5rem;
+  line-height: 0;
+  color: #C13584;
+  transition: 0.2s;
+}
+.social-media-side-bar a:hover {
+  transform: scale(1.2);
+  transition-delay: 0.2s;
+}
+.social-media-side-bar a:first-child {
+  color: #1877f2;
+}
+.social-media-side-bar a:last-child {
+  color: #1da1f2;
 }
 
 .message .container {

@@ -3,22 +3,34 @@
 
 // change the direction of the how-to... arrow
 function up_down(tag) {
-    const arrow = document.querySelector(tag)
+    const arrow = document.querySelector(tag);
     
     arrow.classList.toggle("up");
 }
 
 
+// hide or show some elements depending on the height of the page
+function show_when(tag) {
+    const element = document.getElementById(tag);
+
+    if (window.scrollY >= window.innerHeight * 1.1) {
+        element.style.display = "block";
+    } else {
+        element.style.display = "none";
+    }
+}
+
+
 // display articles-banner
-function show_banner(banner) {
-    console.log("herer")
-    const banner = document.querySelector(banner);
-    let last_scrollY_value = 0;
-    if (window.scrollY > last_scrollY_value && window.screenY > 1000) {
-        banner.style.paddingTop = 0;
+var last_scrollY_value = 0;
+function show_banner(tag) {
+    const banner = document.querySelector(tag);
+    if (window.scrollY < last_scrollY_value && window.scrollY > 800) {
+        banner.style.marginTop = "0";
     } else {
         banner.style.marginTop = "-110px";
     }
+    last_scrollY_value = window.scrollY;
 }
 
 
@@ -86,7 +98,6 @@ function add_new_style(tag, _class) {
         }
     }
 }
-
 add_new_style('.a-header', 'active')
 
 // display element bar by clicking on its icon
@@ -122,18 +133,6 @@ function show_if(btn, sec) {
         button.style.display = "none";
     }
 };
-
-
-// hide or show some elements depending on the height of the page
-function show_when(tag) {
-    const element = document.getElementById(tag);
-
-    if (window.scrollY >= window.innerHeight * 1.1) {
-        element.style.display = "block";
-    } else {
-        element.style.display = "none";
-    }
-}
 
 
 // display every section nicely when scroll down to it

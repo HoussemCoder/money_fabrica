@@ -169,6 +169,7 @@ class ArticlePage(DetailView):
             related = self.get_related(article_list)
             context["category_url"] = self.get_category_slug(article_list[0])
             context["related"] = related
+            context["liked_articles"] = GetArticlesFromDB().get_liked()
             context[self.context_object_name] = article_list[0]
             context.update(dtl_vars)
         else:
@@ -291,7 +292,7 @@ class LoadMoreArticles(TemplateView):
     def get(self, request, *args, **kwargs):
         click_num = int(request.GET["click"])
         filter_data = request.GET["filter"]
-        filter = "pub_date" if filter_data == "latest" else "views"
+        filter = self.get_filter(filter_data)
         offset = 3 * click_num + 6
         articles = self.model.objects.all().order_by(filter)[offset:offset + 3]
         has_more = True if len(articles) == 3 else False
@@ -317,7 +318,17 @@ class LoadMoreArticles(TemplateView):
         context["email_form"] = self.email_form
         context["latest_articles"] = GetArticlesFromDB().get_latest()
         context["popular_articles"] = GetArticlesFromDB().get_popular()
+        context["liked_articles"] = GetArticlesFromDB().get_liked()
         return context
+
+    def get_filter(self, filter_data):
+        if filter_data == "latest":
+            filter = "pub_date"
+        elif filter_data == "popular":
+            filter = "views"
+        else:
+            filter = "likes"
+        return filter
 
 
 class Subscriptions(FormView):
@@ -331,6 +342,7 @@ class Subscriptions(FormView):
         context["email_form"] = self.email_form
         context["latest_articles"] = GetArticlesFromDB().get_latest()
         context["popular_articles"] = GetArticlesFromDB().get_popular()
+        context["liked_articles"] = GetArticlesFromDB().get_liked()
         return context
     
     def get_form_class(self):

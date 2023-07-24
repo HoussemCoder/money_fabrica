@@ -1,0 +1,26 @@
+// side-bars styling
+
+@use "../abstracts/colors" as *;
+@use "../abstracts/vars" as *;
+
+.social-media-side-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    a {
+        font-size: map-get($map: $f-sizes, $key: h2-size);
+        line-height: 0;
+        color: #C13584;
+        transition: .2s;
+        &:hover {
+            transform: scale(1.2);
+            transition-delay: .2s;
+        }
+        &:first-child {color: #1877f2;}
+        &:last-child {color: #1da1f2;}
+    }
+}
