@@ -38,8 +38,7 @@ p {
     @include font-styling('p', 'header');
     font-size: map-get($map: $f-sizes, $key: p-header-size);
     line-height: get-line-height(map-get($map: $f-sizes, $key: p-header-size));
-    letter-spacing: 0.08em;
-    font-weight: normal;
+    letter-spacing: 0.05em;
 }
 
 a:not(.a-btn) {

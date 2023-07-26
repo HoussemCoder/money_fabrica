@@ -53,6 +53,8 @@ aside {
     flex: 1;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    // justify-content: center;
     gap: clamp(20px, 3vw, 30px);
     .company-ad {
         img {
@@ -97,20 +99,23 @@ aside {
             }
         }
     }
+    @include breakpoints(medium) {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    @include breakpoints(between-small) {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .in-between-ads {
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 80px;
+    margin-bottom: 80px;
     .container {
         height: 100%;
         padding: 60px;
         box-shadow: 0 0 5px map-get($map: $primary, $key: dark-light-color);
-        background-image: url(../../../images/ads/bg2.png);
-        background-repeat: repeat;
-        background-size: contain;
-        font-size: map-get($map: $f-sizes, $key: h1-size);
-        color: map-get($map: $primary, $key: second);
         position: relative;
         * {
             position: absolute;
@@ -119,6 +124,13 @@ aside {
             transform: translate(-50%, -50%);
             color: map-get($map: $primary, $key: second);
         }
+        a {
+            width: 100%;
+            img {
+                height: 200px;
+                width: 100%;
+            }
+        } 
     }
 }
 
